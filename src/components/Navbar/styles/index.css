@@ -4,7 +4,7 @@
 
     background-color: white;
 
-    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
     height: 70px;
 
     display: flex;
@@ -71,3 +71,27 @@
         display: none;
     }
 }
+
+
+/* ------------------ */
+
+.menu-enter {
+    height: 0;
+    opacity: 0;
+}
+.menu-enter-active {
+    height: 70%;
+    opacity: 1;
+    transition: all 1500ms;
+}
+.menu-exit {
+    height: 70%;
+    opacity: 1;
+}
+.menu-exit-active {
+    height: 0;
+    opacity: 0;
+    transition: all 2000ms;
+}
+
+/* ------------------ */
