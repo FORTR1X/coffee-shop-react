@@ -4,20 +4,12 @@ import s from './Spoiler.module.css'
 import './index.css'
 
 import { CSSTransition } from "react-transition-group"
-import { Subcategory } from './../../../interfaces/interfaces'
-
-interface SpoilerContent {
-  title: string | undefined | null,
-  content: Subcategory[] | undefined | null,
-  categoryUrl: string | undefined | null
-}
+import { SpoilerContent } from './../../../interfaces/interfaces'
 
 const Spoiler: React.FC<SpoilerContent> = (props: SpoilerContent) => {
 
   const [isSpoilerOpen, setIsSpoilerOpen] = useState<boolean | undefined>(false)
   const handleSetIsSpoilerOpen = (): void => setIsSpoilerOpen(!isSpoilerOpen)
-
-  // const titleStyle = props.content == null ? s.spoiler__title : `${s.spoiler__title} ${s.arrow}`} + ' ' + isSpoilerOpen ? `${s.opened}` : `` 
 
   const isArrowStyle: string = props.content == null || undefined ? '' : `${s.arrow}`
   const isOpenedSpoiler: string = ((isSpoilerOpen) && (props.content !== (null || undefined))) ? `${s.openned}` : ''
@@ -25,9 +17,20 @@ const Spoiler: React.FC<SpoilerContent> = (props: SpoilerContent) => {
 
   return (
     <div className={s.spoiler} onClick={handleSetIsSpoilerOpen}>
-      <span className={titleStyle}>
-        {props.title}
-      </span>
+      {/* with subcategory */}
+      {props.content !== undefined &&
+        <span className={titleStyle}>{props.title}</span>
+      }
+
+      {/* without subcategory */}
+      {props.content === undefined &&
+        <a 
+          className={`${titleStyle} ${s.spoiler__title_link}`}
+          href={props.categoryUrl}
+        >
+            {props.title}
+        </a>
+      }
 
       {(props.content !== undefined && props.content !== null) &&
         <CSSTransition 

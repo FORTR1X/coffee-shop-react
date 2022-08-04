@@ -10,6 +10,10 @@
     transition: transform 1s;
 }
 
+.openned {
+    transition: transform 1s;
+}
+
 .spoiler__title.arrow:after,
 .spoiler__title.arrow:before {
     content: '';
@@ -17,6 +21,8 @@
     background-color: black;
     width: 6px;
     height: 1px;
+
+    transition: transform 1s;
 
     border-radius: 5px;
     top: 7px;
@@ -35,11 +41,11 @@
 .spoiler__title.arrow.openned::before {
     top: 3.3px;
     right: -14px;
-    transform: rotate(40deg);
+    transform: rotate(220deg);
 }
 
 .spoiler__title.arrow.openned::after {
-    transform: rotate(-40deg);
+    transform: rotate(-220deg);
 }
 
 .spoiler__content {
@@ -54,4 +60,9 @@
 .spoiler__link {
     text-decoration: none;
     color: black;
+}
+
+.spoiler__title_link {
+    color: black;
+    text-decoration: none;
 }

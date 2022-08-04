@@ -18,3 +18,9 @@ export interface Product {
     price: number,
     description: string
 }
+
+export interface SpoilerContent {
+    title: string | undefined | null,
+    content: Subcategory[] | undefined | null,
+    categoryUrl: string | undefined
+}
