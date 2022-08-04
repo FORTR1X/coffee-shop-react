@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import s from './styles/Navbar.module.css'
 import './styles/index.css'
@@ -46,7 +46,10 @@ const Navbar: React.FC = () => {
   let countGoodsInCart: number = 7;
 
   const [isSearchOpen, setIsSearchOpen] = useState<boolean | undefined>(false)
-  const handleOnClickSearch = (): void => setIsSearchOpen(!isSearchOpen)
+  const handleOnClickSearch = (): void => {
+    handleIsCategoryHovered(false)
+    setIsSearchOpen(!isSearchOpen)
+  }
 
   const getSubcategoriesByCategoryId = (id: number): Subcategory[] => {
     return bottomSubcategories;
@@ -55,6 +58,16 @@ const Navbar: React.FC = () => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState<boolean | undefined>(false)
   const toggleHamburger = (): void => setIsHamburgerOpen(!isHamburgerOpen)
 
+  const [isCategoryHovered, setIsCategoryHovered] = useState<boolean | undefined>(false)
+  const [currentSelectedCategory, setCurrentSelectedCategory] = useState<Category | null | undefined>(null)
+  const handleIsCategoryHovered = (isState: boolean, currentCategory?: Category): void => {
+    setIsCategoryHovered(isState)
+    setIsSearchOpen(false)
+    if (currentCategory !== undefined) {
+      setCurrentSelectedCategory(currentCategory)
+    }
+  }
+
   return (
     <nav className={s.header}>
       <div className={s.header__top}>
@@ -62,13 +75,13 @@ const Navbar: React.FC = () => {
           <ul className={s.header__top_ul}>
             {topCategories.map(category => 
               <li>
-                <a className={s.header__top_li} href="#" >
+                <a onClick={() => handleIsCategoryHovered(false)} className={s.header__top_li} href="#" >
                   {category}
                 </a>
               </li>
             )}
           </ul>
-          <span className={s.header__number}>{user.phoneNumber}</span>
+          <span onClick={() => handleIsCategoryHovered(false)} className={s.header__number}>{user.phoneNumber}</span>
         </div>
       </div>
 
@@ -77,26 +90,76 @@ const Navbar: React.FC = () => {
         <div className={s.header__bottom_container}>
           <a className={s.header__bottom_logo} href="/"/>
 
-          <ul className={s.header_bottom_categories}>
+          <ul className={s.category__ul}>
             {bottomCategories.map(category => 
-              <li className={s.header_bottom_li}>
+              <li className={s.category__li}>
+                {/* lg display */}
                 <a 
                   key={category.id}
                   href={category.url}
                   className={s.header__text_animation}
                   onClick={() => getSubcategoriesByCategoryId(category.id)}
+                  onMouseEnter={ () => handleIsCategoryHovered(true, category) }
+                  onMouseLeave={ () => handleIsCategoryHovered(false) }
                 >
                   {category.title}
                 </a>
+
+                {/* md display */}
+                <span
+                  key={category.id}
+                  className={s.header__text_animation_md}
+                  onClick={() => {
+                    getSubcategoriesByCategoryId(category.id)
+                    handleIsCategoryHovered(!isCategoryHovered, category)
+                  }}
+                >
+                  {category.title}
+                </span>
+
+                <ul className={s.subcategory__ul}>
+                  <div 
+                    className={s.subcategory__outside_container}
+                    onClick={ () => handleIsCategoryHovered(false) }
+                  />
+                  <div 
+                    className={s.subcategory__content}
+                    onMouseEnter={ () => handleIsCategoryHovered(true) }
+                    onMouseLeave={ () => handleIsCategoryHovered(false) }
+                  >
+                    <div className={s.subcategory__trinagle}/>
+                    <div className={s.subcategory__container}>
+                      {bottomSubcategories.map(subcat => {
+                        return (
+                          <li className={s.subcategory__li}>
+                            <a className={s.subcategory__li_link} href={`${currentSelectedCategory?.url}${subcat.url}`}>
+                              {subcat.title}
+                            </a>
+                          </li>
+                        )
+                      })}
+                    </div>
+                  </div> 
+                </ul>
               </li>
             )}
           </ul>
 
+
           {/* for lg */}
-          <input className={s.header__search} type="text" placeholder="Поиск"/>
+          <input 
+            className={s.header__search}
+            type="text"
+            placeholder="Поиск"
+          />
 
           {/* for md */}
-          <img className={s.header__icon_md} src={search} alt="img" onClick={handleOnClickSearch}/>
+          <img 
+            className={s.header__icon_md}
+            src={search}
+            alt="img"
+            onClick={handleOnClickSearch}
+          />
 
           <div className={s.header__cart}>
             <img className={s.header__cart_svg} alt="cart" src={cart}/>
@@ -165,7 +228,7 @@ const Navbar: React.FC = () => {
           </a>
         </div>
       </CSSTransition>
-      
+    
     </nav>
   )
 }

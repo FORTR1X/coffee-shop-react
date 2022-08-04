@@ -95,3 +95,27 @@
 }
 
 /* ------------------ */
+
+/* ------------------ */
+
+.category-enter {
+    top: 0;
+    opacity: 0;
+}
+.category-enter-active {
+    top: 80px;
+    opacity: 1;
+    transition: all 200ms;
+}
+.category-exit {
+    top: 80px;
+    opacity: 1;
+}
+.category-exit-active {
+    pointer-events: none;
+    top: 0;
+    opacity: 0;
+    transition: all 200ms;
+}
+
+/* ------------------ */
