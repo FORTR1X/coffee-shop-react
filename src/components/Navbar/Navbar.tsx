@@ -8,7 +8,7 @@ import search from './search.svg'
 
 import { CSSTransition } from "react-transition-group"
 
-import { Category, Subcategory } from "../../interfaces/interfaces"
+import { Category, Subcategory, Product } from "../../interfaces/interfaces"
 import Spoiler from "./Spoiler/Spoiler"
 
 const Navbar: React.FC = () => {
@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
     { id: 2, title: 'Кофе', url: '/coffee' },
     { id: 3, title: 'Чай', url: '/chay' },
     { id: 4, title: 'Посуда', url: '/posuda' }
-  ]
+  ].sort((a, b) => a.title.length > b.title.length ? -1 : 1)
   const bottomSubcategories: Subcategory[] = [
     { id: 1, title: 'Моносорта', url: '/monosorta' },
     { id: 2, title: 'Смеси', url: '/smesi' },
@@ -32,14 +32,26 @@ const Navbar: React.FC = () => {
     { id: 9, title: 'Красный', url: '/krasniy' }
   ].sort((a, b) => a.title.length > b.title.length ? -1 : 1)
 
-  console.log(bottomSubcategories);
-
   // bottomCategories.size() - i; j - 
-  const subcategoriesByCategory: Subcategory[][] = bottomCategories.map(category => {
+  const subcategoriesByCategory: Subcategory[][] = bottomCategories.map((category, index) => {
     // делаем запрос, получаем список по category.id, затем return полученный список
     return bottomSubcategories;
   })
   subcategoriesByCategory.pop();
+  const cartProductList: Product[] = [ 
+    { id: 1, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
+    { id: 2, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
+    { id: 3, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
+    { id: 4, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
+    { id: 5, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
+    { id: 6, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
+    { id: 7, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
+    { id: 8, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
+    { id: 9, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
+    { id: 10, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
+   ]
+
+   let totalCostCart: number = 0;
 
   const user = {
     email: 'example@gmail.com',
@@ -68,6 +80,17 @@ const Navbar: React.FC = () => {
     if (currentCategory !== undefined) {
       setCurrentSelectedCategory(currentCategory)
     }
+  }
+
+  const [isCartOpen, setIsCartOpen] = useState<boolean | undefined>(false);
+  const handleIsCartOpen = (state?: boolean):void => {
+    if (state == undefined)
+      setIsCartOpen(!isCartOpen)
+
+    if (state !== undefined)
+      setIsCartOpen(state)
+
+      totalCostCart = 0;  
   }
 
   return (
@@ -123,10 +146,7 @@ const Navbar: React.FC = () => {
                 </span>
 
                 <div>
-                  <div 
-                    className={s.subcategory__ul_outside}
-                    onClick={ (event) => {} } 
-                  />
+                  <div className={s.subcategory__ul_outside} />
 
                   <ul className={s.subcategory__ul}>
                     <div 
@@ -180,20 +200,84 @@ const Navbar: React.FC = () => {
       {/* md */}
       <div className={s.header__bottom_md}>
         <div className={s.header__bottom_container_md}>
-          <img className={s.header__icon_md} src={search} alt="img" onClick={handleOnClickSearch}/>
+          <img className={s.header__icon_md} src={search} alt="ПОИСК" onClick={handleOnClickSearch}/>
           <a className={s.header__bottom_logo} href="/"/>
 
           <div style={{ 
             'display': 'flex',
            }}>
-            <div> 
-              
-              <div className={s.header__cart}>
-                <img className={s.header__cart_svg} alt="cart" src={cart}/>
-                <div className={s.header__cart_circle}/>
-                <span className={s.header__cart_count}>{countGoodsInCart}</span>
-              </div>
-            </div>
+            <ul className={s.cart__category_ul}>
+              <li className={s.cart__category_li}>
+                <div 
+                  className={s.header__cart}
+                  onClick={ () => {handleIsCartOpen()} }
+                >
+                  <img className={s.header__cart_svg} alt="КОРЗИНА" src={cart}/>
+                  <div className={s.header__cart_circle}/>
+                  <span className={s.header__cart_count}>{countGoodsInCart}</span>
+                </div>
+
+                <CSSTransition
+                  in={isCartOpen} 
+                  timeout={300} 
+                  unmountOnExit 
+                  classNames='menu'
+                >
+                  <ul className={s.cart__subcategory_ul}>
+                    <div className={s.cart__subcategory_header}>
+                      <span className={s.header__span}>КОРЗИНА ({countGoodsInCart})</span>
+                        <span 
+                          className={s.header__close}
+                          onClick={(event) => {
+                            handleIsCartOpen(false)
+                            event.currentTarget.classList.add(`${s.active}`)
+                          }}
+                        >
+                          12
+                        </span>
+                    </div>
+                    <div className={s.cart__subcategory_container}>
+                      {cartProductList.map(product => {
+                        return (
+                          <div className={s.product}>
+                            <div className={s.product__container}>
+                              <div className={s.product__img} />
+                              <div className={s.product__content}>
+                                <div className={s.product__content_top}>
+                                  <span className={s.product__title}>{product.header}</span>
+                                  <span className={s.product__delete}></span>
+                                </div>
+
+                                <div className={s.product__content_bottom}>
+                                  <span className={s.product__count}>100 гр.</span>
+                                  <span className={s.product__price}>{product.price} р.</span>
+                                </div>
+                                <span style={{ 'display': 'none' }}>{totalCostCart += product.price}</span>
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+
+                    <div className={s.cart__footer}>
+                      <div className={s.cart__footer_total}>
+                        <span className={s.cart__total_title}>ИТОГО</span>
+                        <span className={s.cart__total_value}>{totalCostCart} р.</span>
+                      </div>
+
+                      <div 
+                        className={s.cart__footer_btn}
+                        onClick={ (event) => {event.currentTarget.classList.add(`${s.active}`);} }
+                      >
+                        ОФОРМИТЬ ЗАКАЗ
+                      </div>
+                    </div>  
+
+                  </ul>
+                </CSSTransition>  
+              </li>
+            </ul>
 
             <div 
               className={isHamburgerOpen ? `${s.burger__container} ${s.burger__active}` : s.burger__container} 
