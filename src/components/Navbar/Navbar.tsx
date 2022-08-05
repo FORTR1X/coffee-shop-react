@@ -30,7 +30,9 @@ const Navbar: React.FC = () => {
     { id: 7, title: 'Пуэр', url: '/puer' },
     { id: 8, title: 'Травяные', url: '/travyanie' },
     { id: 9, title: 'Красный', url: '/krasniy' }
-  ]
+  ].sort((a, b) => a.title.length > b.title.length ? -1 : 1)
+
+  console.log(bottomSubcategories);
 
   // bottomCategories.size() - i; j - 
   const subcategoriesByCategory: Subcategory[][] = bottomCategories.map(category => {
@@ -43,7 +45,7 @@ const Navbar: React.FC = () => {
     email: 'example@gmail.com',
     phoneNumber: '+7 (978)-779-02-36'
   }
-  let countGoodsInCart: number = 7;
+  let countGoodsInCart: number = 3;
 
   const [isSearchOpen, setIsSearchOpen] = useState<boolean | undefined>(false)
   const handleOnClickSearch = (): void => {
@@ -92,7 +94,10 @@ const Navbar: React.FC = () => {
 
           <ul className={s.category__ul}>
             {bottomCategories.map(category => 
-              <li className={s.category__li}>
+              <li 
+                className={s.category__li}
+                onClick={ (event) => {event.currentTarget.classList.toggle(`${s.active}`);} }
+              >
                 {/* lg display */}
                 <a 
                   key={category.id}
@@ -117,30 +122,33 @@ const Navbar: React.FC = () => {
                   {category.title}
                 </span>
 
-                <ul className={s.subcategory__ul}>
+                <div>
                   <div 
-                    className={s.subcategory__outside_container}
-                    onClick={ () => handleIsCategoryHovered(false) }
+                    className={s.subcategory__ul_outside}
+                    onClick={ (event) => {} } 
                   />
-                  <div 
-                    className={s.subcategory__content}
-                    onMouseEnter={ () => handleIsCategoryHovered(true) }
-                    onMouseLeave={ () => handleIsCategoryHovered(false) }
-                  >
-                    <div className={s.subcategory__trinagle}/>
-                    <div className={s.subcategory__container}>
-                      {bottomSubcategories.map(subcat => {
-                        return (
-                          <li className={s.subcategory__li}>
-                            <a className={s.subcategory__li_link} href={`${currentSelectedCategory?.url}${subcat.url}`}>
-                              {subcat.title}
-                            </a>
-                          </li>
-                        )
-                      })}
-                    </div>
-                  </div> 
-                </ul>
+
+                  <ul className={s.subcategory__ul}>
+                    <div 
+                      className={s.subcategory__content}
+                      onMouseEnter={ () => handleIsCategoryHovered(true) }
+                      onMouseLeave={ () => handleIsCategoryHovered(false) }
+                    >
+                      <div className={s.subcategory__trinagle}/>
+                      <div className={s.subcategory__container} >
+                        {bottomSubcategories.map(subcat => {
+                          return (
+                            <li className={s.subcategory__li}>
+                              <a className={s.subcategory__li_link} href={`${currentSelectedCategory?.url}${subcat.url}`}>
+                                {subcat.title}
+                              </a>
+                            </li>
+                          )
+                        })}
+                      </div>
+                    </div> 
+                  </ul>
+                </div>
               </li>
             )}
           </ul>
@@ -162,7 +170,7 @@ const Navbar: React.FC = () => {
           />
 
           <div className={s.header__cart}>
-            <img className={s.header__cart_svg} alt="cart" src={cart}/>
+            <img className={s.header__cart_svg} alt="КОРЗИНА" src={cart}/>
             <div className={s.header__cart_circle}/>
             <span className={s.header__cart_count}>{countGoodsInCart}</span>
           </div>
@@ -178,10 +186,13 @@ const Navbar: React.FC = () => {
           <div style={{ 
             'display': 'flex',
            }}>
-            <div className={s.header__cart}>
-              <img className={s.header__cart_svg} alt="cart" src={cart}/>
-              <div className={s.header__cart_circle}/>
-              <span className={s.header__cart_count}>{countGoodsInCart}</span>
+            <div> 
+              
+              <div className={s.header__cart}>
+                <img className={s.header__cart_svg} alt="cart" src={cart}/>
+                <div className={s.header__cart_circle}/>
+                <span className={s.header__cart_count}>{countGoodsInCart}</span>
+              </div>
             </div>
 
             <div 
