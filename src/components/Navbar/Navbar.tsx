@@ -39,16 +39,16 @@ const Navbar: React.FC = () => {
   })
   subcategoriesByCategory.pop();
   const cartProductList: Product[] = [ 
-    { id: 1, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
-    { id: 2, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
-    { id: 3, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
-    { id: 4, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
-    { id: 5, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
-    { id: 6, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
-    { id: 7, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
-    { id: 8, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
-    { id: 9, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
-    { id: 10, header: 'Пуэр', price: 120, description: 'Вкусный питательный чайок' },
+    { id: 1, header: 'Пуэр 1', price: 12, description: 'Вкусный питательный чайок' },
+    { id: 2, header: 'Пуэр 2', price: 1200, description: 'Вкусный питательный чайок' },
+    { id: 3, header: 'Пуэр 3', price: 120, description: 'Вкусный питательный чайок' },
+    { id: 4, header: 'Пуэр 4', price: 1203, description: 'Вкусный питательный чайок' },
+    { id: 5, header: 'Пуэр 5', price: 1220, description: 'Вкусный питательный чайок' },
+    { id: 6, header: 'Пуэр 6', price: 1120, description: 'Вкусный питательный чайок' },
+    { id: 7, header: 'Пуэр 7', price: 1210, description: 'Вкусный питательный чайок' },
+    { id: 8, header: 'Пуэр 8', price: 1290, description: 'Вкусный питательный чайок' },
+    { id: 9, header: 'Пуэр 9', price: 1260, description: 'Вкусный питательный чайок' },
+    { id: 10, header: 'Пуэр 10', price: 1220, description: 'Вкусный питательный чайок' },
    ]
 
    let totalCostCart: number = 0;
@@ -60,9 +60,16 @@ const Navbar: React.FC = () => {
   let countGoodsInCart: number = 3;
 
   const [isSearchOpen, setIsSearchOpen] = useState<boolean | undefined>(false)
-  const handleOnClickSearch = (): void => {
+  const handleOnClickSearch = (state?: boolean): void => {
     handleIsCategoryHovered(false)
-    setIsSearchOpen(!isSearchOpen)
+
+    console.log(state)
+    
+    if (state !== undefined)
+      setIsSearchOpen(state)
+
+    if (state == undefined)  
+      setIsSearchOpen(!isSearchOpen)
   }
 
   const getSubcategoriesByCategoryId = (id: number): Subcategory[] => {
@@ -70,7 +77,10 @@ const Navbar: React.FC = () => {
   }
 
   const [isHamburgerOpen, setIsHamburgerOpen] = useState<boolean | undefined>(false)
-  const toggleHamburger = (): void => setIsHamburgerOpen(!isHamburgerOpen)
+  const toggleHamburger = (): void => {
+    setIsHamburgerOpen(!isHamburgerOpen)
+    handleOnClickSearch(false)
+  }
 
   const [isCategoryHovered, setIsCategoryHovered] = useState<boolean | undefined>(false)
   const [currentSelectedCategory, setCurrentSelectedCategory] = useState<Category | null | undefined>(null)
@@ -80,6 +90,13 @@ const Navbar: React.FC = () => {
     if (currentCategory !== undefined) {
       setCurrentSelectedCategory(currentCategory)
     }
+  }
+
+  const deleteFromCart = (productId: number, index: number): void => {
+    console.log(cartProductList)
+    if (cartProductList[index].id == productId)
+      cartProductList.splice(index, 1)
+    console.log(cartProductList) 
   }
 
   const [isCartOpen, setIsCartOpen] = useState<boolean | undefined>(false);
@@ -175,37 +192,33 @@ const Navbar: React.FC = () => {
 
 
           {/* for lg */}
-          <input 
-            className={s.header__search}
-            type="text"
-            placeholder="Поиск"
-          />
+          <form onClick={ () => handleIsCartOpen(false) } className={s.search__form} action="#">
+            <input 
+              className={s.search__input}
+              type="text"
+              placeholder="Поиск"
+            />
+
+            <button className={s.search__btn} type="submit">
+              <a href="/search"/>
+            </button>
+          </form>
 
           {/* for md */}
           <img 
             className={s.header__icon_md}
             src={search}
             alt="img"
-            onClick={handleOnClickSearch}
+            onClick={() => handleOnClickSearch()}
           />
 
-          <div className={s.header__cart}>
-            <img className={s.header__cart_svg} alt="КОРЗИНА" src={cart}/>
-            <div className={s.header__cart_circle}/>
-            <span className={s.header__cart_count}>{countGoodsInCart}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* md */}
-      <div className={s.header__bottom_md}>
-        <div className={s.header__bottom_container_md}>
-          <img className={s.header__icon_md} src={search} alt="ПОИСК" onClick={handleOnClickSearch}/>
-          <a className={s.header__bottom_logo} href="/"/>
-
-          <div style={{ 
-            'display': 'flex',
-           }}>
+          <div className={s.cart__wrapper}>
+            {isCartOpen && 
+              <div
+                onClick={ () => {handleIsCartOpen(false)} }
+                className={s.cart__outside} 
+              />
+            }
             <ul className={s.cart__category_ul}>
               <li className={s.cart__category_li}>
                 <div 
@@ -232,12 +245,10 @@ const Navbar: React.FC = () => {
                             handleIsCartOpen(false)
                             event.currentTarget.classList.add(`${s.active}`)
                           }}
-                        >
-                          12
-                        </span>
+                        />
                     </div>
                     <div className={s.cart__subcategory_container}>
-                      {cartProductList.map(product => {
+                      {cartProductList.map((product, index) => {
                         return (
                           <div className={s.product}>
                             <div className={s.product__container}>
@@ -245,7 +256,7 @@ const Navbar: React.FC = () => {
                               <div className={s.product__content}>
                                 <div className={s.product__content_top}>
                                   <span className={s.product__title}>{product.header}</span>
-                                  <span className={s.product__delete}></span>
+                                  <span onClick={ () => deleteFromCart(product.id, index) } className={s.product__delete}/>
                                 </div>
 
                                 <div className={s.product__content_bottom}>
@@ -282,6 +293,98 @@ const Navbar: React.FC = () => {
             <div 
               className={isHamburgerOpen ? `${s.burger__container} ${s.burger__active}` : s.burger__container} 
               onClick={toggleHamburger}
+            >
+              <span/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* md */}
+      <div className={s.header__bottom_md}>
+        <div className={s.header__bottom_container_md}>
+          <img className={s.header__icon_md} src={search} alt="ПОИСК" onClick={() => handleOnClickSearch()}/>
+          <a className={s.header__bottom_logo} href="/"/>
+
+          <div style={{ 
+            'display': 'flex',
+           }}>
+            <ul className={s.cart__category_ul}>
+              <li className={s.cart__category_li}>
+                <div 
+                  className={s.header__cart}
+                  onClick={ () => {handleIsCartOpen()} }
+                >
+                  <img className={s.header__cart_svg} alt="КОРЗИНА" src={cart}/>
+                  <div className={s.header__cart_circle}/>
+                  <span className={s.header__cart_count}>{countGoodsInCart}</span>
+                </div>
+
+                <CSSTransition
+                  in={isCartOpen} 
+                  timeout={300} 
+                  unmountOnExit 
+                  classNames='menu'
+                >
+                  <ul className={s.cart__subcategory_ul}>
+                    <div className={s.cart__subcategory_header}>
+                      <span className={s.header__span}>КОРЗИНА ({countGoodsInCart})</span>
+                        <span 
+                          className={s.header__close}
+                          onClick={(event) => {
+                            handleIsCartOpen(false)
+                            event.currentTarget.classList.add(`${s.active}`)
+                          }}
+                        >
+                          12
+                        </span>
+                    </div>
+                    <div className={s.cart__subcategory_container}>
+                      {cartProductList.map((product, index) => {
+                        return (
+                          <div className={s.product}>
+                            <div className={s.product__container}>
+                              <div className={s.product__img} />
+                              <div className={s.product__content}>
+                                <div className={s.product__content_top}>
+                                  <span className={s.product__title}>{product.header}</span>
+                                  <span onClick={ () => deleteFromCart(product.id, index) } className={s.product__delete}/>
+                                </div>
+
+                                <div className={s.product__content_bottom}>
+                                  <span className={s.product__count}>100 гр.</span>
+                                  <span className={s.product__price}>{product.price} р.</span>
+                                </div>
+                                <span style={{ 'display': 'none' }}>{totalCostCart += product.price}</span>
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+
+                    <div className={s.cart__footer}>
+                      <div className={s.cart__footer_total}>
+                        <span className={s.cart__total_title}>ИТОГО</span>
+                        <span className={s.cart__total_value}>{totalCostCart} р.</span>
+                      </div>
+
+                      <div 
+                        className={s.cart__footer_btn}
+                        onClick={ (event) => {event.currentTarget.classList.add(`${s.active}`);} }
+                      >
+                        ОФОРМИТЬ ЗАКАЗ
+                      </div>
+                    </div>  
+
+                  </ul>
+                </CSSTransition>  
+              </li>
+            </ul>
+
+            <div 
+              className={isHamburgerOpen ? `${s.burger__container} ${s.burger__active}` : s.burger__container} 
+              onClick={() => toggleHamburger()}
             >
               <span/>
             </div>
