@@ -8,19 +8,20 @@ import search from './search.svg'
 
 import { CSSTransition } from "react-transition-group"
 
-import { Category, Subcategory, Product } from "../../interfaces/interfaces"
+import { CategoryType, SubcategoryType, ProductType, UserType } from "../../interfaces/interfaces"
 import Spoiler from "./Spoiler/Spoiler"
+import { PropsNavbar } from "./NavbarContainer"
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<PropsNavbar> = (props) => {
 
-  const topCategories: string[] = ['О компании', 'Оптовикам', 'Контакты']
-  const bottomCategories: Category[] = [
+  const topCategories: Array<string> = ['О компании', 'Оптовикам', 'Контакты']
+  const bottomCategories: Array<CategoryType> = [
     { id: 1, title: 'Аксессуары', url: '/accessuari' },
     { id: 2, title: 'Кофе', url: '/coffee' },
     { id: 3, title: 'Чай', url: '/chay' },
     { id: 4, title: 'Посуда', url: '/posuda' }
   ].sort((a, b) => a.title.length > b.title.length ? -1 : 1)
-  const bottomSubcategories: Subcategory[] = [
+  const bottomSubcategories: Array<SubcategoryType> = [
     { id: 1, title: 'Моносорта', url: '/monosorta' },
     { id: 2, title: 'Смеси', url: '/smesi' },
     { id: 3, title: 'Чёрный', url: '/cherniy' },
@@ -33,12 +34,12 @@ const Navbar: React.FC = () => {
   ].sort((a, b) => a.title.length > b.title.length ? -1 : 1)
 
   // bottomCategories.size() - i; j - 
-  const subcategoriesByCategory: Subcategory[][] = bottomCategories.map((category, index) => {
+  const subcategoriesByCategory: SubcategoryType[][] = bottomCategories.map((category, index) => {
     // делаем запрос, получаем список по category.id, затем return полученный список
     return bottomSubcategories;
   })
   subcategoriesByCategory.pop();
-  const cartProductList: Product[] = [ 
+  const cartProductList: Array<ProductType> = [ 
     { id: 1, header: 'Пуэр 1', price: 12, description: 'Вкусный питательный чайок' },
     { id: 2, header: 'Пуэр 2', price: 1200, description: 'Вкусный питательный чайок' },
     { id: 3, header: 'Пуэр 3', price: 120, description: 'Вкусный питательный чайок' },
@@ -72,7 +73,7 @@ const Navbar: React.FC = () => {
       setIsSearchOpen(!isSearchOpen)
   }
 
-  const getSubcategoriesByCategoryId = (id: number): Subcategory[] => {
+  const getSubcategoriesByCategoryId = (id: number): Array<SubcategoryType> => {
     return bottomSubcategories;
   }
 
@@ -83,8 +84,8 @@ const Navbar: React.FC = () => {
   }
 
   const [isCategoryHovered, setIsCategoryHovered] = useState<boolean | undefined>(false)
-  const [currentSelectedCategory, setCurrentSelectedCategory] = useState<Category | null | undefined>(null)
-  const handleIsCategoryHovered = (isState: boolean, currentCategory?: Category): void => {
+  const [currentSelectedCategory, setCurrentSelectedCategory] = useState<CategoryType | null | undefined>(null)
+  const handleIsCategoryHovered = (isState: boolean, currentCategory?: CategoryType): void => {
     setIsCategoryHovered(isState)
     setIsSearchOpen(false)
     if (currentCategory !== undefined) {
@@ -93,10 +94,8 @@ const Navbar: React.FC = () => {
   }
 
   const deleteFromCart = (productId: number, index: number): void => {
-    console.log(cartProductList)
     if (cartProductList[index].id == productId)
       cartProductList.splice(index, 1)
-    console.log(cartProductList) 
   }
 
   const [isCartOpen, setIsCartOpen] = useState<boolean | undefined>(false);

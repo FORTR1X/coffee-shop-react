@@ -338,6 +338,11 @@ div {
         color: white;
         font-size: 14px;
     }
+
+    .header__span {
+        color: white;
+        cursor: default;
+    }
    
     .header__close {
         cursor: pointer;
@@ -657,6 +662,7 @@ div {
 
     .header__span {
         color: white;
+        cursor: default;
     }
 
     .header__close_wrapper {
@@ -833,7 +839,7 @@ div {
     .header__bottom_md {
         display: block;
 
-        z-index: 10;
+        z-index: 5;
 
         height: 75px;
         background-color: white;

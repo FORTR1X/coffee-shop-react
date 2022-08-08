@@ -4,9 +4,9 @@ import s from './Spoiler.module.css'
 import './index.css'
 
 import { CSSTransition } from "react-transition-group"
-import { SpoilerContent } from './../../../interfaces/interfaces'
+import { SpoilerContentType } from './../../../interfaces/interfaces'
 
-const Spoiler: React.FC<SpoilerContent> = (props: SpoilerContent) => {
+const Spoiler: React.FC<SpoilerContentType> = (props: SpoilerContentType) => {
 
   const [isSpoilerOpen, setIsSpoilerOpen] = useState<boolean | undefined>(false)
   const handleSetIsSpoilerOpen = (): void => setIsSpoilerOpen(!isSpoilerOpen)
