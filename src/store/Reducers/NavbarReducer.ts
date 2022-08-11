@@ -1,4 +1,5 @@
-import { CategoryType, ProductType, SubcategoryType, UserType } from "../../interfaces/interfaces"
+import { AnyAction } from "@reduxjs/toolkit"
+import { CategoryType, CompanyCategoryType, ProductType, SubcategoryType, UserType } from "../../interfaces/interfaces"
 
 const SET_COMPANY_CATEGORIES = 'SET_COMPANY_CATEGORIES'
 const SET_PRODUCT_CATEGORIES = 'SET_PRODUCT_CATEGORIES' 
@@ -12,51 +13,89 @@ const SET_HAMBURGER_OPEN = 'SET_HAMBURGER_OPEN'
 const SET_IS_CATEGORY_HOVERED = 'SET_IS_CATEGORY_HOVERED'
 const SET_IS_CART_OPEN = 'SET_IS_CART_OPEN' 
 
-export type NavbarInitialStateType = {
-  companyCategories: Array<string> | null
-  productCategories: Array<CategoryType> | null
-  productSubcategories: Array<SubcategoryType> | null
-  productSubcategoriesByCategory: SubcategoryType[][] | null
-  cartProductList: Array<ProductType> | null
-  user: UserType | null
-  countGoodsInCart: number
-  isSearchOpen: boolean | undefined
-  isHamburgerOpen: boolean | undefined
-  isCategoryHovered: boolean | undefined
-  isCartOpen: boolean | undefined
-}
-
-let initalState: NavbarInitialStateType = {
-  companyCategories: null,
-  productCategories: null,
-  productSubcategories: null,
-  productSubcategoriesByCategory: null,
-  cartProductList: null,
-  user: null,
+let initalState = {
+  companyCategories: null as Array<CompanyCategoryType> | null,
+  productCategories: null as Array<CategoryType> | null,
+  productSubcategories: null as Array<SubcategoryType> | null,
+  productSubcategoriesByCategory: [] as SubcategoryType[][] | null,
+  cartProductList: null as Array<ProductType> | null,
+  user: null as UserType | null,
   countGoodsInCart: 0,
-  isSearchOpen: false,
-  isHamburgerOpen: false,
-  isCategoryHovered: false,
-  isCartOpen: false
+  isSearchOpen: false as boolean | undefined,
+  isHamburgerOpen: false as boolean | undefined,
+  isCategoryHovered: false as boolean | undefined,
+  isCartOpen: false as boolean | undefined
 }
 
-const navbarReducer = (state = initalState, action: any): NavbarInitialStateType => {
+export type NavbarInitialStateType = typeof initalState
+
+const navbarReducer = (state = initalState, action: NavbarActionTypes): NavbarInitialStateType => {
   switch (action.type) {
 
     case SET_COMPANY_CATEGORIES:
-    case SET_PRODUCT_CATEGORIES:  
+      return {
+        ...state,
+        companyCategories: action.companyCategories
+      }
+
+    case SET_PRODUCT_CATEGORIES:
+      return {
+        ...state,
+        productCategories: action.productCategories
+      }
+
     case SET_PRODUCT_SUBCATEGORIES:
+      return {
+        ...state,
+        productSubcategories: action.productSubcategories
+      }
+
     case SET_SUBCATEGORIES_BY_CATEGORY:
+      return {
+        ...state,
+        productSubcategoriesByCategory: action.subcategoriesByCategory
+      }
+
     case SET_CART_PRODUCT_LIST:
-    case SET_USER:  
+      return {
+        ...state,
+        cartProductList: action.cartProductList
+      }
+
+    case SET_USER:
+      return {
+        ...state,
+        user: action.user
+      }
+
     case SET_COUNTS_GOODS_IN_CART:
+      return {
+        ...state,
+        countGoodsInCart: action.countsGoodsInCart
+      }
+
     case SET_IS_SEARCH_OPEN:
+      return {
+        ...state,
+        isSearchOpen: action.isSearchOpen
+      }
+
     case SET_HAMBURGER_OPEN:
+      return {
+        ...state,
+        isHamburgerOpen: action.isHamburgerOpen
+      }
+
     case SET_IS_CATEGORY_HOVERED:
+      return {
+        ...state,
+        isCategoryHovered: action.isCategoryHovered
+      }
+
     case SET_IS_CART_OPEN:       
       return {
         ...state,
-        ...action.payload
+        isCartOpen: action.isCartOpen
       }
 
     default:
@@ -65,103 +104,107 @@ const navbarReducer = (state = initalState, action: any): NavbarInitialStateType
   }
 }
 
+export type NavbarActionTypes = SetCompanyCategoriesActionType | SetProductCategoriesActionType | SetProductSubcategoriesActionType |
+  SetSubcategoriesByCategoryActionType | SetCartProductListActionType | SetUserActionType | SetCountGoodsInCartActionType |
+  SetIsSearchOpenActionType | SetHamburgerOpenActionType | SetIsCategoryHoveredActionType | SetIsCartOpenActionType
+
 type SetCompanyCategoriesActionType = {
   type: typeof SET_COMPANY_CATEGORIES
-  payload: Array<string>
+  companyCategories: Array<CompanyCategoryType> | null
 }
-export const setCompanyCategories = (companyCategories: Array<string>): SetCompanyCategoriesActionType => ({
+export const setCompanyCategories = (companyCategories: Array<CompanyCategoryType> | null): SetCompanyCategoriesActionType => ({
   type: SET_COMPANY_CATEGORIES,
-  payload: companyCategories
+  companyCategories
 })
 
 type SetProductCategoriesActionType = {
   type: typeof SET_PRODUCT_CATEGORIES
-  payload: Array<CategoryType> | null
+  productCategories: Array<CategoryType> | null
 }
 export const setProductCategories = (productCategories: Array<CategoryType> | null): SetProductCategoriesActionType => ({
   type: SET_PRODUCT_CATEGORIES,
-  payload: productCategories
+  productCategories
 })
 
 type SetProductSubcategoriesActionType = {
   type: typeof SET_PRODUCT_SUBCATEGORIES
-  payload: Array<SubcategoryType> | null
+  productSubcategories: Array<SubcategoryType> | null
 }
 export const setProductSubcategories = (productSubcategories: Array<SubcategoryType> | null): SetProductSubcategoriesActionType => ({
   type: SET_PRODUCT_SUBCATEGORIES,
-  payload: productSubcategories
+  productSubcategories
 })
 
 type SetSubcategoriesByCategoryActionType = {
   type: typeof SET_SUBCATEGORIES_BY_CATEGORY
-  payload: SubcategoryType[][] | null
+  subcategoriesByCategory: SubcategoryType[][] | null
 }
 export const setSubcategoriesByCategory = (subcategoriesByCategory: SubcategoryType[][] | null): SetSubcategoriesByCategoryActionType => ({
   type: SET_SUBCATEGORIES_BY_CATEGORY,
-  payload: subcategoriesByCategory
+  subcategoriesByCategory
 })
 
 type SetCartProductListActionType = {
   type: typeof SET_CART_PRODUCT_LIST
-  payload: Array<ProductType> | null
+  cartProductList: Array<ProductType> | null
 }
 export const setCartProductList = (cartProductList: Array<ProductType> | null): SetCartProductListActionType => ({
   type: SET_CART_PRODUCT_LIST,
-  payload: cartProductList
+  cartProductList
 })
 
 type SetUserActionType = {
   type: typeof SET_USER
-  payload: UserType | null
+  user: UserType | null
 }
 export const setUser = (user: UserType | null): SetUserActionType => ({
   type: SET_USER,
-  payload: user
+  user
 })
 
 type SetCountGoodsInCartActionType = {
   type: typeof SET_COUNTS_GOODS_IN_CART
-  payload: number
+  countsGoodsInCart: number
 }
 export const seCountsGoodsInCart = (countsGoodsInCart: number): SetCountGoodsInCartActionType => ({
   type: SET_COUNTS_GOODS_IN_CART,
-  payload: countsGoodsInCart
+  countsGoodsInCart
 })
 
 type SetIsSearchOpenActionType = {
   type: typeof SET_IS_SEARCH_OPEN
-  payload: boolean | undefined
+  isSearchOpen: boolean | undefined
 }
 export const setIsSearchOpen = (isSearchOpen: boolean | undefined): SetIsSearchOpenActionType => ({
   type: SET_IS_SEARCH_OPEN,
-  payload: isSearchOpen
+  isSearchOpen
 })
 
 type SetHamburgerOpenActionType = {
   type: typeof SET_HAMBURGER_OPEN
-  payload: boolean | undefined
+  isHamburgerOpen: boolean | undefined
 }
 export const setHamburgerOpen = (isHamburgerOpen: boolean | undefined): SetHamburgerOpenActionType => ({
   type: SET_HAMBURGER_OPEN,
-  payload: isHamburgerOpen
-})
-
-type SetIsCategoryHoveredActionType = {
-  type: typeof SET_IS_CATEGORY_HOVERED
-  payload: boolean | undefined
-}
-export const setIsCategoryHovered = (isCategoryHovered: boolean | undefined): SetIsCategoryHoveredActionType => ({
-  type: SET_IS_CATEGORY_HOVERED,
-  payload: isCategoryHovered
+  isHamburgerOpen
 })
 
 type SetIsCartOpenActionType = {
   type: typeof SET_IS_CART_OPEN
-  payload: boolean | undefined
+  isCartOpen: boolean | undefined
 }
 export const setIsCartOpen = (isCartOpen: boolean | undefined): SetIsCartOpenActionType => ({
   type: SET_IS_CART_OPEN,
-  payload: isCartOpen
+  isCartOpen
+})
+
+type SetIsCategoryHoveredActionType = {
+  type: typeof SET_IS_CATEGORY_HOVERED
+  isCategoryHovered: boolean | undefined
+}
+export const setIsCategoryHovered = (isCategoryHovered: boolean | undefined): SetIsCategoryHoveredActionType => ({
+  type: SET_IS_CATEGORY_HOVERED,
+  isCategoryHovered
 })
 
 export default navbarReducer

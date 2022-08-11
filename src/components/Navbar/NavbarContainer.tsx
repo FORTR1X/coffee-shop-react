@@ -1,12 +1,13 @@
 import React from "react"
 import { connect } from "react-redux"
-import { getCompanyCategories, getProductCategories, getProductSubcategories } from "../../store/Actions/NavbarAction"
+import { getCompanyCategories, getProductCategories, getProductSubcategories, getUser } from "../../store/Actions/NavbarAction"
 import { RootState } from "../../store/redux-store"
 import Navbar from "./Navbar"
-import { CategoryType, ProductType, SubcategoryType, UserType } from "../../interfaces/interfaces"
+import { CategoryType, CompanyCategoryType, ProductType, SubcategoryType, UserType } from "../../interfaces/interfaces"
+import { setSubcategoriesByCategory } from "../../store/Reducers/NavbarReducer"
 
 type MapStatePropsType = {
-  companyCategories: Array<string> | null
+  companyCategories: Array<CompanyCategoryType> | null
   productCategories: Array<CategoryType> | null
   productSubcategories: Array<SubcategoryType> | null
   productSubcategoriesByCategory: SubcategoryType[][] | null
@@ -22,7 +23,9 @@ type MapStatePropsType = {
 type MapDispatchPropsType = {
   getCompanyCategories: () => void
   getProductCategories: () => void
-  getProductSubcategories: () => void
+  getProductSubcategories: (categoryId: number) => any
+  getUser: (userId?: number) => void
+  setSubcategoriesByCategory: (subcategoriesByCategory: SubcategoryType[][] | null) => void
 }
 
 type OwnPropsType = {
@@ -46,8 +49,9 @@ let mapStateToProps = (state: RootState) => {
 }
 
 const NavbarContainer = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, RootState>(
-  mapStateToProps, 
-  {getCompanyCategories, getProductCategories, getProductSubcategories}
+  mapStateToProps, {
+    getCompanyCategories, getProductCategories, getProductSubcategories, getUser, setSubcategoriesByCategory
+  }
 )(Navbar)
 
 export default NavbarContainer

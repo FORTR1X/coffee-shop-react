@@ -12,6 +12,12 @@ export type SubcategoryType = {
     url: string
 }
 
+export type CompanyCategoryType = {
+    id: number,
+    title: string,
+    url: string
+}
+
 export type ProductType = {
     id: number,
     header: string,

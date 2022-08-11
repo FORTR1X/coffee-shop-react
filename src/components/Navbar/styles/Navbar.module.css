@@ -562,7 +562,7 @@ div {
         border-bottom: 16px solid white;
 
         position: absolute;
-        top: 10%;
+        top: 35px;
         left: 10%;
     }
 }
@@ -586,10 +586,13 @@ div {
     .header__text_animation_md {
         display: inline-block;
         cursor: pointer;
+
+        text-decoration: none;
+        color: black;
     }
 
     .subcategory__trinagle {
-        top: 11%;
+        top: 35px;
     }
 
 }
@@ -620,12 +623,6 @@ div {
 
     .header__bottom_logo {
         margin-right: 15px;
-    }
-}
-
-@media (min-width: 640px) and (max-width: 768px) {
-    .subcategory__trinagle {
-        top: 12%;
     }
 }
 

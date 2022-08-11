@@ -11,19 +11,19 @@ const Spoiler: React.FC<SpoilerContentType> = (props: SpoilerContentType) => {
   const [isSpoilerOpen, setIsSpoilerOpen] = useState<boolean | undefined>(false)
   const handleSetIsSpoilerOpen = (): void => setIsSpoilerOpen(!isSpoilerOpen)
 
-  const isArrowStyle: string = props.content == null || undefined ? '' : `${s.arrow}`
+  const isArrowStyle: string = (props.content == null) || (props.content !== null && props.content.length == 0) || undefined ? '' : `${s.arrow}`
   const isOpenedSpoiler: string = ((isSpoilerOpen) && (props.content !== (null || undefined))) ? `${s.openned}` : ''
   const titleStyle = `${s.spoiler__title} ${isArrowStyle} ${isOpenedSpoiler}`
 
   return (
     <div className={s.spoiler} onClick={handleSetIsSpoilerOpen}>
       {/* with subcategory */}
-      {props.content !== undefined &&
+      {props.content !== undefined && props.content !== null && props.content.length > 0 &&
         <span className={titleStyle}>{props.title}</span>
       }
 
       {/* without subcategory */}
-      {props.content === undefined &&
+      {(props.content === undefined || props.content === null) || (props.content !== null && props.content.length == 0) &&
         <a 
           className={`${titleStyle} ${s.spoiler__title_link}`}
           href={props.categoryUrl}
