@@ -1,7 +1,5 @@
 import { ThunkAction } from "@reduxjs/toolkit"
-import axios, { AxiosResponse } from "axios"
 import useApi from "../../hooks/useApi"
-import { SubcategoryType } from "../../interfaces/interfaces"
 import { NavbarActionTypes, setCompanyCategories, setProductCategories, setProductSubcategories, setSubcategoriesByCategory, setUser } from "../Reducers/NavbarReducer"
 import { RootState } from "../redux-store"
 
@@ -25,10 +23,10 @@ export const getProductCategories = (): ThunkActionType => {
 
 export const getProductSubcategories = (categoryId: number): ThunkAction<Promise<any>, RootState, unknown, NavbarActionTypes> => {
   return async (dispatch, getState) => {
-    let response = await useApi('GET', `/category/id${categoryId}/subcategories`)
-
-    dispatch(setProductSubcategories(response.data))
-    return response.data
+    let response = useApi('GET', `/category/id${categoryId}/subcategories`)
+    
+    dispatch(setProductSubcategories((await response).data))
+    return (await response).data
   }
 }
 
@@ -39,5 +37,3 @@ export const getUser = (userId?: number): ThunkActionType => {
     dispatch(setUser(response.data))
   }
 }
-
-// TODO: CompanyCategories занести в БД 'О компании', 'Оптовикам'

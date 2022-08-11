@@ -8,10 +8,11 @@ const SET_SUBCATEGORIES_BY_CATEGORY = 'SET_SUBCATEGORIES_BY_CATEGORY'
 const SET_CART_PRODUCT_LIST = 'SET_CART_PRODUCT_LIST'
 const SET_USER = 'SET_USER'
 const SET_COUNTS_GOODS_IN_CART = 'SET_COUNTS_GOODS_IN_CART'
+const SET_CURRENT_SELECTED_CATEGORY = 'SET_CURRENT_SELECTED_CATEGORY'
 const SET_IS_SEARCH_OPEN = 'SET_IS_SEARCH_OPEN'
 const SET_HAMBURGER_OPEN = 'SET_HAMBURGER_OPEN'
 const SET_IS_CATEGORY_HOVERED = 'SET_IS_CATEGORY_HOVERED'
-const SET_IS_CART_OPEN = 'SET_IS_CART_OPEN' 
+const SET_IS_CART_OPEN = 'SET_IS_CART_OPEN'
 
 let initalState = {
   companyCategories: null as Array<CompanyCategoryType> | null,
@@ -21,6 +22,7 @@ let initalState = {
   cartProductList: null as Array<ProductType> | null,
   user: null as UserType | null,
   countGoodsInCart: 0,
+  currentSelectedCategory: null as CategoryType | null,
   isSearchOpen: false as boolean | undefined,
   isHamburgerOpen: false as boolean | undefined,
   isCategoryHovered: false as boolean | undefined,
@@ -74,6 +76,12 @@ const navbarReducer = (state = initalState, action: NavbarActionTypes): NavbarIn
         countGoodsInCart: action.countsGoodsInCart
       }
 
+    case SET_CURRENT_SELECTED_CATEGORY:
+      return {
+        ...state,
+        currentSelectedCategory: action.currentSelectedCategory
+      }   
+
     case SET_IS_SEARCH_OPEN:
       return {
         ...state,
@@ -106,7 +114,7 @@ const navbarReducer = (state = initalState, action: NavbarActionTypes): NavbarIn
 
 export type NavbarActionTypes = SetCompanyCategoriesActionType | SetProductCategoriesActionType | SetProductSubcategoriesActionType |
   SetSubcategoriesByCategoryActionType | SetCartProductListActionType | SetUserActionType | SetCountGoodsInCartActionType |
-  SetIsSearchOpenActionType | SetHamburgerOpenActionType | SetIsCategoryHoveredActionType | SetIsCartOpenActionType
+  SetIsSearchOpenActionType | SetHamburgerOpenActionType | SetIsCategoryHoveredActionType | SetIsCartOpenActionType | SetCurrentSelectedCategory
 
 type SetCompanyCategoriesActionType = {
   type: typeof SET_COMPANY_CATEGORIES
@@ -169,6 +177,15 @@ type SetCountGoodsInCartActionType = {
 export const seCountsGoodsInCart = (countsGoodsInCart: number): SetCountGoodsInCartActionType => ({
   type: SET_COUNTS_GOODS_IN_CART,
   countsGoodsInCart
+})
+
+type SetCurrentSelectedCategory = {
+  type: typeof SET_CURRENT_SELECTED_CATEGORY
+  currentSelectedCategory: CategoryType | null
+}
+export const setCurrentSelectedCategory = (currentSelectedCategory: CategoryType | null): SetCurrentSelectedCategory => ({
+  type: SET_CURRENT_SELECTED_CATEGORY,
+  currentSelectedCategory
 })
 
 type SetIsSearchOpenActionType = {

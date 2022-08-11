@@ -1,10 +1,9 @@
-import React from "react"
 import { connect } from "react-redux"
 import { getCompanyCategories, getProductCategories, getProductSubcategories, getUser } from "../../store/Actions/NavbarAction"
 import { RootState } from "../../store/redux-store"
 import Navbar from "./Navbar"
 import { CategoryType, CompanyCategoryType, ProductType, SubcategoryType, UserType } from "../../interfaces/interfaces"
-import { setSubcategoriesByCategory } from "../../store/Reducers/NavbarReducer"
+import { seCountsGoodsInCart, setCartProductList, setCurrentSelectedCategory, setHamburgerOpen, setIsCartOpen, setIsCategoryHovered, setIsSearchOpen, setSubcategoriesByCategory } from "../../store/Reducers/NavbarReducer"
 
 type MapStatePropsType = {
   companyCategories: Array<CompanyCategoryType> | null
@@ -14,6 +13,7 @@ type MapStatePropsType = {
   cartProductList: Array<ProductType> | null
   user: UserType | null
   countGoodsInCart: number
+  currentSelectedCategory: CategoryType | null
   isSearchOpen: boolean | undefined
   isHamburgerOpen: boolean | undefined
   isCategoryHovered: boolean | undefined
@@ -26,6 +26,13 @@ type MapDispatchPropsType = {
   getProductSubcategories: (categoryId: number) => any
   getUser: (userId?: number) => void
   setSubcategoriesByCategory: (subcategoriesByCategory: SubcategoryType[][] | null) => void
+  setCurrentSelectedCategory: (currentSelectedCategory: CategoryType | null) => void
+  setIsCategoryHovered: (isCategoryHovered: boolean | undefined) => void
+  setIsCartOpen: (isCartOpen: boolean | undefined) => void
+  setHamburgerOpen: (isHamburgerOpen: boolean | undefined) => void
+  setIsSearchOpen: (isSearchOpen: boolean | undefined) => void
+  seCountsGoodsInCart: (countsGoodsInCart: number) => void
+  setCartProductList: (cartProductList: Array<ProductType> | null) => void
 }
 
 type OwnPropsType = {
@@ -41,6 +48,7 @@ let mapStateToProps = (state: RootState) => {
     cartProductList: state.navbar.cartProductList,
     user: state.navbar.user,
     countGoodsInCart: state.navbar.countGoodsInCart,
+    currentSelectedCategory: state.navbar.currentSelectedCategory,
     isSearchOpen: state.navbar.isSearchOpen,
     isHamburgerOpen: state.navbar.isHamburgerOpen,
     isCategoryHovered: state.navbar.isCategoryHovered,
@@ -50,7 +58,9 @@ let mapStateToProps = (state: RootState) => {
 
 const NavbarContainer = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, RootState>(
   mapStateToProps, {
-    getCompanyCategories, getProductCategories, getProductSubcategories, getUser, setSubcategoriesByCategory
+    getCompanyCategories, getProductCategories, getProductSubcategories, getUser, setSubcategoriesByCategory,
+    setIsCategoryHovered, setIsCartOpen, setHamburgerOpen, setIsSearchOpen, seCountsGoodsInCart, setCartProductList,
+    setCurrentSelectedCategory
   }
 )(Navbar)
 

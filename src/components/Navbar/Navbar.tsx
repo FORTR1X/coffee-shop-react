@@ -11,7 +11,6 @@ import { CSSTransition } from "react-transition-group"
 import { CategoryType, SubcategoryType, ProductType, UserType, CompanyCategoryType } from "../../interfaces/interfaces"
 import Spoiler from "./Spoiler/Spoiler"
 import { PropsNavbar } from "./NavbarContainer"
-import axios from "axios"
 
 const Navbar: React.FC<PropsNavbar> = (props) => {
 
@@ -21,110 +20,88 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
     if (props.productCategories == null && props.companyCategories == null) {
       props.getCompanyCategories()
       props.getProductCategories()
+      props.getUser()
     }
   }, [props.productCategories])
 
   useEffect( () => {
-    if (props.productCategories !== null && subcategoriesByCategoryResult.length == 0) {
-
-      props.productCategories.map(async (category, index) => {
-        let response: SubcategoryType[] = await props.getProductSubcategories(category.id)
-        subcategoriesByCategoryResult?.push(response)
-        if (subcategoriesByCategoryResult.length == props.productCategories?.length)
-          props.setSubcategoriesByCategory(subcategoriesByCategoryResult)
-      })
-
-    }
+    if (props.productCategories !== null && subcategoriesByCategoryResult.length == 0) 
+      handleGetSubcategoriesByCategory()
   }, [props.productCategories])
+
+  const handleGetSubcategoriesByCategory = async (): Promise<void> => {
+    let resultArray: SubcategoryType[][] = []
+    if (props.productCategories !== null && props.productCategories.length !== undefined) 
+      for (let i = 0; i < props.productCategories.length; i++) {
+        let res = await props.getProductSubcategories(i+1)
+        resultArray.push(res)
+      }
+
+    props.setSubcategoriesByCategory(resultArray)
+  }
 
   let subcategoriesByCategoryResult: SubcategoryType[][] = []
   let subcategoriesByCategory: SubcategoryType[][] | null = props.productSubcategoriesByCategory;
-
   const topCategories: Array<CompanyCategoryType> | null = props.companyCategories
   const bottomCategories: Array<CategoryType> | null = props.productCategories //.sort((a, b) => a.title.length > b.title.length ? -1 : 1)
-  const bottomSubcategories: Array<SubcategoryType> = [
-    { id: 1, title: 'Моносорта', url: '/monosorta' },
-    { id: 2, title: 'Смеси', url: '/smesi' },
-    { id: 3, title: 'Чёрный', url: '/cherniy' },
-    { id: 4, title: 'Зеленый', url: '/zeleniy' },
-    { id: 5, title: 'Улун', url: '/ulun' },
-    { id: 6, title: 'Белый', url: '/beliy' },
-    { id: 7, title: 'Пуэр', url: '/puer' },
-    { id: 8, title: 'Травяные', url: '/travyanie' },
-    { id: 9, title: 'Красный', url: '/krasniy' }
-  ].sort((a, b) => a.title.length > b.title.length ? -1 : 1)
+  const cartProductList: Array<ProductType> | null = props.cartProductList
+  const user: UserType | null = props.user;
 
-  const cartProductList: Array<ProductType> = [ 
-    { id: 1, header: 'Пуэр 1', price: 12, description: 'Вкусный питательный чайок' },
-    { id: 2, header: 'Пуэр 2', price: 1200, description: 'Вкусный питательный чайок' },
-    { id: 3, header: 'Пуэр 3', price: 120, description: 'Вкусный питательный чайок' },
-    { id: 4, header: 'Пуэр 4', price: 1203, description: 'Вкусный питательный чайок' },
-    { id: 5, header: 'Пуэр 5', price: 1220, description: 'Вкусный питательный чайок' },
-    { id: 6, header: 'Пуэр 6', price: 1120, description: 'Вкусный питательный чайок' },
-    { id: 7, header: 'Пуэр 7', price: 1210, description: 'Вкусный питательный чайок' },
-    { id: 8, header: 'Пуэр 8', price: 1290, description: 'Вкусный питательный чайок' },
-    { id: 9, header: 'Пуэр 9', price: 1260, description: 'Вкусный питательный чайок' },
-    { id: 10, header: 'Пуэр 10', price: 1220, description: 'Вкусный питательный чайок' },
-   ]
-
-   let totalCostCart: number = 0;
-
-  const user: UserType = {
-    email: 'example@gmail.com',
-    phoneNumber: '+7 (978)-779-02-36'
-  }
+  let totalCostCart: number = 0;
   let countGoodsInCart: number = 3;
 
-  const [isSearchOpen, setIsSearchOpen] = useState<boolean | undefined>(false)
+  const [searchValue, setSearchValue] = useState('')
+  const handleSetSearchValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value)
+  }
+
+  const isSearchOpen = props.isSearchOpen
   const handleOnClickSearch = (state?: boolean): void => {
     handleIsCategoryHovered(false)
     
     if (state !== undefined)
-      setIsSearchOpen(state)
+      props.setIsSearchOpen(state)
 
     if (state == undefined)  
-      setIsSearchOpen(!isSearchOpen)
+      props.setIsSearchOpen(!isSearchOpen)
   }
 
-  const [isHamburgerOpen, setIsHamburgerOpen] = useState<boolean | undefined>(false)
+  const isHamburgerOpen = props.isHamburgerOpen
   const toggleHamburger = (): void => {
-    setIsHamburgerOpen(!isHamburgerOpen)
+    props.setHamburgerOpen(!isHamburgerOpen)
     handleOnClickSearch(false)
   }
 
-  const [isCategoryHovered, setIsCategoryHovered] = useState<boolean | undefined>(false)
-  const [currentSelectedCategory, setCurrentSelectedCategory] = useState<CategoryType | null>(null)
+  const isCategoryHovered = props.isCategoryHovered
+  const currentSelectedCategory = props.currentSelectedCategory
   const handleIsCategoryHovered = (isState: boolean, currentCategory?: CategoryType): void => {
-    setIsCategoryHovered(isState)
-    setIsSearchOpen(false)
+    props.setIsCategoryHovered(isState)
+    props.setIsSearchOpen(false)
     if (currentCategory !== undefined) {
-      setCurrentSelectedCategory(currentCategory)
+      props.setCurrentSelectedCategory(currentCategory)
     }
   }
 
   const deleteFromCart = (productId: number, index: number): void => {
-    if (cartProductList[index].id == productId)
-      cartProductList.splice(index, 1)
+    
   }
 
-  const [isCartOpen, setIsCartOpen] = useState<boolean | undefined>(false);
+  const isCartOpen = props.isCartOpen
   const handleIsCartOpen = (state?: boolean):void => {
     if (state == undefined)
-      setIsCartOpen(!isCartOpen)
+      props.setIsCartOpen(!isCartOpen)
 
     if (state !== undefined)
-      setIsCartOpen(state)
+      props.setIsCartOpen(state)
 
       totalCostCart = 0;  
   }
 
-  console.log(subcategoriesByCategory)
-  // TODO ругается что length не найден
-
-
   return (
     <div>
-      {(subcategoriesByCategory !== null && topCategories != null && bottomCategories !== null) && 
+      {(subcategoriesByCategory !== null 
+        && topCategories != null && bottomCategories !== null && bottomCategories.length !== undefined
+        && user !== null && subcategoriesByCategory.length === bottomCategories.length) && 
         <nav className={s.header}>
           <div className={s.header__top}>
             <div className={s.header__top_container}>
@@ -147,7 +124,7 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
               <a className={s.header__bottom_logo} href="/"/>
 
               <ul className={s.category__ul}>
-                {bottomCategories.map(category => 
+                {bottomCategories.map(category =>
                   <li
                     className={s.category__li}
                     onClick={ (event) => {event.currentTarget.classList.toggle(`${s.active}`);} }
@@ -217,16 +194,16 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
 
 
               {/* for lg */}
-              <form onClick={ () => handleIsCartOpen(false) } className={s.search__form} action="#">
+              <form onClick={ () => handleIsCartOpen(false) } className={s.search__form}>
                 <input 
                   className={s.search__input}
                   type="text"
                   placeholder="Поиск"
+                  value={searchValue}
+                  onChange={(event) => {handleSetSearchValue(event)}}
                 />
 
-                <button className={s.search__btn} type="submit">
-                  <a href="/search"/>
-                </button>
+                <a className={s.search__btn} href={`/search/?q=${searchValue}`}/>
               </form>
 
               {/* for md */}
@@ -273,7 +250,8 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                             />
                         </div>
                         <div className={s.cart__subcategory_container}>
-                          {cartProductList.map((product, index) => {
+                          {/* Корзина не пустая */}
+                          {cartProductList !== null && cartProductList.map((product, index) => {
                             return (
                               <div key={++uniqueKey} className={s.product}>
                                 <div className={s.product__container}>
@@ -294,22 +272,30 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                               </div>
                             )
                           })}
+
+                          {/* Корзина пустая */}
+                          {cartProductList === null &&
+                            <div className={s.cart__empty}>
+                              КОРЗИНА ПУСТАЯ :(
+                            </div>
+                          }
                         </div>
 
-                        <div className={s.cart__footer}>
-                          <div className={s.cart__footer_total}>
-                            <span className={s.cart__total_title}>ИТОГО</span>
-                            <span className={s.cart__total_value}>{totalCostCart} р.</span>
-                          </div>
+                        {cartProductList !== null &&  
+                          <div className={s.cart__footer}>
+                            <div className={s.cart__footer_total}>
+                              <span className={s.cart__total_title}>ИТОГО</span>
+                              <span className={s.cart__total_value}>{totalCostCart} р.</span>
+                            </div>
 
-                          <div 
-                            className={s.cart__footer_btn}
-                            onClick={ (event) => {event.currentTarget.classList.add(`${s.active}`);} }
-                          >
-                            ОФОРМИТЬ ЗАКАЗ
-                          </div>
-                        </div>  
-
+                            <div 
+                              className={s.cart__footer_btn}
+                              onClick={ (event) => {event.currentTarget.classList.add(`${s.active}`);} }
+                            >
+                              ОФОРМИТЬ ЗАКАЗ
+                            </div>
+                          </div>  
+                        }
                       </ul>
                     </CSSTransition>  
                   </li>
@@ -365,7 +351,8 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                             </span>
                         </div>
                         <div className={s.cart__subcategory_container}>
-                          {cartProductList.map((product, index) => {
+                          {/* Корзина не пустая */}
+                          {cartProductList !== null && cartProductList.map((product, index) => {
                             return (
                               <div key={++uniqueKey} className={s.product}>
                                 <div className={s.product__container}>
@@ -386,21 +373,30 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                               </div>
                             )
                           })}
+
+                          {/* Корзина пустая */}
+                          {cartProductList === null &&
+                            <div className={s.cart__empty}>
+                              КОРЗИНА ПУСТАЯ :(
+                            </div>
+                          }
                         </div>
 
-                        <div className={s.cart__footer}>
-                          <div className={s.cart__footer_total}>
-                            <span className={s.cart__total_title}>ИТОГО</span>
-                            <span className={s.cart__total_value}>{totalCostCart} р.</span>
-                          </div>
+                        {cartProductList !== null &&  
+                          <div className={s.cart__footer}>
+                            <div className={s.cart__footer_total}>
+                              <span className={s.cart__total_title}>ИТОГО</span>
+                              <span className={s.cart__total_value}>{totalCostCart} р.</span>
+                            </div>
 
-                          <div 
-                            className={s.cart__footer_btn}
-                            onClick={ (event) => {event.currentTarget.classList.add(`${s.active}`);} }
-                          >
-                            ОФОРМИТЬ ЗАКАЗ
-                          </div>
-                        </div>  
+                            <div 
+                              className={s.cart__footer_btn}
+                              onClick={ (event) => {event.currentTarget.classList.add(`${s.active}`);} }
+                            >
+                              ОФОРМИТЬ ЗАКАЗ
+                            </div>
+                          </div>  
+                        }
 
                       </ul>
                     </CSSTransition>  
@@ -447,10 +443,8 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
             classNames='search'
           >
             <div className='header__search_md'>
-              <input className='header__search_input' type="text" placeholder="Поиск"/>
-              <a href="#">
-                <button className='header__search_btn'/>
-              </a>
+              <input value={searchValue} onChange={(event) => {handleSetSearchValue(event)}} className='header__search_input' type="text" placeholder="Поиск"/>
+              <a className='header__search_btn' href={`/search/?q=${searchValue}`}/>
             </div>
           </CSSTransition>
         
