@@ -27,3 +27,7 @@
   opacity: 1;
   background-color: white;
 }
+
+.swiper-slide.swiper-slide-active a {
+  display:block
+}
