@@ -483,7 +483,6 @@ div {
     .product__price {}
 
     .cart__empty {
-        background-color: red;
         font-size: 14px;
         text-align: center;
     }

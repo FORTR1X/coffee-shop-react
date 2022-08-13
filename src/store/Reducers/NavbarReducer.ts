@@ -1,4 +1,3 @@
-import { AnyAction } from "@reduxjs/toolkit"
 import { CategoryType, CompanyCategoryType, ProductType, SubcategoryType, UserType } from "../../interfaces/interfaces"
 
 const SET_COMPANY_CATEGORIES = 'SET_COMPANY_CATEGORIES'
@@ -14,7 +13,7 @@ const SET_HAMBURGER_OPEN = 'SET_HAMBURGER_OPEN'
 const SET_IS_CATEGORY_HOVERED = 'SET_IS_CATEGORY_HOVERED'
 const SET_IS_CART_OPEN = 'SET_IS_CART_OPEN'
 
-let initalState = {
+let initialState = {
   companyCategories: null as Array<CompanyCategoryType> | null,
   productCategories: null as Array<CategoryType> | null,
   productSubcategories: null as Array<SubcategoryType> | null,
@@ -29,9 +28,9 @@ let initalState = {
   isCartOpen: false as boolean | undefined
 }
 
-export type NavbarInitialStateType = typeof initalState
+export type NavbarInitialStateType = typeof initialState
 
-const navbarReducer = (state = initalState, action: NavbarActionTypes): NavbarInitialStateType => {
+const navbarReducer = (state = initialState, action: NavbarActionTypes): NavbarInitialStateType => {
   switch (action.type) {
 
     case SET_COMPANY_CATEGORIES:

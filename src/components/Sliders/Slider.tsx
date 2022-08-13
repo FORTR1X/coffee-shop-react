@@ -37,10 +37,9 @@ const Slider: React.FC = () => {
       loop
       speed={800}
       className={s.swiper__wrapper}
-      autoplay={ {delay: 6000, pauseOnMouseEnter: true, disableOnInteraction: false} }
+      autoplay={ {delay: 6000, pauseOnMouseEnter: false, disableOnInteraction: false} }
       allowTouchMove
       slideToClickedSlide
-      url={'/local'}
     >
       
         {slideImages.map((slide, index) => {
