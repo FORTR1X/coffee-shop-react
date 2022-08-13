@@ -13,6 +13,10 @@ div {
 
 .header {
     width: 100%;
+
+    position: fixed;
+
+    z-index: 100;
 }
 
 /* Header Top */
@@ -128,7 +132,7 @@ div {
     height: 1.5px;
     bottom: 0;
     left: 0;
-    background-color: black;
+    background-color: #FFB052;
     transform-origin: bottom left;
     transition: transform 0.25s ease-out;
 }

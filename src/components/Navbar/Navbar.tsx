@@ -127,7 +127,7 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                 {bottomCategories.map(category =>
                   <li
                     className={s.category__li}
-                    onClick={ (event) => {event.currentTarget.classList.toggle(`${s.active}`);} }
+                    onClick={ (event) => { event.currentTarget.classList.toggle(`${s.active}`) } }
                   >
                     {/* lg display */}
                     <a 

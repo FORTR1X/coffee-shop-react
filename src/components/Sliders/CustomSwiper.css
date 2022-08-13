@@ -1,0 +1,29 @@
+.swiper-button-next,
+.swiper-button-prev {
+  color: white;
+}
+
+.swiper-pagination-bullet {
+  width: 14px;
+  height: 14px;
+
+  opacity: 0.8;
+
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid white;
+
+  transition: all 0.5s;
+}
+.swiper-pagination-bullet:not(.swiper-pagination-bullet:last-child) {
+  margin-right: 15px;
+}
+
+.swiper-pagination-bullet:hover {
+  opacity: 1;
+  background-color: white;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background-color: white;
+}
