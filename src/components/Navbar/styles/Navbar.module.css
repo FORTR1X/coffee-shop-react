@@ -104,6 +104,31 @@ div {
     z-index: 3;
 }
 
+.header__text_animation>.down_arrow:before,
+.header__text_animation>.down_arrow:after {
+    content: '';
+    position: absolute;
+
+    background-color: gray;
+    width: 5px;
+    height: 1px;
+
+    border-radius: 10px;
+
+    top: 40%;
+    right: 0;
+}
+
+.header__text_animation>.down_arrow:before {
+    transform: rotate(40deg);
+    right: -8px;
+}
+
+.header__text_animation>.down_arrow:after {
+    transform: rotate(-40deg);
+    right: -11.4px;
+}
+
 .header__text_animation {
 
     /*  */
@@ -119,10 +144,6 @@ div {
 
     z-index: 3;
 }
-
-/* .header__text_animation:hover .category__main_ul {
-    display: inline-block;
-} */
 
 .header__text_animation:after {
     content: '';
@@ -599,6 +620,33 @@ div {
 
         text-decoration: none;
         color: black;
+        position: relative;
+    }
+
+    .header__text_animation_md>.down_arrow:before,
+    .header__text_animation_md>.down_arrow:after {
+        content: '';
+        position: absolute;
+
+        background-color: gray;
+        width: 5px;
+        height: 1px;
+
+        border-radius: 10px;
+
+        top: 40%;
+        right: 0;
+    }
+
+    .header__text_animation_md>.down_arrow:before {
+        right: -8px;
+        transform: rotate(40deg);
+
+    }
+
+    .header__text_animation_md>.down_arrow:after {
+        right: -11.4px;
+        transform: rotate(-40deg);
     }
 
     .subcategory__trinagle {

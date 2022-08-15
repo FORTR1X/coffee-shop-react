@@ -3,6 +3,13 @@
   color: white;
 }
 
+@media (max-width: 992px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none;
+  }
+}
+
 .swiper-pagination-bullet {
   width: 14px;
   height: 14px;

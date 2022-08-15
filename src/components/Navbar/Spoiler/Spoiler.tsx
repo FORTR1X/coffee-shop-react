@@ -40,9 +40,9 @@ const Spoiler: React.FC<SpoilerContentType> = (props: SpoilerContentType) => {
           classNames='spoiler'
         >   
           <ul className={s.spoiler__content}>
-            {props.content?.map(subcategory => {
+            {props.content?.map((subcategory, index) => {
               return ( 
-                <li className={s.spoiler__li}>
+                <li key={index * 7} className={s.spoiler__li}>
                   <a className={s.spoiler__link} href={`${props.categoryUrl}${subcategory.url}`}>
                     {subcategory.title}
                   </a>

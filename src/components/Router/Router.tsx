@@ -7,8 +7,6 @@ import Slider from "../Sliders/Slider";
 
 const Router: React.FC<PropsRouter> = (props) => {
 
-  console.log(props)
-
   return (
     <div>
       <NavbarContainer/>

@@ -44,7 +44,7 @@ const Slider: React.FC = () => {
       
         {slideImages.map((slide, index) => {
           return (
-            <SwiperSlide>
+            <SwiperSlide key={index * 2}>
               <a className={s.slide__link} href={slide.urlTo}>
                 <img className={s.slide__img} src={slide.imgUrl} alt={slide.alt} />
               </a>

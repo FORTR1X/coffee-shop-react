@@ -99,7 +99,7 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
 
   return (
     <div>
-      {(subcategoriesByCategory !== null 
+      {(subcategoriesByCategory !== null
         && topCategories != null && bottomCategories !== null && bottomCategories.length !== undefined
         && user !== null && subcategoriesByCategory.length === bottomCategories.length) && 
         <nav className={s.header}>
@@ -107,7 +107,7 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
             <div className={s.header__top_container}>
               <ul className={s.header__top_ul}>
                 {topCategories.map((category, index) => 
-                  <li key={++uniqueKey}>
+                  <li key={++uniqueKey * 30}>
                     <a onClick={() => handleIsCategoryHovered(false)} className={s.header__top_li} href={category.url} >
                       {category.title}
                     </a>
@@ -126,24 +126,26 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
               <ul className={s.category__ul}>
                 {bottomCategories.map(category =>
                   <li
+                    key={++uniqueKey * 5}
                     className={s.category__li}
                     onClick={ (event) => { event.currentTarget.classList.toggle(`${s.active}`) } }
                   >
                     {/* lg display */}
-                    <a 
-                      key={++uniqueKey * 5}
+                    
+                    <a
                       href={category.url}
                       className={s.header__text_animation}
                       onMouseEnter={ () => handleIsCategoryHovered(true, category) }
                       onMouseLeave={ () => handleIsCategoryHovered(false) }
                     >
-                      {category.title}
+                      <span className={subcategoriesByCategory !== null && subcategoriesByCategory[category.id - 1].length > 0 ? `${s.down_arrow}` : ''}>
+                        {category.title}
+                      </span>
                     </a>
 
                     {/* md display */}
                     {subcategoriesByCategory !== null && subcategoriesByCategory.length !== undefined && subcategoriesByCategory.length > 0 && subcategoriesByCategory[category.id - 1].length == 0 && subcategoriesByCategory.length == bottomCategories.length &&
                       <a
-                        key={++uniqueKey * 10}
                         href={category.url}
                         className={s.header__text_animation_md}
                       >
@@ -152,13 +154,14 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                     }
                     {subcategoriesByCategory !== null && subcategoriesByCategory.length !== undefined && subcategoriesByCategory.length > 0 && subcategoriesByCategory[category.id - 1].length > 0 && subcategoriesByCategory.length == bottomCategories.length &&
                       <span
-                        key={++uniqueKey * 10}
                         className={s.header__text_animation_md}
                         onClick={() => {
                           handleIsCategoryHovered(!isCategoryHovered, category)
                         }}
                       >
-                        {category.title}
+                        <span className={subcategoriesByCategory !== null && subcategoriesByCategory[category.id - 1].length > 0 ? `${s.down_arrow}` : ''}>
+                          {category.title}
+                        </span>
                       </span>
                     }
 
@@ -176,8 +179,8 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                               <div className={s.subcategory__container} >
                                 {subcategoriesByCategory[category.id - 1].length > 0 && subcategoriesByCategory[category.id - 1].map(subcat => {
                                   return (
-                                    <li className={s.subcategory__li}>
-                                      <a key={++uniqueKey * 100} className={s.subcategory__li_link} href={`${currentSelectedCategory?.url}${subcat.url}`}>
+                                    <li key={++uniqueKey * 10} className={s.subcategory__li}>
+                                      <a className={s.subcategory__li_link} href={`${currentSelectedCategory?.url}${subcat.url}`}>
                                         {subcat.title}
                                       </a>
                                     </li>
@@ -253,7 +256,7 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                           {/* Корзина не пустая */}
                           {cartProductList !== null && cartProductList.map((product, index) => {
                             return (
-                              <div key={++uniqueKey} className={s.product}>
+                              <div key={++uniqueKey * 15} className={s.product}>
                                 <div className={s.product__container}>
                                   <div className={s.product__img} />
                                   <div className={s.product__content}>
@@ -354,7 +357,7 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                           {/* Корзина не пустая */}
                           {cartProductList !== null && cartProductList.map((product, index) => {
                             return (
-                              <div key={++uniqueKey} className={s.product}>
+                              <div key={++uniqueKey * 20} className={s.product}>
                                 <div className={s.product__container}>
                                   <div className={s.product__img} />
                                   <div className={s.product__content}>
@@ -423,7 +426,7 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                   <div className={s.burger__menu_container}>
                     {bottomCategories.map(category => {
                         return <Spoiler
-                                  key={++uniqueKey}
+                                  key={++uniqueKey * 25}
                                   title={category.title}
                                   content={subcategoriesByCategory !== null ? subcategoriesByCategory[category.id - 1] : null}
                                   categoryUrl={category.url}
