@@ -1,5 +1,5 @@
 import { connect } from "react-redux"
-import { getCompanyCategories, getProductCategories, getProductSubcategories, getUser } from "../../store/Actions/NavbarAction"
+import { getAllSubcategories, getCompanyCategories, getProductCategories, getProductSubcategories, getUser } from "../../store/Actions/NavbarAction"
 import { RootState } from "../../store/redux-store"
 import Navbar from "./Navbar"
 import { CategoryType, CompanyCategoryType, ProductType, SubcategoryType, UserType } from "../../interfaces/interfaces"
@@ -25,6 +25,7 @@ type MapDispatchPropsType = {
   getProductCategories: () => void
   getProductSubcategories: (categoryId: number) => any
   getUser: (userId?: number) => void
+  getAllSubcategories: () => void
   setSubcategoriesByCategory: (subcategoriesByCategory: SubcategoryType[][] | null) => void
   setCurrentSelectedCategory: (currentSelectedCategory: CategoryType | null) => void
   setIsCategoryHovered: (isCategoryHovered: boolean | undefined) => void
@@ -60,7 +61,7 @@ const NavbarContainer = connect<MapStatePropsType, MapDispatchPropsType, OwnProp
   mapStateToProps, {
     getCompanyCategories, getProductCategories, getProductSubcategories, getUser, setSubcategoriesByCategory,
     setIsCategoryHovered, setIsCartOpen, setHamburgerOpen, setIsSearchOpen, seCountsGoodsInCart, setCartProductList,
-    setCurrentSelectedCategory
+    setCurrentSelectedCategory, getAllSubcategories
   }
 )(Navbar)
 

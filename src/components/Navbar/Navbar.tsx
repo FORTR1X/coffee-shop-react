@@ -21,6 +21,7 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
       props.getCompanyCategories()
       props.getProductCategories()
       props.getUser()
+      props.getAllSubcategories()
     }
   }, [props.productCategories])
 

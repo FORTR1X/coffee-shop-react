@@ -1,0 +1,55 @@
+.category__container {
+  margin: 0 auto;
+
+  display: inline-block;
+  white-space: normal;
+
+  width: 170px;
+}
+
+.category__link {
+
+  width: 140px;
+  height: 140px;
+
+  margin: 0 auto;
+}
+
+.category__img {
+  position: relative;
+
+  width: 140px;
+  height: 140px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+}
+.subcategory {
+  color: black;
+  text-align: center;
+
+  text-decoration: none;
+
+  margin-top: 3px;
+
+  font-size: 22px;
+
+  width: 100%;
+}
+.category {
+  font-family: 'Lato Light';
+  font-size: 18px;
+
+  color: black;
+
+  text-align: center;
+  text-decoration: none;
+
+  width: 100%;
+}
+
+.subcategory__container,
+.category__container {
+  text-align: center;
+}

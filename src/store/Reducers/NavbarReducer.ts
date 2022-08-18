@@ -3,6 +3,7 @@ import { CategoryType, CompanyCategoryType, ProductType, SubcategoryType, UserTy
 const SET_COMPANY_CATEGORIES = 'SET_COMPANY_CATEGORIES'
 const SET_PRODUCT_CATEGORIES = 'SET_PRODUCT_CATEGORIES' 
 const SET_PRODUCT_SUBCATEGORIES = 'SET_PRODUCT_SUBCATEGORIES'
+const SET_PRODUCT_ALL_SUBCATEGORIES = 'SET_PRODUCT_ALL_SUBCATEGORIES'
 const SET_SUBCATEGORIES_BY_CATEGORY = 'SET_SUBCATEGORIES_BY_CATEGORY'
 const SET_CART_PRODUCT_LIST = 'SET_CART_PRODUCT_LIST'
 const SET_USER = 'SET_USER'
@@ -17,6 +18,7 @@ let initialState = {
   companyCategories: null as Array<CompanyCategoryType> | null,
   productCategories: null as Array<CategoryType> | null,
   productSubcategories: null as Array<SubcategoryType> | null,
+  productAllSubcategories: null as Array<SubcategoryType> | null,
   productSubcategoriesByCategory: [] as SubcategoryType[][] | null,
   cartProductList: null as Array<ProductType> | null,
   user: null as UserType | null,
@@ -50,6 +52,12 @@ const navbarReducer = (state = initialState, action: NavbarActionTypes): NavbarI
         ...state,
         productSubcategories: action.productSubcategories
       }
+
+    case SET_PRODUCT_ALL_SUBCATEGORIES:
+      return {
+        ...state,
+        productAllSubcategories: action.productAllSubcategories
+      }  
 
     case SET_SUBCATEGORIES_BY_CATEGORY:
       return {
@@ -113,7 +121,8 @@ const navbarReducer = (state = initialState, action: NavbarActionTypes): NavbarI
 
 export type NavbarActionTypes = SetCompanyCategoriesActionType | SetProductCategoriesActionType | SetProductSubcategoriesActionType |
   SetSubcategoriesByCategoryActionType | SetCartProductListActionType | SetUserActionType | SetCountGoodsInCartActionType |
-  SetIsSearchOpenActionType | SetHamburgerOpenActionType | SetIsCategoryHoveredActionType | SetIsCartOpenActionType | SetCurrentSelectedCategory
+  SetIsSearchOpenActionType | SetHamburgerOpenActionType | SetIsCategoryHoveredActionType | SetIsCartOpenActionType |
+  SetCurrentSelectedCategory | SetProductAllSubcategoriesType
 
 type SetCompanyCategoriesActionType = {
   type: typeof SET_COMPANY_CATEGORIES
@@ -140,6 +149,15 @@ type SetProductSubcategoriesActionType = {
 export const setProductSubcategories = (productSubcategories: Array<SubcategoryType> | null): SetProductSubcategoriesActionType => ({
   type: SET_PRODUCT_SUBCATEGORIES,
   productSubcategories
+})
+
+type SetProductAllSubcategoriesType = {
+  type: typeof SET_PRODUCT_ALL_SUBCATEGORIES,
+  productAllSubcategories: Array<SubcategoryType> | null
+}
+export const setProductAllSubcategories = (productAllSubcategories: Array<SubcategoryType> | null): SetProductAllSubcategoriesType => ({
+  type: SET_PRODUCT_ALL_SUBCATEGORIES,
+  productAllSubcategories
 })
 
 type SetSubcategoriesByCategoryActionType = {

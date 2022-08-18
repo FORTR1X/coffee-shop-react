@@ -1,7 +1,7 @@
 import { ThunkAction } from "@reduxjs/toolkit"
 import useApi from "../../hooks/useApi"
 import { CategoryType, CompanyCategoryType, SubcategoryType } from "../../interfaces/interfaces"
-import { NavbarActionTypes, setCompanyCategories, setProductCategories, setProductSubcategories, setSubcategoriesByCategory, setUser } from "../Reducers/NavbarReducer"
+import { NavbarActionTypes, setCompanyCategories, setProductAllSubcategories, setProductCategories, setProductSubcategories, setSubcategoriesByCategory, setUser } from "../Reducers/NavbarReducer"
 import { UrlActionTypes, setCategoryAccessory, setCategoryCoffee, setCategoryTea, setCategoryTableware, setCompanyAbout, setCompanyOptovikam, setCompanyKontakti, setSubcatMonosorta, setSubcatSmesi, setSubcatCherniy, setSubcatZeleniy, setSubcatUlun, setSubcatBeliy, setSubcatPuer, setSubcatTravyanie, setSubcatKrasniy } from "../Reducers/UrlReducer"
 import { RootState } from "../redux-store"
 
@@ -87,5 +87,14 @@ export const getUser = (userId?: number): ThunkActionType => {
   
     if (response.status == 200)
       dispatch(setUser(response.data))
+  }
+}
+
+export const getAllSubcategories = (): ThunkActionType => {
+  return async (dispatch, getState) => {
+    let response = await useApi('GET', '/subcategories')
+
+    if (response.status == 200)
+      dispatch(setProductAllSubcategories(response.data))
   }
 }
