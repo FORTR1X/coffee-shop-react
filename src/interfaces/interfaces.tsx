@@ -1,5 +1,3 @@
-import React from "react"
-
 export type CategoryType = {
     id: number,
     title: string,
@@ -24,6 +22,7 @@ export type ProductType = {
     header: string,
     price: number,
     description: string
+    subcategory: SubcategoryType
 }
 
 export type SpoilerContentType = {
@@ -35,4 +34,9 @@ export type SpoilerContentType = {
 export type UserType = {
     email: string
     phoneNumber: string
+}
+
+export type BestSellersType = {
+    id: number
+    product: ProductType
 }

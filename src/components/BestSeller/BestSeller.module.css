@@ -1,0 +1,12 @@
+.bestSeller {
+  background-color: #F9F9F9;
+
+  height: 430px;
+
+  padding: 40px;
+}
+
+.products__container {
+  display: flex;
+  justify-content: space-between;
+}

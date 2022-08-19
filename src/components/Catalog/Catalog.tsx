@@ -48,7 +48,6 @@ const Catalog: React.FC<PropsCatalog> = (props) => {
         }
   }
 
-  // for (let i = 0; i < )
   let countPagesInCatalogInt: number = countCategoriesInCatalog / countColumnsCategory // Integer part of count
   let countPagesInCatalogRemainder: number = countPagesInCatalogInt % countColumnsCategory // Remainder parof of count
   let countPagesInCatalog: number = Math.trunc(countPagesInCatalogRemainder > 0 ? countPagesInCatalogInt + 1 : countPagesInCatalogInt)

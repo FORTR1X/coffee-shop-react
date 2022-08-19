@@ -1,11 +1,13 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import bestSellersReducer from './Reducers/BestSellersReducer'
 
 import navbarReducer from './Reducers/NavbarReducer'
 import urlReducer from './Reducers/UrlReducer'
 
 const rootReducer = combineReducers({
   navbar: navbarReducer,
-  url: urlReducer
+  url: urlReducer,
+  bestSellers: bestSellersReducer
 })
 
 export const store = configureStore({
