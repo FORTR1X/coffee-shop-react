@@ -13,6 +13,11 @@ const BestSeller: React.FC<PropsBestSeller> = (props: PropsBestSeller) => {
 
   return (
     <div className={s.bestSeller}>
+      <div className={s.catalog__title}>
+        <h2>Топ продаж</h2>
+        <div className={s.title_underline}></div>
+      </div>
+
       {props.bestSellersProduct !== null && props.bestSellersProduct.length > 0 &&
         <div className={s.products__container}>
           {props.bestSellersProduct.map((bestSeller, index) => {
