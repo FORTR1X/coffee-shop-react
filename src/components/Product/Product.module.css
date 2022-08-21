@@ -4,13 +4,16 @@
   width: 236px;
   height: 330px;
 
-  padding-bottom: 10px;
+  padding-bottom: 15px;
 
   background-color: white;
 
   border-radius: 13px;
 
   transition: 0.5s all;
+
+  z-index: 1;
+  box-shadow: 0 0 2px 0px rgba(0, 0, 0, 0.15);
 }
 
 /* .product:hover {

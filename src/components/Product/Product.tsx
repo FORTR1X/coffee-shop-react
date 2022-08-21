@@ -16,6 +16,9 @@ type TeaUnitsType = {
   value: number
 }
 
+// TODO: Добавить: Просмотреть товар
+// TODO: Добавить: Работа с корзиной
+
 const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
 
   const teaUnits: Array<TeaUnitsType> = [
