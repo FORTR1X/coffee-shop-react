@@ -1,0 +1,124 @@
+.social {
+  overflow-x: hidden;
+
+  margin-bottom: 20px;
+}
+
+.social__container {
+  cursor: pointer;
+
+  margin: 0 auto;
+  width: 60%;
+  height: 60px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social__container > div {
+  width: 60px;
+  height: 60px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+.social__container > div:not(:last-child) {
+  margin-right: 10px;
+}
+
+.link__vk,
+.link__whatsapp,
+.link__viber,
+.link__email,
+.link__telegram {
+
+  width: 54px;
+  height: 54px;
+
+  border-radius: 50%;
+
+  position: absolute;
+
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.link__viber {
+
+  width: 57px;
+  height: 57px;
+}
+
+.link__vk:before,
+.link__whatsapp:before,
+.link__viber:before,
+.link__email:before,
+.link__telegram:before {
+
+  content: '';
+
+  position: absolute;
+
+  width: 54px;
+  height: 54px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+
+  transform: scale(0);
+  z-index: -1;
+
+  transition: 0.4s all;
+}
+.link__viber:before {
+  width: 52px;
+  height: 52px;
+}
+
+.link__vk:hover:before,
+.link__whatsapp:hover:before,
+.link__viber:hover:before,
+.link__email:hover:before,
+.link__telegram:hover:before {
+  pointer-events: none;
+  transform: scale(1);
+}
+
+#vk_social:hover > #vk_title_social,
+#whatsapp_social:hover > #whatsapp_title_social,
+#viber_social:hover > #viber_title_social,
+#email_social:hover > #email_title_social,
+#telegram_social:hover > #telegram_title_social {
+  fill: white;
+}
+
+.link__vk:before { background-color: #4D76A1; }
+.link__whatsapp:before { background-color: #25D366; }
+.link__viber:before { background-color: #826CB4; }
+.link__email:before { background-color: #2B74CA ; }
+.link__telegram:before { background-color: #22A6DC; }
+
+#vk_social,
+#whatsapp_social,
+#telegram_social,
+#email_social,
+#viber_social {
+  transition: 0.4s all;
+}
+
+@media (max-width: 461px) {
+  .social__container {
+    width: 98%;
+  }
+}

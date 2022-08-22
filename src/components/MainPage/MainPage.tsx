@@ -4,6 +4,7 @@ import AboutUs from "../AboutUs/AboutUs"
 import BestSellerContainer from "../BestSeller/BestSellerContainer"
 import CatalogContainer from "../Catalog/CatalogContainer"
 import Slider from "../Sliders/Slider"
+import SocialFooter from "../SocialFooter/SocialFooter"
 
 const MainPage: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const MainPage: React.FC = () => {
       <CatalogContainer/>
       <BestSellerContainer/>
       <AboutUs/>
+      <SocialFooter/>
     </div>
   )
 }
