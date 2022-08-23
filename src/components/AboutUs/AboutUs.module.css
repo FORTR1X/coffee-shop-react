@@ -35,6 +35,7 @@
 
 .about_us__image > img {
   height: 320px;
+  width: 100%;
 
   position: relative;
   z-index: 0;

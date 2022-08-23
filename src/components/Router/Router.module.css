@@ -1,0 +1,19 @@
+html,
+body {
+  height: 100%;
+}
+
+.content {
+  min-height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  justify-content: flex-end;
+}
+
+.main_content {
+  flex: 1 1 auto;
+}

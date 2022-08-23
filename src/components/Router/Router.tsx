@@ -1,6 +1,8 @@
 import React from "react"
 import {Route, Routes, useLocation} from 'react-router-dom';
 
+import s from './Router.module.css'
+
 import NavbarContainer from "../Navbar/NavbarContainer";
 import { PropsRouter } from "./RouterContainer";
 import MainPage from "../MainPage/MainPage";
@@ -9,10 +11,11 @@ import Footer from "../Footer/Footer";
 const Router: React.FC<PropsRouter> = (props) => {
 
   return (
-    <div>
+    <div className={s.content}>
       <NavbarContainer/>
-      {props.productSubcategoriesByCategory !== null && props.companyCategories !== null && props.productCategories !== null && props.productSubcategories !== null && props.user !== null &&
-        <div>  
+
+      <main className={s.main_content}>
+        {props.productSubcategoriesByCategory !== null && props.companyCategories !== null && props.productCategories !== null && props.productSubcategories !== null && props.user !== null &&
           <Routes>
             <Route path="/" element={<MainPage/>}/>
 
@@ -39,13 +42,15 @@ const Router: React.FC<PropsRouter> = (props) => {
             <Route path={`${props.url.categoryTea}${props.url.subcatTravyanie}`} element/>
             <Route path={`${props.url.categoryTea}${props.url.subcatKrasniy}`} element/>
           </Routes>
+        }
+      </main>
 
-          <Footer
-            productCategories={props.productCategories}
-            productSubcategoriesByCategory={props.productSubcategoriesByCategory}
-            companyCategories={props.companyCategories}
-          />
-        </div>
+      {props.productCategories !== null && props.productSubcategoriesByCategory !== null && props.companyCategories !== null &&
+        <Footer
+          productCategories={props.productCategories}
+          productSubcategoriesByCategory={props.productSubcategoriesByCategory}
+          companyCategories={props.companyCategories}
+        />
       }
 
     </div>

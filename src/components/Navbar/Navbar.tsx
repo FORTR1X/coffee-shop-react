@@ -99,7 +99,7 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
   }
 
   return (
-    <div>
+    <header>
       {(subcategoriesByCategory !== null
         && topCategories != null && bottomCategories !== null && bottomCategories.length !== undefined
         && user !== null && subcategoriesByCategory.length === bottomCategories.length) && 
@@ -454,7 +454,7 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
         
         </nav>
       }
-    </div>
+    </header>
   )
 }
 

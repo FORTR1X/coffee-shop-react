@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef, useState } from "react"
 
 import s from './Footer.module.css'
 
@@ -12,16 +12,37 @@ type FooterProps = {
 }
 
 const Footer: React.FC<FooterProps> = (props: FooterProps) => {
+
+  const [currentEvent, setCurrentEvent] = useState<React.MouseEvent<HTMLUListElement, MouseEvent> | null>(null)
+
+  const [isSpoilerOpen, setIsSpoilerOpen] = useState(false)
+  const handleIsSpoilerOpen = (event: React.MouseEvent<HTMLUListElement, MouseEvent>, state?: boolean) => {
+
+    setCurrentEvent(event)
+
+    if (state == undefined)
+      setIsSpoilerOpen(!isSpoilerOpen)
+    else
+      setIsSpoilerOpen(state)
+  }
+
   return (
-    <div className={s.footer}>
+    <footer className={s.footer}>
       {props.productSubcategoriesByCategory !== null && props.productCategories !== null &&
         <div className={s.footer__content}>
           <div className={s.content__catregories}>
             {props.productSubcategoriesByCategory.map((category, categoryIndex) => {
               if (props.productSubcategoriesByCategory !== null && category !== null && category.length > 0) {
                 return (
-                  <ul className={s.category__ul} key={categoryIndex}>
-                    {props.productCategories[categoryIndex].title}
+                  <ul 
+                    onClick={ (event) => { event.currentTarget.classList.toggle(`${s.enable}`) } }
+                    className={s.category__ul}
+                    key={categoryIndex}
+                  >
+                    <div className={s.category__title}>
+                      <span className={s.title}>{props.productCategories[categoryIndex].title}</span>
+                      <div className={s.spoiler_arrow}/>
+                    </div>  
 
                     {category.map((subcategory, subcatIndex) => {
                       return (
@@ -34,8 +55,11 @@ const Footer: React.FC<FooterProps> = (props: FooterProps) => {
                 )
               }
             })}
-            <ul className={s.category__ul}>
-              Marvels
+            <ul onClick={ (event) => { event.currentTarget.classList.toggle(`${s.enable}`) } } className={`${s.category__ul} ${s.disable}`}>
+              <div className={s.category__title}>
+                <span className={s.title}>Marvels</span>
+                <div className={s.spoiler_arrow}/>
+              </div>  
               {props.companyCategories.map((category) => {
                 return (
                   <li className={s.category__li}>
@@ -65,7 +89,7 @@ const Footer: React.FC<FooterProps> = (props: FooterProps) => {
           <b><a className={s.copyright__link} href="https://vk.com/f0rtrix">FORTRIX</a></b>
         </span>
       </div>
-    </div>
+    </footer>
   )
 }
 
