@@ -1,0 +1,159 @@
+/* copyright */
+.footer__copyright {
+  height: 40px;
+
+  background-color: #2C9462;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  color: white;
+  font-size: 14px;
+
+  cursor: default;
+}
+
+.footer__copyright > span {
+  font-family: 'Lato Light';
+}
+
+.copyright__text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.copyright__text > b {
+  padding: 0 5px 0 5px;
+}
+
+.copyright {
+  z-index: 0;
+  position: relative;
+
+  width: 18px;
+
+  margin-right: 5px;
+}
+
+.copyright__link {
+  position: relative;
+
+  text-decoration: none;
+  color: white;
+
+  transition: 0.5s all;
+}
+.copyright__link:before,
+.copyright__link:after {
+  content: '';
+  position: absolute;
+
+  width: 10px;
+  height: 2px;
+
+  transition: 0.7s all ease-out;
+
+  background-color: #F0B065;
+}
+
+.copyright__link:before {
+  right: 0;
+  top: -2.5px;
+}
+
+.copyright__link:after {
+  left: 0;
+  bottom: -2px;
+}
+
+.copyright__link:hover:before {
+  width: 90%;
+}
+.copyright__link:hover:after {
+  width: 90%;
+}
+/* copyright */
+
+
+/* content */
+.footer__content {
+  background-color: #F9F9F9;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.content__catregories,
+.content__worktime {
+  width: 50%;
+}
+
+.content__catregories {
+  padding: 40px 0 40px 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.category__ul {
+  cursor: default;
+  list-style-type: none;
+
+  font-size: 18px;
+}
+
+.category__ul:not(:last-child) {
+  margin-right: 80px;
+}
+
+.category__li:first-child {
+  margin-top: 13px;
+}
+
+.category__li:not(:last-child) {
+  margin-bottom: 7px;
+}
+
+.category__li:hover > a {
+  color: #333333;
+  font-family: 'Lato Regular';
+}
+
+.category__li {
+  width: 90px;
+  font-size: 16px;
+
+  white-space: nowrap;
+}
+
+.category__li > a {
+
+  color: #A5A6A5;
+  text-decoration: 0;
+
+  transition: 0.3s all;
+
+  font-family: 'Lato Light';
+}
+
+.content__worktime {
+  cursor: default;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content__worktime > p {
+  margin-bottom: 13px;
+}
+
+.content__worktime > span {
+  color: #A5A6A5;
+  font-family: 'Lato Light';
+}
+/* content */

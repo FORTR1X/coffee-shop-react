@@ -1,33 +1,33 @@
 export type CategoryType = {
-    id: number,
-    title: string,
+    id: number
+    title: string
     url: string
 }
 
 export type SubcategoryType = {
-    id: number,
-    title: string,
+    id: number
+    title: string
     url: string
     category: CategoryType
 }
 
 export type CompanyCategoryType = {
-    id: number,
-    title: string,
+    id: number
+    title: string
     url: string
 }
 
 export type ProductType = {
-    id: number,
-    header: string,
-    price: number,
+    id: number
+    header: string
+    price: number
     description: string
     subcategory: SubcategoryType
 }
 
 export type SpoilerContentType = {
-    title: string | undefined | null,
-    content: SubcategoryType[] | undefined | null,
+    title: string | undefined | null
+    content: SubcategoryType[] | undefined | null
     categoryUrl: string | undefined
 }
 
