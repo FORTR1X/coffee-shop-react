@@ -1,13 +1,15 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 
 import searchSvg from './search.svg'
 import cartSvg from './cart.svg'
 
 import s from './Product.module.css'
 import { ProductType } from "../../interfaces/interfaces"
+import ModalProduct from "./ModalProduct/ModalProduct"
 
-type ProductPropsType = {
+export type ProductPropsType = {
   product: ProductType
+  productList: Array<ProductType> | null
 }
 
 type TeaUnitsType = {
@@ -20,6 +22,22 @@ type TeaUnitsType = {
 // TODO: Добавить: Работа с корзиной
 
 const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
+
+  const [currentProduct, setCurrentProduct] = useState<ProductType>()
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false)
+  const handleSetIsProductModalOpen = (state?: boolean) => {
+
+    if (state == undefined)
+      setIsProductModalOpen(!isProductModalOpen)
+    else
+      setIsProductModalOpen(state)
+  }
+
+  useEffect(() => {
+    document.body.classList.toggle(s.body__no_scroll)
+    if (isProductModalOpen && productHoveredRef.current !== null)
+      productHoveredRef.current.className = s.product__hovered_container
+  }, [isProductModalOpen])
 
   const teaUnits: Array<TeaUnitsType> = [
     {id: 1, title: '50 гр', value: 50},
@@ -60,7 +78,7 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
   }
 
   const [isTeaUnitsOpen, setIsTeaUnitsOpen] = useState(false)
-  const [currentTeaUnits, setCurrentTeaUnits] = useState<TeaUnitsType>(teaUnits[0])
+  const [currentTeaUnits, setCurrentTeaUnits] = useState<TeaUnitsType>(teaUnits[5])
   const teaUnitsRef = useRef<HTMLUListElement>(null)
   const handleSetCurrentTeaUnits = (currentTeaUnits: TeaUnitsType | null): void => {
     if (currentTeaUnits !== null)
@@ -99,7 +117,7 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
   }
 
   return (
-    <div 
+    <div
       ref={productRef}
       onMouseLeave={handleMouseLeaveAnimation}
       onMouseEnter={handleMouseEnterAnimation}
@@ -111,11 +129,19 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
               className={s.img}
               src={`http://localhost:8080/uploads/product/${props.product.id}.jpg`} 
               alt={props.product.header} 
-              title={props.product.header}
             />
           </a>  
           <div className={s.img__hovered_content}>
-            <img className={s.img__search} src={searchSvg} alt="view" title="Просмотреть товар" />
+            <img
+              className={s.img__search}
+              src={searchSvg}
+              alt="view"
+              title="Просмотреть товар"
+              onClick={ () => {
+                setCurrentProduct(props.product)
+                handleSetIsProductModalOpen()
+              }}
+            />
           </div>
         </div>
 
@@ -194,6 +220,14 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
           }
         </div>
       </div>
+
+      {currentProduct !== undefined && isProductModalOpen &&
+        <ModalProduct
+          handleClose={handleSetIsProductModalOpen}
+          product={currentProduct}
+          isProductModalOpen={isProductModalOpen}
+        />
+      }
     </div>
   )
 }

@@ -1,0 +1,16 @@
+.modal-product-enter {
+  opacity: 0;
+  transition: all 3s;
+}
+.modal-product-enter-active {
+  opacity: 1;
+  transition: all 3s;
+}
+.modal-product-exit {
+  opacity: 1;
+  transition: all 3s;
+}
+.modal-product-exit-active {
+  opacity: 0;
+  transition: all 3s;
+}

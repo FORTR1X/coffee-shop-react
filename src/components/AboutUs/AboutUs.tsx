@@ -12,8 +12,6 @@ const AboutUs: React.FC = () => {
       </div>
 
       <div className={s.about_us__description}>
-        {/* <h2> <span className={s.description__title}>Marverls</span> — best coffee and tea traditions!</h2> */}
-
         <div>
           <span>
             <p>Компания начала свою деятельность сравнительно недавно, мы занимаемся закупками и распространением чая и кофе с разных уголков Мира. Цель нашей деятельности, дать возможность каждому человеку открыть для себя что-то новое в чайно-кофейной индустрии.</p>

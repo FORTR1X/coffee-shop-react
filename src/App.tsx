@@ -3,9 +3,7 @@ import RouterContainer from './components/Router/RouterContainer';
 
 const App = () => {
   return (
-    <div>
-      <RouterContainer/>
-    </div>
+    <RouterContainer/>
   );
 }
 

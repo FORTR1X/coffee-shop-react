@@ -4,10 +4,12 @@
   height: 475px;
 
   padding: 40px;
+
+  z-index: 5;
 }
 
 .products__container {
-  width: 100%;
+  width: 85%;
 
   margin: 0 auto;
 

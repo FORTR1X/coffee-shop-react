@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import React from "react"
 
 const BASE_URL = 'http://localhost:8080'
 

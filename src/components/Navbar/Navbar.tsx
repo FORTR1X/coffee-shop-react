@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 
 import s from './styles/Navbar.module.css'
 import './styles/index.css'
