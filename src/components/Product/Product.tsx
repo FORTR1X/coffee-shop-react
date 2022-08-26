@@ -39,7 +39,7 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
     let isSimilarItem = false
     const item: CartType = {productId, count: count == undefined ? 1 : count}
 
-    cartSubList.map((cartItem, index) => {
+    cartSubList.map((cartItem) => {
       if (cartItem.productId == item.productId) {
         cartItem.count = cartItem.count + 1
         isSimilarItem = true
@@ -60,7 +60,7 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
       setTimeout(() => {
         if (addCartBtnRef.current !== null)
           addCartBtnRef.current.classList.toggle(s.successfully)
-      }, 1000)
+      }, 400)
     }
   }
 

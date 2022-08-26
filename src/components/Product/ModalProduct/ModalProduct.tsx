@@ -1,11 +1,11 @@
-import React, { useState } from "react"
-import { ProductType } from "../../../interfaces/interfaces"
-import { ProductPropsType } from "../Product"
+import React, { useRef, useState } from "react"
+import { CartType, ProductType } from "../../../interfaces/interfaces"
 
 import { CSSTransition } from "react-transition-group"
 
 import s from './ModalProduct.module.css'
 import './style.css'
+import { useLocalStorage } from "usehooks-ts"
 
 type ModalProductType = {
   product: ProductType
@@ -30,6 +30,51 @@ const ModalProduct: React.FC<ModalProductType> = (props: ModalProductType) => {
 
     if (productCount > 0)
       setProductCount(productCount)
+  }
+
+  const addCartBtnRef = useRef<HTMLButtonElement>(null)
+  const successfullyTextRef = useRef<HTMLSpanElement>(null)
+
+  const [cart, setCart] = useLocalStorage('cart', [] as Array<CartType>)
+  const handleAddToCart = (productId: number, count?: number) => {
+    // If new item already exists cart, we just modify count this item in local storage
+    const cartSubList = cart
+    let isSimilarItem = false
+    const item: CartType = {productId, count: count == undefined ? 1 : count}
+
+    cartSubList.map((cartItem) => {
+      if (cartItem.productId == item.productId) {
+        cartItem.count = count == undefined ? cartItem.count + 1 : cartItem.count + count
+        isSimilarItem = true
+      }
+    })
+    if (isSimilarItem)
+      setCart(cartSubList)
+    else
+      setCart([...cart, item])  
+
+    animationSuccessfullyAddToCart()
+  }
+
+  const animationSuccessfullyAddToCart = () => {
+    if (successfullyTextRef.current !== null) {
+      successfullyTextRef.current.classList.toggle(s.active)
+
+      setTimeout(() => {
+        if (successfullyTextRef.current !== null) {
+          successfullyTextRef.current.classList.toggle(s.active)
+        }
+      }, 3000)
+    }
+
+    if (addCartBtnRef.current !== null) {
+      addCartBtnRef.current.classList.toggle(s.successfully)
+
+      setTimeout(() => {
+        if (addCartBtnRef.current !== null)
+          addCartBtnRef.current.classList.toggle(s.successfully)
+      }, 3000)
+    }
   }
 
   return (
@@ -67,14 +112,41 @@ const ModalProduct: React.FC<ModalProductType> = (props: ModalProductType) => {
 
               <div className={s.btn__group}>
                 <div className={s.counter__container}>
-                  <input type='button' onClick={handleMinusProductCount} className={s.counter__minus} value="-"/>
-                  <input type='text' onChange={(event) => {handleSetProductCount(event)}} className={s.counter__count} value={productCount}/>
-                  <input type='button' onClick={handlePlusProductCount} className={s.counter__plus} value="+"/>
+                  <input
+                    type='button'
+                    onClick={handleMinusProductCount}
+                    className={s.counter__minus}
+                    value="-"
+                  />
+
+                  <input
+                    type='text'
+                    onChange={(event) => {handleSetProductCount(event)}}
+                    className={s.counter__count} value={productCount}
+                  />
+
+                  <input type='button'
+                    onClick={handlePlusProductCount}
+                    className={s.counter__plus}
+                    value="+"
+                  />
                 </div>
 
-                <div className={s.btn__add_to_cart}>
+                <button
+                  ref={addCartBtnRef}
+                  className={s.btn__add_to_cart}
+                  onClick={() => { handleAddToCart(props.product.id, productCount) }}
+                >
                   В корзину
-                </div>
+                </button>
+              </div>
+              <div className={s.successfully__text_container}>
+                <span
+                  ref={successfullyTextRef}
+                  className={s.successfully__text}
+                >
+                  Товар успешно добавлен в корзину!
+                </span>
               </div>
 
               <span className={s.description}>{props.product.description}</span>

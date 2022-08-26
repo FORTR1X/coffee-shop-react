@@ -111,8 +111,6 @@
 .btn__group {
   display: flex;
   align-items: center;
-
-  margin-bottom: 30px;
 }
 
 .counter__container {
@@ -154,9 +152,9 @@
 
 .counter__minus:hover,
 .counter__plus:hover {
-  background-color: #FFB052;
+  background-color: #2C9462;
   color: white;
-  border: 1px solid #FFB052;
+  border: 1px solid #2C9462;
 }
 
 .counter__minus {
@@ -168,27 +166,58 @@
 }
 
 .btn__add_to_cart {
-  font-family: 'Lato Light';
+  font-family: 'Lato Regular';
+
+  height: 100%;
 
   cursor: pointer;
 
   text-transform: uppercase;
 
   border-radius: 10px;
-  border: 1px solid #2C9462;
-  color: #2C9462;
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid #FFB052;
+  color: #FFB052;
 
   padding: 4px 7px 2px 7px;
 
   transition: all 0.5s;
 }
 .btn__add_to_cart:hover {
+  background-color: #FFB052;
+  color: white;
+}
+.btn__add_to_cart.successfully {
   background-color: #2C9462;
+  border: 2px solid #2C9462;
   color: white;
 }
 
+.successfully__text {
+  margin-top: 5px;
+
+  width: 0;
+  height: 100%;
+
+  display: block;
+
+  color:#2C9462;
+
+  font-family: 'Lato Light';
+
+  text-overflow: clip;
+  overflow: hidden;
+  white-space: nowrap;
+
+  transition: all 1s;
+}
+
+.successfully__text.active {
+  width: 270px;
+}
+
 .description {
-  
+  margin-top: 10px;
 }
 
 .split_line {
