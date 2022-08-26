@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react"
 
 import searchSvg from './search.svg'
-import cartSvg from './cart.svg'
+import cart from './cart_white.svg'
 
 import s from './Product.module.css'
 import { ProductType } from "../../interfaces/interfaces"
 import ModalProduct from "./ModalProduct/ModalProduct"
+import { useCart } from "../../hooks/useCart"
 
 export type ProductPropsType = {
   product: ProductType
@@ -46,52 +47,13 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
     {id: 6, title: '300 гр', value: 300},
   ].reverse()
 
-  const productRef = useRef<HTMLDivElement>(null);
-
-  const [isTeaUnitsOpen, setIsTeaUnitsOpen] = useState(false)
-  const [currentTeaUnits, setCurrentTeaUnits] = useState<TeaUnitsType>(teaUnits[5])
-  const teaUnitsRef = useRef<HTMLUListElement>(null)
-  const handleSetCurrentTeaUnits = (currentTeaUnits: TeaUnitsType | null): void => {
-    if (currentTeaUnits !== null)
-      setCurrentTeaUnits(currentTeaUnits)
-  }
-
-  const handleOnClickTeaUnits = (): void => {
-
-    if (isTeaUnitsOpen)
-      handleFadeOutTeaUnits()
-    else
-      handleFadeInTeaUnits()
-  }
-
-  const handleFadeInTeaUnits = (): void => {
-    if (!isTeaUnitsOpen && teaUnitsRef.current !== null) {
-      teaUnitsRef.current.className = `${s.tea_units__ul} ${s.start}`
-      setTimeout( () => {
-        if (teaUnitsRef.current !== null) {
-          teaUnitsRef.current.className = `${s.tea_units__ul} ${s.active}`
-          setIsTeaUnitsOpen(true)
-        }
-      }, 500)
-    }
-  }
-  const handleFadeOutTeaUnits = (): void => {
-    if (isTeaUnitsOpen && teaUnitsRef.current !== null) {
-      teaUnitsRef.current.className = `${s.tea_units__ul} ${s.disable}`
-      setTimeout( () => {
-        if (teaUnitsRef.current !== null) {
-          teaUnitsRef.current.className = `${s.tea_units__ul}`
-          setIsTeaUnitsOpen(false)
-        }
-      }, 500)
-    }
-  }
+  const productRef = useRef<HTMLDivElement>(null)
+  const addToCartBtnRef = useRef<HTMLDivElement>(null)
 
   return (
     <div
       ref={productRef}
       className={s.product}>
-
       <div className={s.product__img}>
         <a href={`/product/id${props.product.id}`}>
           <img 
@@ -112,6 +74,13 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
             }}
           />
         </div>
+        <button
+          className={s.add_to_cart_btn}
+          onClick={() => { console.log('Нажал') }}
+        >
+          <img src={cart} alt="cart" />
+          <span>В корзину</span>
+        </button>
       </div>
 
       <div className={s.product__container}>

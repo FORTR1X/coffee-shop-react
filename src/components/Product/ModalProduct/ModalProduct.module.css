@@ -205,7 +205,10 @@
 .product_id > span { font-family: 'Lato Light'; }
 
 .product_category { font-family: 'Lato Regular'; }
-.product_category > span { font-family: 'Lato Light'; }
+.product_category > span { 
+  font-family: 'Lato Light';
+  margin-left: 5px;
+}
 
 .header__close {
   position: relative;

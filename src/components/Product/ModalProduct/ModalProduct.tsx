@@ -56,8 +56,6 @@ const ModalProduct: React.FC<ModalProductType> = (props: ModalProductType) => {
               <div onClick={() => {props.handleClose(false)}} className={s.header__close}/>
             </div>  
 
-            <div></div>
-
             <div className={s.product__content}>
               <div className={s.price}>  
                 <span>{props.product.price} руб
@@ -84,7 +82,12 @@ const ModalProduct: React.FC<ModalProductType> = (props: ModalProductType) => {
               <div className={s.split_line}/>
 
               <span className={s.product_id}>Артикул: <span>#{props.product.id}</span></span>
-              <span className={s.product_category}>Категория: <span>{props.product.subcategory.category.title}, {props.product.subcategory.title}</span></span>
+              <span className={s.product_category}>
+                Категория: 
+                <span>
+                  {props.product.subcategory.category.title}, {props.product.subcategory.title}
+                </span>
+              </span>
             </div>
           </div>
         </div>

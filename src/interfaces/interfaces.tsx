@@ -40,3 +40,8 @@ export type BestSellersType = {
     id: number
     product: ProductType
 }
+
+export type CartType = {
+    product: ProductType
+    count: number
+}
