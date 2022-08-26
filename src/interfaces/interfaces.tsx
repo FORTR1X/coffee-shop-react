@@ -42,6 +42,6 @@ export type BestSellersType = {
 }
 
 export type CartType = {
-    product: ProductType
+    productId: number
     count: number
 }

@@ -1,25 +1,18 @@
 import React, { useEffect, useRef, useState } from "react"
 
 import searchSvg from './search.svg'
-import cart from './cart_white.svg'
+import cartSvg from './cart_white.svg'
 
 import s from './Product.module.css'
-import { ProductType } from "../../interfaces/interfaces"
+import { CartType, ProductType } from "../../interfaces/interfaces"
 import ModalProduct from "./ModalProduct/ModalProduct"
-import { useCart } from "../../hooks/useCart"
+import { useLocalStorage } from "usehooks-ts"
 
 export type ProductPropsType = {
   product: ProductType
   productList: Array<ProductType> | null
 }
 
-type TeaUnitsType = {
-  id: number
-  title: string
-  value: number
-}
-
-// TODO: Добавить: Просмотреть товар
 // TODO: Добавить: Работа с корзиной
 
 const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
@@ -38,21 +31,41 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
     document.body.classList.toggle(s.body__no_scroll)
   }, [isProductModalOpen])
 
-  const teaUnits: Array<TeaUnitsType> = [
-    {id: 1, title: '50 гр', value: 50},
-    {id: 2, title: '100 гр', value: 100},
-    {id: 3, title: '150 гр', value: 150},
-    {id: 4, title: '200 гр', value: 200},
-    {id: 5, title: '250 гр', value: 250},
-    {id: 6, title: '300 гр', value: 300},
-  ].reverse()
+  const addCartBtnRef = useRef<HTMLButtonElement>(null)
+  const [cart, setCart] = useLocalStorage('cart', [] as Array<CartType>)
+  const handleAddToCart = (productId: number, count?: number) => {
+    // If new item already exists cart, we just modify count this item in local storage
+    const cartSubList = cart
+    let isSimilarItem = false
+    const item: CartType = {productId, count: count == undefined ? 1 : count}
 
-  const productRef = useRef<HTMLDivElement>(null)
-  const addToCartBtnRef = useRef<HTMLDivElement>(null)
+    cartSubList.map((cartItem, index) => {
+      if (cartItem.productId == item.productId) {
+        cartItem.count = cartItem.count + 1
+        isSimilarItem = true
+      }
+    })
+    if (isSimilarItem)
+      setCart(cartSubList)
+    else
+      setCart([...cart, item])  
+
+    animationSuccessfullyAddToCart()
+  }
+
+  const animationSuccessfullyAddToCart = () => {
+    if (addCartBtnRef.current !== null) {
+      addCartBtnRef.current.classList.toggle(s.successfully)
+
+      setTimeout(() => {
+        if (addCartBtnRef.current !== null)
+          addCartBtnRef.current.classList.toggle(s.successfully)
+      }, 1000)
+    }
+  }
 
   return (
     <div
-      ref={productRef}
       className={s.product}>
       <div className={s.product__img}>
         <a href={`/product/id${props.product.id}`}>
@@ -75,10 +88,11 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
           />
         </div>
         <button
+          ref={addCartBtnRef}
           className={s.add_to_cart_btn}
-          onClick={() => { console.log('Нажал') }}
+          onClick={() => { handleAddToCart(props.product.id) }}
         >
-          <img src={cart} alt="cart" />
+          <img src={cartSvg} alt="cart" />
           <span>В корзину</span>
         </button>
       </div>
