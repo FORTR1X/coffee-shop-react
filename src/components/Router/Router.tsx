@@ -7,6 +7,7 @@ import NavbarContainer from "../Navbar/NavbarContainer";
 import { PropsRouter } from "./RouterContainer";
 import MainPage from "../MainPage/MainPage";
 import Footer from "../Footer/Footer";
+import PageProductContainer from "../Product/PageProduct/PageProductContainer";
 
 const Router: React.FC<PropsRouter> = (props) => {
 
@@ -41,6 +42,9 @@ const Router: React.FC<PropsRouter> = (props) => {
             <Route path={`${props.url.categoryTea}${props.url.subcatPuer}`} element/>
             <Route path={`${props.url.categoryTea}${props.url.subcatTravyanie}`} element/>
             <Route path={`${props.url.categoryTea}${props.url.subcatKrasniy}`} element/>
+
+            {/* Product */}
+            <Route path={'/product/id:id'} element={<PageProductContainer/>}/>
           </Routes>
         }
       </main>

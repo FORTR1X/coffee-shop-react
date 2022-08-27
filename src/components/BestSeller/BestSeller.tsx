@@ -23,7 +23,8 @@ const BestSeller: React.FC<PropsBestSeller> = (props: PropsBestSeller) => {
         <div className={s.products__container}>
           {props.bestSellersProduct.map((bestSeller, index) => {
             return (
-              <Product 
+              <Product
+                key={(index + 1) * bestSeller.product.id}
                 product={bestSeller.product}
                 productList={bestSellersArrayToProductArray(props.bestSellersProduct)}
               />

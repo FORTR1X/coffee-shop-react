@@ -60,9 +60,9 @@ const Footer: React.FC<FooterProps> = (props: FooterProps) => {
                 <span className={s.title}>Marvels</span>
                 <div className={s.spoiler_arrow}/>
               </div>  
-              {props.companyCategories.map((category) => {
+              {props.companyCategories.map((category, index) => {
                 return (
-                  <li className={s.category__li}>
+                  <li key={(index + 1) * category.id} className={s.category__li}>
                     <a href={category.url}>
                       {category.title}
                     </a>

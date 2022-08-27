@@ -201,7 +201,12 @@
 }
 
 .product__container {
+  cursor: default;
+
   height: 120px;
+
+  text-decoration: none;
+  color: black;
 
   display: flex;
   flex-direction: column;
@@ -263,7 +268,8 @@
   .product__hovered_container,
   .product__hovered_container.start,
   .product__hovered_container.end,
-  .img__hovered_content {
+  .img__hovered_content,
+  .add_to_cart_btn {
     display: none;
   }
 

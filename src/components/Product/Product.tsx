@@ -13,8 +13,6 @@ export type ProductPropsType = {
   productList: Array<ProductType> | null
 }
 
-// TODO: Добавить: Работа с корзиной
-
 const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
 
   const [currentProduct, setCurrentProduct] = useState<ProductType>()
@@ -68,11 +66,12 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
     <div
       className={s.product}>
       <div className={s.product__img}>
-        <a href={`/product/id${props.product.id}`}>
+        <a className={s.img__link} href={`/product/id${props.product.id}`}>
           <img 
             className={s.img}
             src={`http://localhost:8080/uploads/product/${props.product.id}.jpg`} 
-            alt={props.product.header} 
+            alt={props.product.header}
+            title={props.product.header}
           />
         </a>  
         <div className={s.img__hovered_content}>
@@ -97,12 +96,12 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
         </button>
       </div>
 
-      <div className={s.product__container}>
+      <a href={`/product/id${props.product.id}`} className={s.product__container}>
         <div>
           <div className={s.product__title}>
-            <a href={`/product/id${props.product.id}`}>
+            <span>
               {props.product.header}
-            </a>
+            </span>
           </div>
 
           <div className={s.product__category}>
@@ -121,7 +120,7 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
             }
           </span>
         </div> 
-      </div>
+      </a>
 
       {currentProduct !== undefined && isProductModalOpen &&
         <ModalProduct

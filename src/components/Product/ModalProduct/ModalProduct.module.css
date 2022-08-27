@@ -196,7 +196,8 @@
 .successfully__text {
   margin-top: 5px;
 
-  width: 0;
+  width: 270px;
+  opacity: 0;
   height: 100%;
 
   display: block;
@@ -213,7 +214,7 @@
 }
 
 .successfully__text.active {
-  width: 270px;
+  opacity: 1;
 }
 
 .description {
