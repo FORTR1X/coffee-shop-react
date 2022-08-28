@@ -8,9 +8,11 @@ import search from './search.svg'
 
 import { CSSTransition } from "react-transition-group"
 
-import { CategoryType, SubcategoryType, ProductType, UserType, CompanyCategoryType } from "../../interfaces/interfaces"
+import { CategoryType, SubcategoryType, ProductType, UserType, CompanyCategoryType, CartType } from "../../interfaces/interfaces"
 import Spoiler from "./Spoiler/Spoiler"
 import { PropsNavbar } from "./NavbarContainer"
+import { useLocalStorage } from "usehooks-ts"
+import { mapCartTypeToProductsIds } from "../../mapper/mapCartTypeToProductsIds"
 
 const Navbar: React.FC<PropsNavbar> = (props) => {
 
@@ -48,8 +50,37 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
   const cartProductList: Array<ProductType> | null = props.cartProductList
   const user: UserType | null = props.user;
 
-  let totalCostCart: number = 0;
-  let countGoodsInCart: number = 3;
+  const [totalCostCart, setTotalCostCart] = useState(0)
+  const [countGoodsInCart, setCountGoodsInCart] = useState(0)
+
+  const [cartStorage, setCartStorage] = useLocalStorage('cart', [] as Array<CartType>)
+
+  useEffect(() => {
+    if (cartStorage !== null && cartStorage.length > 0) {
+      props.getCartProductList(mapCartTypeToProductsIds(cartStorage))
+    }
+    if (cartStorage !== null && cartStorage.length == 0) {
+      props.setCartProductList(null)
+    }
+  }, [cartStorage])
+
+  useEffect(() => {
+    if (cartProductList !== null) {
+      setCountGoodsInCart(cartProductList.length)
+
+      handleGetTotalCostCart()
+    }
+  }, [cartProductList])
+
+  const handleGetTotalCostCart = () => {
+    let totalCost = 0
+    if (cartProductList !== null && cartProductList.length > 0)
+      cartProductList.map((product, index) => {
+        totalCost += (product.price * cartStorage[index].count)
+      })
+    
+    setTotalCostCart(totalCost)
+  }
 
   const [searchValue, setSearchValue] = useState('')
   const handleSetSearchValue = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,7 +115,10 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
   }
 
   const deleteFromCart = (productId: number, index: number): void => {
-    
+    let subCartArray = cartStorage
+    if (subCartArray[index].productId == productId)
+      subCartArray.splice(index, 1)
+    setCartStorage(subCartArray)
   }
 
   const isCartOpen = props.isCartOpen
@@ -95,7 +129,6 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
     if (state !== undefined)
       props.setIsCartOpen(state)
 
-      totalCostCart = 0;  
   }
 
   return (
@@ -259,7 +292,7 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                             return (
                               <div key={++uniqueKey * 15} className={s.product}>
                                 <div className={s.product__container}>
-                                  <div className={s.product__img} />
+                                  <img src={`http://localhost:8080/uploads/product/${product.id}.jpg`} className={s.product__img} />
                                   <div className={s.product__content}>
                                     <div className={s.product__content_top}>
                                       <span className={s.product__title}>{product.header}</span>
@@ -267,10 +300,14 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                                     </div>
 
                                     <div className={s.product__content_bottom}>
-                                      <span className={s.product__count}>100 гр.</span>
-                                      <span className={s.product__price}>{product.price} р.</span>
+                                      {product.subcategory.category.title == 'Чай' &&
+                                        <span className={s.product__count}>{cartStorage[index] !== undefined ? 50 * cartStorage[index].count : 50} гр</span>
+                                      }
+                                      {product.subcategory.category.title != 'Чай' &&
+                                        <span className={s.product__count}>{cartStorage[index] !== undefined ? cartStorage[index].count : 1} шт</span>
+                                      }
+                                      <span className={s.product__price}>{cartStorage[index] !== undefined ? product.price * cartStorage[index].count : product.price} р.</span>
                                     </div>
-                                    <span style={{ 'display': 'none' }}>{totalCostCart += product.price}</span>
                                   </div>
                                 </div>
                               </div>
@@ -360,7 +397,7 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                             return (
                               <div key={++uniqueKey * 20} className={s.product}>
                                 <div className={s.product__container}>
-                                  <div className={s.product__img} />
+                                  <img src={`http://localhost:8080/uploads/product/${product.id}.jpg`} className={s.product__img} />
                                   <div className={s.product__content}>
                                     <div className={s.product__content_top}>
                                       <span className={s.product__title}>{product.header}</span>
@@ -368,10 +405,14 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                                     </div>
 
                                     <div className={s.product__content_bottom}>
-                                      <span className={s.product__count}>100 гр.</span>
-                                      <span className={s.product__price}>{product.price} р.</span>
+                                      {product.subcategory.category.title == 'Чай' &&
+                                        <span className={s.product__count}>{cartStorage[index] !== undefined ? 50 * cartStorage[index].count : 50} гр</span>
+                                      }
+                                      {product.subcategory.category.title != 'Чай' &&
+                                        <span className={s.product__count}>{cartStorage[index] !== undefined ? cartStorage[index].count : 1} шт</span>
+                                      }
+                                      <span className={s.product__price}>{cartStorage[index] !== undefined ? product.price * cartStorage[index].count : product.price} р.</span>
                                     </div>
-                                    <span style={{ 'display': 'none' }}>{totalCostCart += product.price}</span>
                                   </div>
                                 </div>
                               </div>

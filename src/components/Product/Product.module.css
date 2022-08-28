@@ -172,7 +172,19 @@
 }
 
 .add_to_cart_btn.successfully {
-  background-color: #2C9462;
+  pointer-events: none;
+  animation: change-color-in 1s ease-out 1;
+}
+@keyframes change-color-in {
+  0% {
+    background-color: #F0B065;
+  }
+  50% {
+    background-color: #2C9462;
+  }
+  100% {
+    background-color: #F0B065;
+  }
 }
 
 .add_to_cart_btn > img {

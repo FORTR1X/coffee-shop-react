@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react"
-import { bestSellersArrayToProductArray } from "../../hooks/bestSellersArrayToProductArray"
+import { mapBestSellersArrayToProductArray } from "../../mapper/mapBestSellersArrayToProductArray"
 import Product from "../Product/Product"
 
 import s from './BestSeller.module.css'
@@ -26,7 +26,7 @@ const BestSeller: React.FC<PropsBestSeller> = (props: PropsBestSeller) => {
               <Product
                 key={(index + 1) * bestSeller.product.id}
                 product={bestSeller.product}
-                productList={bestSellersArrayToProductArray(props.bestSellersProduct)}
+                productList={mapBestSellersArrayToProductArray(props.bestSellersProduct)}
               />
             )
           })}

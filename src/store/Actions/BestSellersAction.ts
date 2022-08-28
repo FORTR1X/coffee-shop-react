@@ -8,10 +8,15 @@ type ThunkActionType = ThunkAction<Promise<void>, RootState, unknown, AllActions
 
 export const getBestSellersList = (): ThunkActionType => {
   return async (dispatch, getState) => {
-    let response = await useApi('GET', '/best-sellers')
 
-    if (response.status == 200) {
-      dispatch(setBestSellersList(response.data))
+    if (getState().bestSellers.bestSellersProduct == null) {
+      let response = await useApi('GET', '/best-sellers')
+
+      if (response.status == 200) {
+        dispatch(setBestSellersList(response.data))
+
+      }
     }
+
   }
 }

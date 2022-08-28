@@ -1,7 +1,7 @@
 import { ThunkAction } from "@reduxjs/toolkit"
 import useApi from "../../hooks/useApi"
 import { CategoryType, CompanyCategoryType, SubcategoryType } from "../../interfaces/interfaces"
-import { NavbarActionTypes, setCompanyCategories, setProductAllSubcategories, setProductCategories, setProductSubcategories, setSubcategoriesByCategory, setUser } from "../Reducers/NavbarReducer"
+import { NavbarActionTypes, setCartProductList, setCompanyCategories, setProductAllSubcategories, setProductCategories, setProductSubcategories, setSubcategoriesByCategory, setUser } from "../Reducers/NavbarReducer"
 import { UrlActionTypes, setCategoryAccessory, setCategoryCoffee, setCategoryTea, setCategoryTableware, setCompanyAbout, setCompanyOptovikam, setCompanyKontakti, setSubcatMonosorta, setSubcatSmesi, setSubcatCherniy, setSubcatZeleniy, setSubcatUlun, setSubcatBeliy, setSubcatPuer, setSubcatTravyanie, setSubcatKrasniy } from "../Reducers/UrlReducer"
 import { RootState } from "../redux-store"
 
@@ -96,5 +96,20 @@ export const getAllSubcategories = (): ThunkActionType => {
 
     if (response.status == 200)
       dispatch(setProductAllSubcategories(response.data))
+  }
+}
+
+export const getCartProductList = (productsId: Array<number>): ThunkActionType => {
+  return async (dispatch, getState) => {
+    let productsIdsForRequest: string = ''
+    productsId.map((id) => {
+      productsIdsForRequest = productsIdsForRequest + `id=${id}&`
+    })
+    let response = await useApi('GET', `/products-by-ids?${productsIdsForRequest}`)
+
+    
+    if (response.status == 200) {
+      dispatch(setCartProductList(response.data))
+    }
   }
 }

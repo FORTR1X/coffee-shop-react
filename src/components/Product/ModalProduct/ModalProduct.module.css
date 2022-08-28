@@ -188,9 +188,25 @@
   color: white;
 }
 .btn__add_to_cart.successfully {
-  background-color: #2C9462;
-  border: 2px solid #2C9462;
-  color: white;
+  pointer-events: none;
+  animation: change-color-in 3s ease-out 1;
+}
+@keyframes change-color-in {
+  0% {
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid #FFB052;
+    color: #FFB052;
+  }
+  50% {
+    background-color: #2C9462;
+    border: 2px solid #2C9462;
+    color: white;
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid #FFB052;
+    color: #FFB052;
+  }
 }
 
 .successfully__text {

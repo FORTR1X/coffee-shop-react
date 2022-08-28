@@ -19,7 +19,7 @@ type OwnPropsType = {
 
 let mapStateToProps = (state: RootState) => {
   return {
-    bestSellersProduct: state.bestSellers.bestSellersProduct
+    bestSellersProduct: state.bestSellers.bestSellersProduct,
   }
 }
 

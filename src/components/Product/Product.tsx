@@ -58,7 +58,7 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
       setTimeout(() => {
         if (addCartBtnRef.current !== null)
           addCartBtnRef.current.classList.toggle(s.successfully)
-      }, 400)
+      }, 3000)
     }
   }
 
