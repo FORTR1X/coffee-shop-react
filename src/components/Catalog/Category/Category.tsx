@@ -1,4 +1,5 @@
 import React from "react"
+import { BASE_URL } from "../../../hooks/useApi"
 import { CategoryType } from "../../../interfaces/interfaces"
 
 import s from './Category.module.css'
@@ -19,7 +20,7 @@ const Category: React.FC<PropsCategoryType> = (props: PropsCategoryType) => {
       <a className={s.category__link} href={linkTo}>
         <img 
           className={s.category__img}
-          src={`http://localhost:3000/img/subcat/${props.id}.jpg`}
+          src={`${BASE_URL}/uploads/subcat/${props.id}.jpg`}
           alt="img"
           placeholder={props.title}/>
       </a>

@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
-const BASE_URL = 'http://localhost:8080'
+export const BASE_URL = 'http://localhost:8080'
 
 const useApi = async (method: string, url: string, config?: AxiosRequestConfig<{}> | undefined, data?: any): Promise<AxiosResponse<any, any>> => {
 

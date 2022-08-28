@@ -7,6 +7,7 @@ import s from './Product.module.css'
 import { CartType, ProductType } from "../../interfaces/interfaces"
 import ModalProduct from "./ModalProduct/ModalProduct"
 import { useLocalStorage } from "usehooks-ts"
+import { BASE_URL } from "../../hooks/useApi"
 
 export type ProductPropsType = {
   product: ProductType
@@ -69,7 +70,7 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
         <a className={s.img__link} href={`/product/id${props.product.id}`}>
           <img 
             className={s.img}
-            src={`http://localhost:8080/uploads/product/${props.product.id}.jpg`} 
+            src={`${BASE_URL}/uploads/product/${props.product.id}.jpg`} 
             alt={props.product.header}
             title={props.product.header}
           />

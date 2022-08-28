@@ -10,6 +10,7 @@ import 'swiper/css/scrollbar'
 // import custom style
 import s from './Slider.module.css'
 import './CustomSwiper.css'
+import { BASE_URL } from "../../hooks/useApi"
 
 type SlideImagesType = {
   id: number
@@ -19,11 +20,11 @@ type SlideImagesType = {
 }
 
 const slideImages: SlideImagesType[] = [
-  {id: 1, imgUrl: 'http://localhost:3000/img/bg/background_1.jpg', alt: 'img1', urlTo: '/product1'},
-  {id: 2, imgUrl: 'http://localhost:3000/img/bg/background_2.jpg', alt: 'img2', urlTo: '/product2'},
-  {id: 3, imgUrl: 'http://localhost:3000/img/bg/background_3.jpg', alt: 'img3', urlTo: '/product3'},
-  {id: 4, imgUrl: 'http://localhost:3000/img/bg/background_4.jpg', alt: 'img4', urlTo: '/product4'},
-  {id: 5, imgUrl: 'http://localhost:3000/img/bg/background_5.jpg', alt: 'img5', urlTo: '/product5'},
+  {id: 1, imgUrl: `${BASE_URL}/uploads/bg/background_1.jpg`, alt: 'img1', urlTo: '/product1'},
+  {id: 2, imgUrl: `${BASE_URL}/uploads/bg/background_2.jpg`, alt: 'img2', urlTo: '/product2'},
+  {id: 3, imgUrl: `${BASE_URL}/uploads/bg/background_3.jpg`, alt: 'img3', urlTo: '/product3'},
+  {id: 4, imgUrl: `${BASE_URL}/uploads/bg/background_4.jpg`, alt: 'img4', urlTo: '/product4'},
+  {id: 5, imgUrl: `${BASE_URL}/uploads/bg/background_5.jpg`, alt: 'img5', urlTo: '/product5'},
 ]
 
 const Slider: React.FC = () => {

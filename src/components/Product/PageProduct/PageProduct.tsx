@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useLocalStorage } from "usehooks-ts"
+import { BASE_URL } from "../../../hooks/useApi"
 import { CartType } from "../../../interfaces/interfaces"
 import Product from "../Product"
 
@@ -95,7 +96,7 @@ const PageProduct: React.FC<PropsPageProduct> = (props: PropsPageProduct) => {
             <div className={s.product}>
               <div className={s.img__container}>
                 <img
-                  src={`http://localhost:8080/uploads/product/${props.product.id}.jpg`}
+                  src={`${BASE_URL}/uploads/product/${props.product.id}.jpg`}
                   alt={props.product.header}
                 />
               </div>

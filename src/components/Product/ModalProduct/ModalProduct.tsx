@@ -6,6 +6,7 @@ import { CSSTransition } from "react-transition-group"
 import s from './ModalProduct.module.css'
 import './style.css'
 import { useLocalStorage } from "usehooks-ts"
+import { BASE_URL } from "../../../hooks/useApi"
 
 type ModalProductType = {
   product: ProductType
@@ -91,7 +92,7 @@ const ModalProduct: React.FC<ModalProductType> = (props: ModalProductType) => {
           <img 
             className={s.modal__img}
             title={props.product.header}
-            src={`http://localhost:8080/uploads/product/${props.product.id}.jpg`}
+            src={`${BASE_URL}/uploads/product/${props.product.id}.jpg`}
             alt="img" 
           />
         
