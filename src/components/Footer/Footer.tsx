@@ -32,7 +32,7 @@ const Footer: React.FC<FooterProps> = (props: FooterProps) => {
         <div className={s.footer__content}>
           <div className={s.content__catregories}>
             {props.productSubcategoriesByCategory.map((category, categoryIndex) => {
-              if (props.productSubcategoriesByCategory !== null && category !== null && category.length > 0) {
+              if (props.productSubcategoriesByCategory !== null && category !== null && category.length > 1) {
                 return (
                   <ul 
                     onClick={ (event) => { event.currentTarget.classList.toggle(`${s.enable}`) } }

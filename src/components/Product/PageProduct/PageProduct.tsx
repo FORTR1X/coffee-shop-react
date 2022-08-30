@@ -160,7 +160,15 @@ const PageProduct: React.FC<PropsPageProduct> = (props: PropsPageProduct) => {
                 <span className={s.product_category}>
                   Категория: 
                   <span>
-                    {props.product.subcategory.category.title}, {props.product.subcategory.title}
+                    {/* if category have subcategory */}
+                    {props.product.subcategory.category.title != props.product.subcategory.title && 
+                      `${props.product.subcategory.category.title}, ${props.product.subcategory.title}`
+                    }
+                    
+                    {/* if category don't have subcategory */}
+                    {props.product.subcategory.category.title == props.product.subcategory.title &&
+                      props.product.subcategory.category.title
+                    }
                   </span>
                 </span>
 

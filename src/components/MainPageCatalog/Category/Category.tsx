@@ -22,14 +22,15 @@ const Category: React.FC<PropsCategoryType> = (props: PropsCategoryType) => {
           className={s.category__img}
           src={`${BASE_URL}/uploads/subcat/${props.id}.jpg`}
           alt="img"
-          placeholder={props.title}/>
+          placeholder={props.title}
+        />
       </a>
       <div className={s.subcategory__container}>
         <a className={s.subcategory} href={linkTo}>
           {props.title}
         </a>
       </div>
-      {props.category !== undefined &&
+      {props.category !== undefined && props.category.title != props.title &&
         <div className={s.category__container}>  
           <a className={s.category} href={linkTo}>{props.category.title}</a>
         </div>

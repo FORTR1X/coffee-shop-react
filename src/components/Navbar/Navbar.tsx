@@ -172,13 +172,13 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                       onMouseEnter={ () => handleIsCategoryHovered(true, category) }
                       onMouseLeave={ () => handleIsCategoryHovered(false) }
                     >
-                      <span className={subcategoriesByCategory !== null && subcategoriesByCategory[category.id - 1].length > 0 ? `${s.down_arrow}` : ''}>
+                      <span className={subcategoriesByCategory !== null && subcategoriesByCategory[category.id - 1].length > 1 ? `${s.down_arrow}` : ''}>
                         {category.title}
                       </span>
                     </a>
 
                     {/* md display */}
-                    {subcategoriesByCategory !== null && subcategoriesByCategory.length !== undefined && subcategoriesByCategory.length > 0 && subcategoriesByCategory[category.id - 1].length == 0 && subcategoriesByCategory.length == bottomCategories.length &&
+                    {subcategoriesByCategory !== null && subcategoriesByCategory.length !== undefined && subcategoriesByCategory.length > 1 && subcategoriesByCategory[category.id - 1].length <= 1 && subcategoriesByCategory.length == bottomCategories.length &&
                       <a
                         href={category.url}
                         className={s.header__text_animation_md}
@@ -186,20 +186,20 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                         {category.title}
                       </a>
                     }
-                    {subcategoriesByCategory !== null && subcategoriesByCategory.length !== undefined && subcategoriesByCategory.length > 0 && subcategoriesByCategory[category.id - 1].length > 0 && subcategoriesByCategory.length == bottomCategories.length &&
+                    {subcategoriesByCategory !== null && subcategoriesByCategory.length !== undefined && subcategoriesByCategory.length > 1 && subcategoriesByCategory[category.id - 1].length > 1 && subcategoriesByCategory.length == bottomCategories.length &&
                       <span
                         className={s.header__text_animation_md}
                         onClick={() => {
                           handleIsCategoryHovered(!isCategoryHovered, category)
                         }}
                       >
-                        <span className={subcategoriesByCategory !== null && subcategoriesByCategory[category.id - 1].length > 0 ? `${s.down_arrow}` : ''}>
+                        <span className={subcategoriesByCategory !== null && subcategoriesByCategory[category.id - 1].length > 1 ? `${s.down_arrow}` : ''}>
                           {category.title}
                         </span>
                       </span>
                     }
 
-                    {subcategoriesByCategory !== null && subcategoriesByCategory.length !== undefined && subcategoriesByCategory.length > 0 && subcategoriesByCategory.length == bottomCategories.length && subcategoriesByCategory[category.id - 1].length > 0 &&
+                    {subcategoriesByCategory !== null && subcategoriesByCategory.length !== undefined && subcategoriesByCategory.length > 0 && subcategoriesByCategory.length == bottomCategories.length && subcategoriesByCategory[category.id - 1].length > 1 &&
                       <div>
                         <div className={s.subcategory__ul_outside} />
 
@@ -211,7 +211,7 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                           >
                             <div className={s.subcategory__trinagle}/>
                               <div className={s.subcategory__container} >
-                                {subcategoriesByCategory[category.id - 1].length > 0 && subcategoriesByCategory[category.id - 1].map(subcat => {
+                                {subcategoriesByCategory[category.id - 1].length > 1 && subcategoriesByCategory[category.id - 1].map(subcat => {
                                   return (
                                     <li key={++uniqueKey * 10} className={s.subcategory__li}>
                                       <a className={s.subcategory__li_link} href={`${currentSelectedCategory?.url}${subcat.url}`}>

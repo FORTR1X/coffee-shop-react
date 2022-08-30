@@ -1,7 +1,7 @@
 import { connect } from "react-redux"
 import { CategoryType, SubcategoryType } from "../../interfaces/interfaces"
 import { RootState } from "../../store/redux-store"
-import Catalog from "./Catalog"
+import Catalog from "./MainPageCatalog"
 
 type MapStatePropsType = {
   productCategories: Array<CategoryType> | null
@@ -25,9 +25,9 @@ let mapStateToProps = (state: RootState) => {
   }
 }
 
-const CatalogContainer = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, RootState>(
+const MainPageCatalogContainer = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, RootState>(
   mapStateToProps
 )(Catalog)
 
-export default CatalogContainer
+export default MainPageCatalogContainer
 export type PropsCatalog = MapStatePropsType & MapDispatchPropsType & OwnPropsType

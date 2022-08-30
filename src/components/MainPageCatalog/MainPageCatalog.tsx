@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
-import { PropsCatalog } from "./CatalogContainer"
+import { PropsCatalog } from "./MainPageCatalogContainer"
 import s from './Catalog.module.css'
 
 // import Swiper JS
@@ -132,7 +132,7 @@ const Catalog: React.FC<PropsCatalog> = (props) => {
                   return (
                     <SwiperSlide key={pageIndex * countColumnsCategory}>
                       <div className={s.swiper__container}>
-                        {/* Elem have eny type because they can be CategoryType or SubcategoryType (need filed category) */}
+                        {/* Elem have any type because they can be CategoryType or SubcategoryType (need filed category) */}
                         {page.map((elem: any, elemIndex) => {
                           return (
                             <Category

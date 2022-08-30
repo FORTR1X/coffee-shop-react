@@ -63,6 +63,8 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
     }
   }
 
+  // делать запрос на бэк получая количество изображений
+
   return (
     <div
       className={s.product}>
@@ -106,7 +108,15 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
           </div>
 
           <div className={s.product__category}>
-            {`${props.product.subcategory.category.title}, ${props.product.subcategory.title}`}
+            {/* if category have subcategory */}
+            {props.product.subcategory.category.title != props.product.subcategory.title && 
+              `${props.product.subcategory.category.title}, ${props.product.subcategory.title}`
+            }
+
+            {/* if category don't have subcategory */}
+            {props.product.subcategory.category.title == props.product.subcategory.title &&
+              props.product.subcategory.category.title
+            }
           </div>
         </div>  
 
