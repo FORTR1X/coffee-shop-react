@@ -8,6 +8,8 @@ import { PropsRouter } from "./RouterContainer";
 import MainPage from "../MainPage/MainPage";
 import Footer from "../Footer/Footer";
 import PageProductContainer from "../Product/PageProduct/PageProductContainer";
+import CatalogContainer from "../Catalog/CatalogContainer";
+import { stringify } from "querystring";
 
 const Router: React.FC<PropsRouter> = (props) => {
 
@@ -16,32 +18,43 @@ const Router: React.FC<PropsRouter> = (props) => {
       <NavbarContainer/>
 
       <main className={s.main_content}>
-        {props.productSubcategoriesByCategory !== null && props.companyCategories !== null && props.productCategories !== null && props.productSubcategories !== null && props.user !== null &&
+        {props.productSubcategoriesByCategory !== null
+          && props.companyCategories !== null
+          && props.productCategories !== null
+          && props.productSubcategories !== null
+          && props.user !== null
+          && props.url !== null
+          && props.url.isAllUrlReady &&
           <Routes>
             <Route path="/" element={<MainPage/>}/>
 
             {/* Company Categories */}
-            <Route path={props.url.companyAbout} element/>
-            <Route path={props.url.companyKontakti} element/>
-            <Route path={props.url.companyOptovikam} element/>
+            <Route path={props.url.companyAbout} element={<CatalogContainer/>}/>
+            <Route path={props.url.companyKontakti} element={<CatalogContainer/>}/>
+            <Route path={props.url.companyOptovikam} element={<CatalogContainer/>}/>
 
-            {/* Product Caregories */}
-            <Route path={props.url.categoryAccessory} element/>
-            <Route path={props.url.categoryCoffee} element/>
-            <Route path={props.url.categoryTableware} element/>
-            <Route path={props.url.categoryTea} element/>
-            
+            {/* Accessory */}
+            <Route path={props.url.categoryAccessory} element={<CatalogContainer/>}/>
 
-            {/* Subcategories */}
-            <Route path={`${props.url.categoryCoffee}${props.url.subcatMonosorta}`} element/>
-            <Route path={`${props.url.categoryTea}${props.url.subcatSmesi}`} element/>
-            <Route path={`${props.url.categoryTea}${props.url.subcatCherniy}`} element/>
-            <Route path={`${props.url.categoryTea}${props.url.subcatZeleniy}`} element/>
-            <Route path={`${props.url.categoryTea}${props.url.subcatUlun}`} element/>
-            <Route path={`${props.url.categoryTea}${props.url.subcatBeliy}`} element/>
-            <Route path={`${props.url.categoryTea}${props.url.subcatPuer}`} element/>
-            <Route path={`${props.url.categoryTea}${props.url.subcatTravyanie}`} element/>
-            <Route path={`${props.url.categoryTea}${props.url.subcatKrasniy}`} element/>
+            {/* Coffee */}
+            <Route path={props.url.categoryCoffee} element={<CatalogContainer/>}>
+              <Route path={props.url.subcatSmesi} element={<CatalogContainer/>}/>
+              <Route path={props.url.subcatMonosorta} element={<CatalogContainer/>}/>
+            </Route>
+
+            {/* Tableware */}
+            <Route path={props.url.categoryTableware}element={<CatalogContainer/>}/>
+
+            {/* Tea */}
+            <Route path={props.url.categoryTea} element={<CatalogContainer/>}>
+              <Route path={props.url.subcatZeleniy} element={<CatalogContainer/>}/>
+              <Route path={props.url.subcatUlun} element={<CatalogContainer/>}/>
+              <Route path={props.url.subcatBeliy} element={<CatalogContainer/>}/>
+              <Route path={props.url.subcatPuer} element={<CatalogContainer/>}/>
+              <Route path={props.url.subcatTravyanie} element={<CatalogContainer/>}/>
+              <Route path={props.url.subcatKrasniy} element={<CatalogContainer/>}/>
+              <Route path={props.url.subcatCherniy} element={<CatalogContainer/>}/>
+            </Route>
 
             {/* Product */}
             <Route path={'/product/id:id'} element={<PageProductContainer/>}/>

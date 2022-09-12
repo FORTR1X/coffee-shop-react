@@ -33,7 +33,7 @@ const useApi = async (method: string, url: string, config?: AxiosRequestConfig<{
       return response
     
     default:
-      return {config: {}, data: null, headers: {}, status: -1, statusText: '', request: ''};
+      return {config: {}, data: {}, headers: {}, status: -1, statusText: '', request: ''};
   }
 }
 

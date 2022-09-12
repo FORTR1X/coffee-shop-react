@@ -23,6 +23,8 @@ type UrlType = {
   companyAbout: string
   companyOptovikam: string
   companyKontakti: string
+
+  isAllUrlReady: boolean
 }
 
 type MapStatePropsType = {
@@ -34,7 +36,7 @@ type MapStatePropsType = {
   productSubcategoriesByCategory: SubcategoryType[][] | null
 
   // UrlReducer
-  url: UrlType
+  url: UrlType  
 }
 
 type MapDispatchPropsType = {

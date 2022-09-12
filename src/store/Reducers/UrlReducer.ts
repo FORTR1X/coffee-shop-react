@@ -37,10 +37,35 @@ let initialState = {
 
   companyAbout: '',
   companyOptovikam: '',
-  companyKontakti: ''
+  companyKontakti: '',
+
+  isAllUrlReady: false
 }
 
 export type UrlInitialStateType = typeof initialState
+
+const handleIsAllUrlReady = (state: UrlInitialStateType): boolean => {
+
+  if (state.categoryTea.length > 1
+    && state.categoryCoffee.length > 1
+    && state.categoryTableware.length > 1
+    && state.categoryAccessory.length > 1
+    && state.subcatMonosorta.length > 1
+    && state.subcatSmesi.length > 1
+    && state.subcatCherniy.length > 1
+    && state.subcatZeleniy.length > 1
+    && state.subcatUlun.length > 1
+    && state.subcatBeliy.length > 1
+    && state.subcatPuer.length > 1
+    && state.subcatTravyanie.length > 1
+    && state.subcatKrasniy.length > 1
+    && state.companyAbout.length > 1
+    && state.companyOptovikam.length > 1
+    && state.companyKontakti.length > 1)
+      return true
+
+  return false 
+}
 
 const urlReducer = (state = initialState, action: UrlActionTypes): UrlInitialStateType => {
 
@@ -49,97 +74,113 @@ const urlReducer = (state = initialState, action: UrlActionTypes): UrlInitialSta
     case SET_CATEGORY_TEA:
       return {
         ...state,
-        categoryTea: action.categoryTea
+        categoryTea: action.categoryTea,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }
 
     case SET_CATEGORY_COFFEE:
       return {
         ...state,
-        categoryCoffee: action.categoryCoffee
+        categoryCoffee: action.categoryCoffee,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }
     
     case SET_CATEGORY_TABLEWARE:
       return {
         ...state,
-        categoryTableware: action.categoryTableware 
+        categoryTableware: action.categoryTableware,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }
 
     case SET_CATEORY_ACCESSORY:
       return {
         ...state,
-        categoryAccessory: action.categoryAccessory
+        categoryAccessory: action.categoryAccessory,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }
 
     case SET_SUBCAT_MONOSORTA:
       return {
         ...state,
-        subcatMonosorta: action.subcatMonosorta
+        subcatMonosorta: action.subcatMonosorta,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }
 
     case SET_SUBCAT_SMESI:
       return {
         ...state,
-        subcatSmesi: action.subcatSmesi
+        subcatSmesi: action.subcatSmesi,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }
 
     case SET_SUBCAT_CHERNIY:
       return {
         ...state,
-        subcatCherniy: action.subcatCherniy
+        subcatCherniy: action.subcatCherniy,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }
 
     case SET_SUBCAT_ZELENIY:
       return {
         ...state,
-        subcatZeleniy: action.subcatZeleniy
+        subcatZeleniy: action.subcatZeleniy,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }
 
     case SET_SUBCAT_ULUN:
       return {
         ...state,
-        subcatUlun: action.subcatUlun
+        subcatUlun: action.subcatUlun,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }
 
     case SET_SUBCAT_BELIY:
       return {
         ...state,
-        subcatBeliy: action.subcatBeliy
+        subcatBeliy: action.subcatBeliy,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }
 
     case SET_SUBCAT_PUER:
       return {
         ...state,
-        subcatPuer: action.subcatPuer
+        subcatPuer: action.subcatPuer,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }
 
     case SET_SUBCAT_TRAVYANIE:
       return {
         ...state,
-        subcatTravyanie: action.subcatTravyanie
+        subcatTravyanie: action.subcatTravyanie,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }
 
     case SET_SUBCAT_KRANIY:
       return {
         ...state,
-        subcatKrasniy: action.subcatKrasniy
+        subcatKrasniy: action.subcatKrasniy,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }
 
     case SET_COMPANY_ABOUT:
       return {
         ...state,
-        companyAbout: action.companyAbout
+        companyAbout: action.companyAbout,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }
 
     case SET_COMPANY_OPTOVIKAM:
       return {
         ...state,
-        companyOptovikam: action.companyOptovikam
+        companyOptovikam: action.companyOptovikam,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }
 
     case SET_COMPANY_KONTAKTI:
       return {
         ...state,
-        companyKontakti: action.companyKontakti
+        companyKontakti: action.companyKontakti,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }  
 
     default: return state  

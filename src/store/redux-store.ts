@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import bestSellersReducer from './Reducers/BestSellersReducer'
+import catalogReducer from './Reducers/CatalogReducer'
 
 import navbarReducer from './Reducers/NavbarReducer'
 import pageProductReducer from './Reducers/PageProductReducer'
@@ -9,7 +10,8 @@ const rootReducer = combineReducers({
   navbar: navbarReducer,
   url: urlReducer,
   bestSellers: bestSellersReducer,
-  pageProduct: pageProductReducer
+  pageProduct: pageProductReducer,
+  catalog: catalogReducer
 })
 
 export const store = configureStore({
