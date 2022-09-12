@@ -31,6 +31,9 @@ const Catalog: React.FC<PropsCatalogType> = (props: PropsCatalogType) => {
   ]
   const [currentItemSort, setCurrentItemSort] = useState<string>('Не выбрано')
 
+  const [isFilterOpen, setIsFilterOpen] = useState(false)
+  const [isCatalogOpen, setIsCatalogOpen] = useState(false)
+
   const currentPageUrlPath: string = useLocation().pathname
   const currentPageUrlPathByCategories = currentPageUrlPath.match(/\w+/g)
   const [pageCategory, setPageCategory] = useState<CategoryType | null>(null)
@@ -192,6 +195,7 @@ const Catalog: React.FC<PropsCatalogType> = (props: PropsCatalogType) => {
     for (let page = 0; page < COUNT_PAGES; page++) {
       htmlPages.push(
         <div
+          key={page * 11}
           onClick={() => {searchParam.setPage(page.toString())}}
           className={page == NUMBER_PAGE ? `${s.nav_page} ${s.current}` : s.nav_page}
         >
@@ -225,6 +229,20 @@ const Catalog: React.FC<PropsCatalogType> = (props: PropsCatalogType) => {
     searchParam.setPrice(priceFromInput.toString(), priceToInput.toString())
   }
 
+  const handleIsCatalogOpen = () => {
+    setIsCatalogOpen(!isCatalogOpen)
+
+    if (isFilterOpen)
+      setIsFilterOpen(false)
+  }
+
+  const handleIsFilterOpen = () => {
+    setIsFilterOpen(!isFilterOpen)
+    
+    if (isCatalogOpen)
+      setIsCatalogOpen(false)
+  }
+
   return (
     <div className={s.catalog__wrapper}>
       {props.productCategories
@@ -245,7 +263,32 @@ const Catalog: React.FC<PropsCatalogType> = (props: PropsCatalogType) => {
           </div>
           <div className={s.catalog__content}>
             <div className={s.catalog__characteristic}>
-              <div className={s.characteristic__content}>
+
+              <div className={s.catalog_mobile_spoiler}>
+                <div
+                  onClick={() => {handleIsCatalogOpen()}}
+                  className={s.catalog_spoiler}
+                >
+                  <div className={isCatalogOpen ? `${s.burger_menu} ${s.opened}` : s.burger_menu}>
+                    <div className={s.burger_menu_line}/>
+                  </div>
+
+                  <span>Каталог</span>
+                </div>
+                
+                <div
+                  onClick={() => {handleIsFilterOpen()}}
+                  className={s.filter_spoiler}
+                >
+                  <span>Фильтр</span>
+                  <div className={isFilterOpen ? `${s.filter__arrows} ${s.opened}` : s.filter__arrows}>
+                    <div className={s.filter__arrow_up}/>
+                    <div className={s.filter__arrow_down}/>
+                  </div>
+                </div>
+              </div>
+
+              <div className={isCatalogOpen ? `${s.characteristic__content} ${s.opened}` : s.characteristic__content}>
                 <span className={s.characteristic__title}>Каталог</span>
                 
                 {props.productCategories.map((currentCategory, index) => {
@@ -295,7 +338,7 @@ const Catalog: React.FC<PropsCatalogType> = (props: PropsCatalogType) => {
 
               </div>
 
-              <div className={s.filter__by_price}>
+              <div className={isFilterOpen ? `${s.filter__by_price} ${s.opened}` : s.filter__by_price}>
                 <span>Фильтр по цене</span>
 
                 <div className={s.split_line}/>
@@ -327,7 +370,9 @@ const Catalog: React.FC<PropsCatalogType> = (props: PropsCatalogType) => {
                       <div className={s.reset__circle}/>
                       <span>Сбросить</span>
                     </button>
-                    <button onClick={() => {handleSetPriceSearchParam()}} className={s.btn__search}>Поиск</button>
+                    <button onClick={() => {handleSetPriceSearchParam()}} className={s.btn__search}>
+                      <span>Поиск</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -365,31 +410,40 @@ const Catalog: React.FC<PropsCatalogType> = (props: PropsCatalogType) => {
                 </form>
               </div>
 
-              <div className={s.products__container}>      
-                <div className={s.products_content}>
-                  {props.productList && props.productList.map((product, index) => {
-                    return (
-                      <Product productList={props.productList} product={product} />
-                    )
-                  })}
-                </div>
+              {props.productList !== null && props.productList.length > 0 &&
+                <div className={s.products__container}>      
+                  <div className={s.products_content}>
+                    {props.productList && props.productList.map((product, index) => {
+                      return (
+                        <Product key={index * 9} productList={props.productList} product={product} />
+                      )
+                    })}
+                  </div>
 
-                <div className={s.products__navigation}>
-                  {PAGE_PARAM_VALUE != null && parseInt(PAGE_PARAM_VALUE) > 0 &&
-                    <div onClick={() => getUrlPrevPage()} className={s.prev_page}>
-                      <div className={s.prev_arrow}/>
-                    </div>
-                  }  
+                  <div className={s.products__navigation}>
+                    {PAGE_PARAM_VALUE != null && parseInt(PAGE_PARAM_VALUE) > 0 &&
+                      <div onClick={() => getUrlPrevPage()} className={s.prev_page}>
+                        <div className={s.prev_arrow}/>
+                      </div>
+                    }  
 
-                  {getHtmlNavigationSlider()}
-                  
-                  {PAGE_PARAM_VALUE != null && (getCountPages() - 1) != parseInt(PAGE_PARAM_VALUE) &&
-                    <div onClick={() => getUrlNextPage()} className={s.next_page}>
-                      <div className={s.next_arrow}/>
-                    </div>
-                  }
+                    {getHtmlNavigationSlider()}
+                    
+                    {PAGE_PARAM_VALUE != null && (getCountPages() - 1) != parseInt(PAGE_PARAM_VALUE) &&
+                      <div onClick={() => getUrlNextPage()} className={s.next_page}>
+                        <div className={s.next_arrow}/>
+                      </div>
+                    }
+                  </div>
+                </div>  
+              }
+              {props.productList == null || props.productList.length == 0 &&
+                <div className={s.product_list__error}>
+                  <h3>Ошибка!</h3>
+                  <span className={s.error_status}>404</span>
+                  <span>Страница не найдена :(</span>
                 </div>
-              </div>  
+              }
             </div>
           </div>
         </div>

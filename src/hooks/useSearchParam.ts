@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
+import { useEffectOnce } from "usehooks-ts"
 
 const PAGE = 'page'
 const PRICE_FROM = 'priceFrom'
@@ -21,6 +22,10 @@ const useSearchParam = () => {
       sort: ''
     })
   const [searchParams, setSearchParams] = useSearchParams()
+
+  useEffect(() => {
+
+  }, [])
 
   const setPage = (page: string): void => {
     setValueSearchParams({...valueSearchParams, page})
@@ -48,6 +53,7 @@ const useSearchParam = () => {
   }
 
   const setPrice = (priceFrom: string, priceTo: string) => {
+    setValueSearchParams({...valueSearchParams, priceFrom, priceTo})
     setSearchParams({...valueSearchParams, priceFrom, priceTo})
   }
   

@@ -1045,3 +1045,7 @@ div {
 .subcategory__ul_outside {
     z-index: -1;
 }
+
+@media (max-width: 281px) {
+    .header__number { display: none; }
+}
