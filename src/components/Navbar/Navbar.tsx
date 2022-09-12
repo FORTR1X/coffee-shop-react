@@ -70,6 +70,10 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
 
       handleGetTotalCostCart()
     }
+
+    if (cartProductList == null) {
+      setCountGoodsInCart(0)
+    }
   }, [cartProductList])
 
   const handleGetTotalCostCart = () => {
