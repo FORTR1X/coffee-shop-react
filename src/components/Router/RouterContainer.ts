@@ -1,31 +1,7 @@
 import { connect } from "react-redux"
 import { RootState } from "../../store/redux-store"
 import Router from "./Router"
-import { CategoryType, CompanyCategoryType, SubcategoryType, UserType } from "../../interfaces/interfaces"
-
-type UrlType = {
-  categoryTea: string
-  categoryCoffee: string
-  categoryTableware: string
-  categoryAccessory: string
-
-  subcatMonosorta: string
-  subcatSmesi: string
-
-  subcatCherniy: string
-  subcatZeleniy: string
-  subcatUlun: string
-  subcatBeliy: string
-  subcatPuer: string
-  subcatTravyanie: string
-  subcatKrasniy: string
-
-  companyAbout: string
-  companyOptovikam: string
-  companyKontakti: string
-
-  isAllUrlReady: boolean
-}
+import { CategoryType, CompanyCategoryType, SubcategoryType, UrlType, UserType } from "../../interfaces/interfaces"
 
 type MapStatePropsType = {
   // NavbarReducer

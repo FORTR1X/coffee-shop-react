@@ -9,11 +9,12 @@ import MainPage from "../MainPage/MainPage";
 import Footer from "../Footer/Footer";
 import PageProductContainer from "../Product/PageProduct/PageProductContainer";
 import CatalogContainer from "../Catalog/CatalogContainer";
-import { stringify } from "querystring";
+import SearchContainer from "../Search/SearchContainer";
 
 const Router: React.FC<PropsRouter> = (props) => {
 
   return (
+
     <div className={s.content}>
       <NavbarContainer/>
 
@@ -58,6 +59,9 @@ const Router: React.FC<PropsRouter> = (props) => {
 
             {/* Product */}
             <Route path={'/product/id:id'} element={<PageProductContainer/>}/>
+
+            {/* Search */}
+            <Route path={'/search'} element={<SearchContainer/>}/>
           </Routes>
         }
       </main>
@@ -70,7 +74,7 @@ const Router: React.FC<PropsRouter> = (props) => {
         />
       }
 
-    </div>
+    </div> 
   )
 }
 

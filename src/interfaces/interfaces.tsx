@@ -45,3 +45,27 @@ export type CartType = {
     productId: number
     count: number
 }
+
+export type UrlType = {
+    categoryTea: string
+    categoryCoffee: string
+    categoryTableware: string
+    categoryAccessory: string
+  
+    subcatMonosorta: string
+    subcatSmesi: string
+  
+    subcatCherniy: string
+    subcatZeleniy: string
+    subcatUlun: string
+    subcatBeliy: string
+    subcatPuer: string
+    subcatTravyanie: string
+    subcatKrasniy: string
+  
+    companyAbout: string
+    companyOptovikam: string
+    companyKontakti: string
+  
+    isAllUrlReady: boolean
+  }

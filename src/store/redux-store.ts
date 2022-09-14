@@ -4,6 +4,7 @@ import catalogReducer from './Reducers/CatalogReducer'
 
 import navbarReducer from './Reducers/NavbarReducer'
 import pageProductReducer from './Reducers/PageProductReducer'
+import searchReducer from './Reducers/SearchReducer'
 import urlReducer from './Reducers/UrlReducer'
 
 const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
   url: urlReducer,
   bestSellers: bestSellersReducer,
   pageProduct: pageProductReducer,
-  catalog: catalogReducer
+  catalog: catalogReducer,
+  search: searchReducer
 })
 
 export const store = configureStore({

@@ -13,6 +13,7 @@ import Spoiler from "./Spoiler/Spoiler"
 import { PropsNavbar } from "./NavbarContainer"
 import { useLocalStorage } from "usehooks-ts"
 import { mapCartTypeToProductsIds } from "../../mapper/mapCartTypeToProductsIds"
+import { useNavigate } from "react-router-dom"
 
 const Navbar: React.FC<PropsNavbar> = (props) => {
 
@@ -233,10 +234,9 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                 )}
               </ul>
 
-
               {/* for lg */}
               <form onClick={ () => handleIsCartOpen(false) } className={s.search__form}>
-                <input 
+                <input
                   className={s.search__input}
                   type="text"
                   placeholder="Поиск"
@@ -244,7 +244,7 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                   onChange={(event) => {handleSetSearchValue(event)}}
                 />
 
-                <a className={s.search__btn} href={`/search/?q=${searchValue}`}/>
+                <a className={s.search__btn} href={`/search?q=${searchValue}`}/>
               </form>
 
               {/* for md */}
