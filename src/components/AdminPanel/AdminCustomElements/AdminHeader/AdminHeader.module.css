@@ -1,0 +1,27 @@
+.header__container {
+  margin-top: 40px;
+
+  text-align: center;
+  font-size: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header__marvels_shop {
+  margin-right: 3px;
+}
+
+.header__admin_panel {
+  color: #2C9462;
+}
+
+.header__underline {
+  margin-top: 4.6px;
+
+  width: 180px;
+  height: 2px;
+
+  background-color: #FFB052;
+}

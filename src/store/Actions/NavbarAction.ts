@@ -2,7 +2,7 @@ import { ThunkAction } from "@reduxjs/toolkit"
 import useApi from "../../hooks/useApi"
 import { CategoryType, CompanyCategoryType, SubcategoryType } from "../../interfaces/interfaces"
 import { NavbarActionTypes, setCartProductList, setCompanyCategories, setProductAllSubcategories, setProductCategories, setProductSubcategories, setSubcategoriesByCategory, setUser } from "../Reducers/NavbarReducer"
-import { UrlActionTypes, setCategoryAccessory, setCategoryCoffee, setCategoryTea, setCategoryTableware, setCompanyAbout, setCompanyOptovikam, setCompanyKontakti, setSubcatMonosorta, setSubcatSmesi, setSubcatCherniy, setSubcatZeleniy, setSubcatUlun, setSubcatBeliy, setSubcatPuer, setSubcatTravyanie, setSubcatKrasniy } from "../Reducers/UrlReducer"
+import { UrlActionTypes, setCategoryAccessory, setCategoryCoffee, setCategoryTea, setCategoryTableware, setCompanyAbout, setCompanyOptovikam, setCompanyKontakti, setSubcatMonosorta, setSubcatSmesi, setSubcatCherniy, setSubcatZeleniy, setSubcatUlun, setSubcatBeliy, setSubcatPuer, setSubcatTravyanie, setSubcatKrasniy, setCompantDostavka } from "../Reducers/UrlReducer"
 import { RootState } from "../redux-store"
 
 type AllActionsType = NavbarActionTypes | UrlActionTypes
@@ -22,6 +22,9 @@ export const getCompanyCategories = (): ThunkActionType => {
           dispatch(setCompanyOptovikam(response.url))
         if (response.title == 'Контакты')
           dispatch(setCompanyKontakti(response.url))
+        if (response.title == 'Доставка')
+          dispatch(setCompantDostavka(response.url))
+      
       })
     }
   }

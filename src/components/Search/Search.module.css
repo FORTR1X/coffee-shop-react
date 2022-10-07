@@ -2,8 +2,7 @@
   margin-top: 172px;
 }
 
-.failed__loading,
-.not_found {
+.failed__loading {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,16 +11,29 @@
   padding: 0 40px 60px 40px;
 }
 
-.failed__header,
-.not_found__header {
+.not_found {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding-bottom: 30px;
+}
+
+.failed__header {
   text-align: center;
   text-transform: uppercase;
 
   margin-bottom: 10px;
 }
 
-.failed__status,
-.not_found__status {
+.not_found__header {
+  text-align: center;
+
+  margin-bottom: 10px;
+}
+
+.failed__status {
   color: #bc0000;
 
   font-family: 'Lato Bold';

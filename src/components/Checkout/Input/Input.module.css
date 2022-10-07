@@ -1,0 +1,58 @@
+.input__wrapper {
+  display: flex;
+  flex-direction: column;
+
+  border-bottom: 2px solid gray;
+
+  width: 210px;
+
+  transition: 0.2s all;
+
+  margin: 25px 0 25px 0;
+  padding-bottom: 5px;
+}
+.input__wrapper.error {
+  border-bottom: 2px solid #CA1919;
+}
+.input__title {
+  font-family: 'Lato Light';
+
+  margin-bottom: 7px;
+}
+
+.required_field {
+  color: red;
+  margin-left: 2px;
+}
+
+.input__wrapper.error > .input__input::placeholder {
+  color: #CA1919;
+}
+.input__input,
+.input__area {
+  font-family: 'Lato Light';
+
+  color: black;
+  font-size: 16px;
+
+  padding: 0 3px 0 3px;
+
+  transition: 0.2s all;
+}
+.input__input:focus,
+.input__area:focus {
+  outline: none;
+}
+
+.input__area {
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 50px;
+  max-height: 150px;
+}
+
+@media (max-width: 539px) {
+  .input__wrapper {
+    width: 100%;
+  } 
+}

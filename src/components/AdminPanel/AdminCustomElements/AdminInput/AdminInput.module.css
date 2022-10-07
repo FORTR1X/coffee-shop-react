@@ -1,0 +1,20 @@
+.form__container {
+  display: flex;
+  flex-direction: column;
+
+  margin: 15px 0 15px 0;
+}
+
+.form__title {
+  margin-bottom: 3px;
+}
+
+.form__input {
+  font-family: 'Lato Regular';
+  padding: 5px 5px 5px 8px;
+}
+
+.form__input:focus {
+  outline: none;
+}
+

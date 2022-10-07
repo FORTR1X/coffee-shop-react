@@ -17,6 +17,7 @@ const SET_SUBCAT_KRANIY = 'SET_SUBCAT_KRANIY'
 const SET_COMPANY_ABOUT = 'SET_COMPANY_ABOUT'
 const SET_COMPANY_OPTOVIKAM = 'SET_COMPANY_OPTOVIKAM'
 const SET_COMPANY_KONTAKTI = 'SET_COMPANY_KONTAKTI'
+const SET_COMPANY_DOSTAVKA = 'SET_COMPANY_DOSTAVKA'
 
 let initialState = {
   categoryTea: '',
@@ -38,6 +39,7 @@ let initialState = {
   companyAbout: '',
   companyOptovikam: '',
   companyKontakti: '',
+  companyDostavka: '',
 
   isAllUrlReady: false
 }
@@ -61,7 +63,8 @@ const handleIsAllUrlReady = (state: UrlInitialStateType): boolean => {
     && state.subcatKrasniy.length > 1
     && state.companyAbout.length > 1
     && state.companyOptovikam.length > 1
-    && state.companyKontakti.length > 1)
+    && state.companyKontakti.length > 1
+    && state.companyDostavka.length > 1)
       return true
 
   return false 
@@ -181,6 +184,13 @@ const urlReducer = (state = initialState, action: UrlActionTypes): UrlInitialSta
         ...state,
         companyKontakti: action.companyKontakti,
         isAllUrlReady: handleIsAllUrlReady(state)
+      }
+
+    case SET_COMPANY_DOSTAVKA:
+      return {
+        ...state,
+        companyDostavka: action.companyDostavka,
+        isAllUrlReady: handleIsAllUrlReady(state)
       }  
 
     default: return state  
@@ -190,7 +200,7 @@ const urlReducer = (state = initialState, action: UrlActionTypes): UrlInitialSta
 export type UrlActionTypes = SetCategoryTeaType | SetCategoryCoffeeType | SetCategoryTablewareType | 
   SetCategoryAccessoryType | SetSubcatMonosortaType | SetSmesiType | SetSubcatCherniyType | SetSubcatZeleniyType |
   SetSubcatUlunType | SetSubcatBeliyType | SetSubcatPuerType | SetSubcatTravyanieType | SetSubcatKraniyType |
-  SetCompanyAboutType | SetCompanyOptovikamType | SetCompanyKontaktiType
+  SetCompanyAboutType | SetCompanyOptovikamType | SetCompanyKontaktiType | SetCompanyDostavkaType
 
 type SetCategoryTeaType = {
   type: typeof SET_CATEGORY_TEA
@@ -334,6 +344,15 @@ type SetCompanyKontaktiType = {
 export const setCompanyKontakti = (companyKontakti: string): SetCompanyKontaktiType => ({
   type: SET_COMPANY_KONTAKTI,
   companyKontakti
+})
+
+type SetCompanyDostavkaType = {
+  type: typeof SET_COMPANY_DOSTAVKA
+  companyDostavka: string
+}
+export const setCompantDostavka = (companyDostavka: string): SetCompanyDostavkaType => ({
+  type: SET_COMPANY_DOSTAVKA,
+  companyDostavka
 })
 
 export default urlReducer

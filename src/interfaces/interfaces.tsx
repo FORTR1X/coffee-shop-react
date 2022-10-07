@@ -51,10 +51,10 @@ export type UrlType = {
     categoryCoffee: string
     categoryTableware: string
     categoryAccessory: string
-  
+
     subcatMonosorta: string
     subcatSmesi: string
-  
+
     subcatCherniy: string
     subcatZeleniy: string
     subcatUlun: string
@@ -62,10 +62,29 @@ export type UrlType = {
     subcatPuer: string
     subcatTravyanie: string
     subcatKrasniy: string
-  
+
     companyAbout: string
     companyOptovikam: string
     companyKontakti: string
-  
+    companyDostavka: string
+
     isAllUrlReady: boolean
-  }
+}
+
+export type OrderType = {
+    firstName: string
+    lastName: string
+    phoneNumber: string
+    email: string
+    address: string
+    orderNote: string
+    methodPayment: string
+    productDtoList: Array<CartType>
+}
+
+export type ProductCreateRequestBodyType = {
+    header: string
+    price: string
+    description: string
+    subcategory: {id: string}
+}

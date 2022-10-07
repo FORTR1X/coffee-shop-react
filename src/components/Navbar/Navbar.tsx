@@ -13,7 +13,6 @@ import Spoiler from "./Spoiler/Spoiler"
 import { PropsNavbar } from "./NavbarContainer"
 import { useLocalStorage } from "usehooks-ts"
 import { mapCartTypeToProductsIds } from "../../mapper/mapCartTypeToProductsIds"
-import { useNavigate } from "react-router-dom"
 
 const Navbar: React.FC<PropsNavbar> = (props) => {
 
@@ -333,12 +332,13 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                               <span className={s.cart__total_value}>{totalCostCart} р.</span>
                             </div>
 
-                            <div 
+                            <a
+                              href={'/checkout'}
                               className={s.cart__footer_btn}
                               onClick={ (event) => {event.currentTarget.classList.add(`${s.active}`);} }
                             >
                               ОФОРМИТЬ ЗАКАЗ
-                            </div>
+                            </a>
                           </div>  
                         }
                       </ul>
@@ -438,12 +438,13 @@ const Navbar: React.FC<PropsNavbar> = (props) => {
                               <span className={s.cart__total_value}>{totalCostCart} р.</span>
                             </div>
 
-                            <div 
+                            <a
+                              href={'/checkout'}
                               className={s.cart__footer_btn}
                               onClick={ (event) => {event.currentTarget.classList.add(`${s.active}`);} }
                             >
                               ОФОРМИТЬ ЗАКАЗ
-                            </div>
+                            </a>  
                           </div>  
                         }
 

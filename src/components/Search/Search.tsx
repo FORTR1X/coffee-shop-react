@@ -40,9 +40,7 @@ const Search: React.FC<PropsSearchType> = (props: PropsSearchType) => {
 
       {isResponseSuccessfully && isProductListEmpty &&
         <div className={s.not_found}>
-          <h3 className={s.not_found__header}>Ошибка</h3>
-          <span className={s.not_found__status}>404</span>
-          <span className={s.not_found__description}>По Вашему запросу ничего не найдено</span>
+          <span className={s.not_found__header}>Товаров, соответствующих вашему запросу, не обнаружено.</span>
         </div>
       }
 

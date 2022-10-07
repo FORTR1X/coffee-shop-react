@@ -2,7 +2,9 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 export const BASE_URL = 'http://localhost:8080'
 
-const useApi = async (method: string, url: string, config?: AxiosRequestConfig<{}> | undefined, data?: any): Promise<AxiosResponse<any, any>> => {
+type MethodsType = 'POST' | 'PUT' | 'GET' | 'DELETE'
+
+const useApi = async (method: MethodsType, url: string, config?: AxiosRequestConfig<{}> | undefined, data?: any): Promise<AxiosResponse<any, any>> => {
 
   const requestUrl = `${BASE_URL}${url}`
   let response: AxiosResponse<any, any>
