@@ -4,7 +4,14 @@
 
 .swiper-button-next,
 .swiper-button-prev {
+  transition: 0.4s all;
+  border-radius: 13px;
   color: white;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 @media (max-width: 992px) {

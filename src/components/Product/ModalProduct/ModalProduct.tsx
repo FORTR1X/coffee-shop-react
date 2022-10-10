@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { CartType, ProductType } from "../../../interfaces/interfaces"
 
 import { CSSTransition } from "react-transition-group"
@@ -7,20 +7,28 @@ import s from './ModalProduct.module.css'
 import './style.css'
 import { useLocalStorage } from "usehooks-ts"
 import { BASE_URL } from "../../../hooks/useApi"
+import { ModalProductPropsType } from "./ModalProductContainer"
 
-type ModalProductType = {
-  product: ProductType
-  handleClose: (state?: boolean) => void
-  isProductModalOpen: boolean
-}
+// import Swiper JS
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Pagination, Autoplay, A11y } from 'swiper'
+// import Swiper styles
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
 
-const ModalProduct: React.FC<ModalProductType> = (props: ModalProductType) => {
+const ModalProduct: React.FC<ModalProductPropsType> = (props: ModalProductPropsType) => {
 
   const [productCount, setProductCount] = useState(1)
   const handleMinusProductCount = () => {
     if (productCount > 1)
       setProductCount(productCount - 1)
   }
+
+  useEffect(() => {
+    props.getUrlProductImages(props.product.id)
+  }, [props.product])
   
   const handlePlusProductCount = () => {
     setProductCount(productCount + 1)
@@ -89,13 +97,27 @@ const ModalProduct: React.FC<ModalProductType> = (props: ModalProductType) => {
         classNames='modal-product'
       >
         <div className={s.modal__content}>
-          <img 
-            className={s.modal__img}
-            title={props.product.header}
-            src={`${BASE_URL}/uploads/product/${props.product.id}.jpg`}
-            alt="img" 
-          />
-        
+          <Swiper
+            modules={[Navigation, A11y, Autoplay]}
+            autoplay={ {delay: 6000, pauseOnMouseEnter: false, disableOnInteraction: false} }
+            spaceBetween={0}
+            slidesPerView={1}
+            navigation
+            loop
+            speed={800}
+            className={s.swiper__wrapper}
+            allowTouchMove
+            slideToClickedSlide
+          >
+            {props.productImages.map((productUrl, index) => {
+              return (
+                <SwiperSlide key={index * 2}>
+                  <img className={s.modal__img} src={`${BASE_URL}${productUrl}`}/>
+                </SwiperSlide>
+              )
+            })}
+          </Swiper>
+
           <div className={s.content__right}>
             <div className={s.header__container}>
               <h3 className={s.header__title}>{props.product.header}</h3>

@@ -8,6 +8,7 @@ import { CartType, ProductType } from "../../interfaces/interfaces"
 import ModalProduct from "./ModalProduct/ModalProduct"
 import { useLocalStorage } from "usehooks-ts"
 import { BASE_URL } from "../../hooks/useApi"
+import ModalProductContainer from "./ModalProduct/ModalProductContainer"
 
 export type ProductPropsType = {
   product: ProductType
@@ -134,7 +135,7 @@ const Product: React.FC<ProductPropsType> = (props: ProductPropsType) => {
       </a>
 
       {currentProduct !== undefined && isProductModalOpen &&
-        <ModalProduct
+        <ModalProductContainer
           handleClose={handleSetIsProductModalOpen}
           product={currentProduct}
           isProductModalOpen={isProductModalOpen}

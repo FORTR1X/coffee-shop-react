@@ -30,6 +30,12 @@
   height: 100%;
 }
 
+.swiper__wrapper {
+  border-radius: 13px 0 0 13px;
+
+  width: 500px;
+}
+
 .modal__content {
   transition: all 0.4s;
 

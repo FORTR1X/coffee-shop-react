@@ -1,6 +1,6 @@
 import { ThunkAction } from "@reduxjs/toolkit";
 import useApi from "../../hooks/useApi";
-import { PageProductActionTypes, setPageProduct } from "../Reducers/PageProductReducer";
+import { PageProductActionTypes, setPageProduct, setProductImages } from "../Reducers/PageProductReducer";
 import { RootState } from "../redux-store";
 
 type AllActionsType = PageProductActionTypes
@@ -12,6 +12,16 @@ export const getPageProducts = (productId: number): ThunkActionType => {
   
     if (response.status == 200) {
       dispatch(setPageProduct(response.data))
+    }
+  }
+}
+
+export const getUrlProductImages = (id: number): ThunkActionType => {
+  return async (dispatch, getState) => {
+    let response = await useApi('GET', `/upload/product/images-title${id}`)
+
+    if (response.status == 200) {
+      dispatch(setProductImages(response.data))
     }
   }
 }

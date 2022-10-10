@@ -3,7 +3,15 @@ import { useParams } from "react-router-dom"
 import { useLocalStorage } from "usehooks-ts"
 import { BASE_URL } from "../../../hooks/useApi"
 import { CartType } from "../../../interfaces/interfaces"
-import Product from "../Product"
+
+// import Swiper JS
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Pagination, Autoplay, A11y } from 'swiper'
+// import Swiper styles
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
 
 import s from './PageProduct.module.css'
 import { PropsPageProduct } from "./PageProductContainer"
@@ -12,10 +20,15 @@ import questionSvg from './question.svg'
 const PageProduct: React.FC<PropsPageProduct> = (props: PropsPageProduct) => {
   const pageId: string | undefined = useParams().id
   const productId: number | undefined = pageId === undefined ? undefined : parseInt(pageId)
-
+  
+  const productImages: Array<string> = props.productImages
   useEffect(() => {
     if (props.product == null && productId !== undefined) {
       props.getPageProducts(productId)
+    }
+
+    if (props.product !== null && props.productImages.length == 0) {
+      props.getUrlProductImages(props.product.id)
     }
   }, [props.product])
 
@@ -95,10 +108,26 @@ const PageProduct: React.FC<PropsPageProduct> = (props: PropsPageProduct) => {
 
             <div className={s.product}>
               <div className={s.img__container}>
-                <img
-                  src={`${BASE_URL}/uploads/product/${props.product.id}.jpg`}
-                  alt={props.product.header}
-                />
+                <Swiper
+                  modules={[Navigation, A11y, Autoplay]}
+                  autoplay={ {delay: 6000, pauseOnMouseEnter: false, disableOnInteraction: false} }
+                  spaceBetween={0}
+                  slidesPerView={1}
+                  navigation
+                  loop
+                  speed={800}
+                  className={s.swiper__wrapper}
+                  allowTouchMove
+                  slideToClickedSlide
+                >
+                  {productImages.map((productUrl, index) => {
+                    return (
+                      <SwiperSlide key={index * 2}>
+                        <img className={s.swiper__img} src={`${BASE_URL}${productUrl}`}/>
+                      </SwiperSlide>
+                    )
+                  })}
+                </Swiper>
               </div>
 
               <div className={s.right__container}>
