@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { CategoryType, ProductCreateRequestBodyType, ProductType, SubcategoryType } from "../../../interfaces/interfaces";
+import { CategoryType, ProductRequestBodyType, ProductType, SubcategoryType } from "../../../interfaces/interfaces";
 import { createImagesProduct, createProduct, getCategories, getSubcategories } from "../../../store/Actions/AdminCreateProductAction";
 import { RootState } from "../../../store/redux-store";
 import AdminCreateProduct from "./AdminCreateProduct";
@@ -16,7 +16,7 @@ type MapStatePropsType = {
 type MapDispatchPropsType = {
   getCategories: () => void
   getSubcategories: () => void
-  createProduct: (requestBody: ProductCreateRequestBodyType) => void
+  createProduct: (requestBody: ProductRequestBodyType) => void
   createImagesProduct: (id: string, imagesData: FormData) => void
 }
 

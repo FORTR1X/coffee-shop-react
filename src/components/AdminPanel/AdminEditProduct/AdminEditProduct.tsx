@@ -3,7 +3,7 @@ import { PropsAdminEditProduct } from "./AdminEditProductContainer"
 
 import s from './AdminEditProduct.module.css'
 import { useLocalStorage } from "usehooks-ts"
-import { SubcategoryType } from "../../../interfaces/interfaces"
+import { ProductRequestBodyType, SubcategoryType } from "../../../interfaces/interfaces"
 import Input from "../../Checkout/Input/Input"
 import { useLocation, useParams } from "react-router-dom"
 
@@ -107,7 +107,15 @@ const AdminEditProduct: React.FC<PropsAdminEditProduct> = (props: PropsAdminEdit
   const handleUpdateProduct = async () => {
     if (imageData == undefined || imageData.entries().next().value[1] === null) return
     
-    
+    const productRequestBody: ProductRequestBodyType = {
+      header: titleValue,
+      description: descriptionValue,
+      price: priceValue,
+      subcategory: {id: currentSubcategoryIdSelected}
+    }
+
+    props.updateProductById(props.product.id, productRequestBody)
+    props.updateProductImageById(props.product.id, imageData)
   }
 
   return (

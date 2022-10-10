@@ -6,7 +6,7 @@ import { PropsAdminCreateProduct } from "./AdminCreateProductContainer"
 import s from './AdminCreateProduct.module.css'
 import AdminInput from "../AdminCustomElements/AdminInput/AdminInput"
 import Input from "../../Checkout/Input/Input"
-import { ProductCreateRequestBodyType, SubcategoryType } from "../../../interfaces/interfaces"
+import { ProductRequestBodyType, SubcategoryType } from "../../../interfaces/interfaces"
 import axios from "axios"
 
 type OptionSelectType = {
@@ -94,7 +94,7 @@ const AdminCreateProduct: React.FC<PropsAdminCreateProduct> = (props: PropsAdmin
     if (imageData == undefined || imageData.entries().next().value[1] === null) return
     if (titleValue.length == 0 || priceValue.length == 0 || descriptionValue.length == 0 || currentSubcategoryIdSelected.length == 0) return
 
-    const createProductRequestBody: ProductCreateRequestBodyType = {
+    const createProductRequestBody: ProductRequestBodyType = {
       header: titleValue,
       price: priceValue,
       description: descriptionValue,

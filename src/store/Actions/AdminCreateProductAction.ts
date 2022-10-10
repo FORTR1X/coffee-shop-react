@@ -1,6 +1,6 @@
 import { ThunkAction } from "@reduxjs/toolkit"
 import useApi from "../../hooks/useApi"
-import { ProductCreateRequestBodyType } from "../../interfaces/interfaces"
+import { ProductRequestBodyType } from "../../interfaces/interfaces"
 import { AdminCreateProductActionTypes, setCategories, setResponseProduct, setSubcategories } from "../Reducers/AdminCreateProductReducer"
 import { RootState } from "../redux-store"
 
@@ -27,7 +27,7 @@ export const getSubcategories = (): ThunkActionType => {
   }
 }
 
-export const createProduct = (requestBody: ProductCreateRequestBodyType): ThunkActionType => {
+export const createProduct = (requestBody: ProductRequestBodyType): ThunkActionType => {
   return async (dispatch, getState) => {
 
     const token = localStorage.getItem('token')

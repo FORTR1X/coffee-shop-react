@@ -82,7 +82,7 @@ export type OrderType = {
     productDtoList: Array<CartType>
 }
 
-export type ProductCreateRequestBodyType = {
+export type ProductRequestBodyType = {
     header: string
     price: string
     description: string

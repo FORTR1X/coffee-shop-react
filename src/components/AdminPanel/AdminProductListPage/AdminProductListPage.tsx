@@ -199,11 +199,13 @@ const AdminProductListPage: React.FC<PropsAdminProductListType> = (props: PropsA
                 <td> 
                   <div className={s.product_row__btn_group}>
                     <button type="button">
-                      <img src={editSvg} alt="Редактировать" />
+                      <a href={`/admin/product/edit/id${product.id}`}>
+                        <img className={s.btn__img} src={editSvg} alt="Редактировать" />
+                      </a>
                     </button>
                     
-                    <button type="button">
-                      <img src={deleteSvg} alt="Удалить" />
+                    <button onClick={() => {handleDelteProductById(product.id)}} type="button">
+                      <img className={s.btn__img} src={deleteSvg} alt="Удалить" />
                     </button>
                   </div>
                 </td>

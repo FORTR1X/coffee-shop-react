@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
-import { ProductType, SubcategoryType } from "../../../interfaces/interfaces";
+import { ProductRequestBodyType, ProductType, SubcategoryType } from "../../../interfaces/interfaces";
 import { getSubcategories } from "../../../store/Actions/AdminCreateProductAction";
-import { getEditableProduct } from "../../../store/Actions/AdminEditProductAction";
+import { getEditableProduct, updateProductById, updateProductImageById } from "../../../store/Actions/AdminEditProductAction";
 import { RootState } from "../../../store/redux-store";
 import AdminEditProduct from "./AdminEditProduct";
 
@@ -13,6 +13,8 @@ type MapStatePropsType = {
 type MapDispatchPropsType = {
   getSubcategories: () => void
   getEditableProduct: (id: number) => void
+  updateProductImageById: (id: number, imagesData: FormData) => void
+  updateProductById: (id: number, product: ProductRequestBodyType) => void
 }
 
 type OwnPropsType = {
@@ -28,7 +30,7 @@ let mapStateToProps = (state: RootState) => {
 }
 
 const AdminEditProductContainer = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, RootState>(
-  mapStateToProps, {getSubcategories, getEditableProduct}
+  mapStateToProps, {getSubcategories, getEditableProduct, updateProductImageById, updateProductById}
 )(AdminEditProduct)
 
 export default AdminEditProductContainer
