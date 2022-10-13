@@ -1,4 +1,5 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import adminBestSellersReducer from './Reducers/AdminBestSellersReducer'
 import adminCreateProductReducer from './Reducers/AdminCreateProductReducer'
 import adminEditProductReducer from './Reducers/AdminEditProductReducer'
 import adminPanelReducer from './Reducers/AdminPanelReducer'
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
   OAuth: OAuthReducer,
   adminPanel: adminPanelReducer,
   adminCreateProduct: adminCreateProductReducer,
-  adminEditProduct: adminEditProductReducer
+  adminEditProduct: adminEditProductReducer,
+  adminBestSellers: adminBestSellersReducer
 })
 
 export const store = configureStore({

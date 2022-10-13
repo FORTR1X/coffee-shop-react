@@ -14,6 +14,7 @@ import { useLocalStorage } from "usehooks-ts"
 import AdminProductListPageContainer from "./AdminProductListPage/AdminProductListPageContainer"
 import AdminCreateProductContainer from "./AdminCreateProduct/AdminCreateProductContainer"
 import AdminEditProductContainer from "./AdminEditProduct/AdminEditProductContainer"
+import AdminBestSellersContainer from "./AdminBestSellers/AdminBestSellersContainer"
 
 const AdminPanel: React.FC<PropsAdminPanel> = (props: PropsAdminPanel) => {
   
@@ -65,8 +66,8 @@ const AdminPanel: React.FC<PropsAdminPanel> = (props: PropsAdminPanel) => {
                   <img src={productListSvg} alt="Список" /> <a href="/admin" className={s.catalog__link}>Список товаров</a>
                 </div>
 
-                <div className={s.catalog__container}>
-                  <img src={bestSellersSvg} alt="Список" /> <a href="#" className={s.catalog__link}>Топ продаж</a>
+                <div className={URL_PATH == "/admin/best_sellers" ? `${s.catalog__container} ${s.current}` : s.catalog__container}>
+                  <img src={bestSellersSvg} alt="Список" /> <a href="/admin/best_sellers" className={s.catalog__link}>Топ продаж</a>
                 </div>
 
                 <div className={s.catalog__container}>
@@ -101,6 +102,10 @@ const AdminPanel: React.FC<PropsAdminPanel> = (props: PropsAdminPanel) => {
 
               {URL_PATH.includes("/admin/product/edit") &&
                 <AdminEditProductContainer/>
+              }
+
+              {URL_PATH == "/admin/best_sellers" &&
+                <AdminBestSellersContainer/>
               }
             </div>
           </div>

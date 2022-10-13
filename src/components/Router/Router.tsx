@@ -97,6 +97,7 @@ const Router: React.FC<PropsRouter> = (props) => {
         <Route path="/admin" element={<AdminPanelContainer/>}/>
         <Route path="/admin/product/add" element={<AdminPanelContainer/>}/>
         <Route path="/admin/product/edit/id:id" element={<AdminPanelContainer/>}/>
+        <Route path="/admin/best_sellers" element={<AdminPanelContainer/>}/>
       </Routes>
 
     </div> 
