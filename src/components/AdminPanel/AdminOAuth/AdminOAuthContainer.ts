@@ -1,28 +1,22 @@
-import { connect } from "react-redux";
-import { getAuthToken } from "../../../store/Actions/OAuthAction";
-import { RootState } from "../../../store/redux-store";
+import {connect} from "react-redux";
+import {getAuthToken} from "../../../store/Actions/OAuthAction";
+import {RootState} from "../../../store/redux-store";
 import AdminOAuth from "./AdminOAuth";
 
-type MapStatePropsType = {
-
-}
+type MapStatePropsType = {}
 
 type MapDispatchPropsType = {
-  getAuthToken: (login: string, password: string) => void
+    getAuthToken: (login: string, password: string) => void
 }
 
-type OwnPropsType = {
-
-}
+type OwnPropsType = {}
 
 let mapStateToProps = (state: RootState) => {
-  return {
-    
-  }
+    return {}
 }
 
 const AdminOAuthContainer = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, RootState>(
-  mapStateToProps, {getAuthToken}
+    mapStateToProps, {getAuthToken}
 )(AdminOAuth)
 
 export default AdminOAuthContainer

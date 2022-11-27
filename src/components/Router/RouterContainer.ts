@@ -1,42 +1,38 @@
-import { connect } from "react-redux"
-import { RootState } from "../../store/redux-store"
+import {connect} from "react-redux"
+import {RootState} from "../../store/redux-store"
 import Router from "./Router"
-import { CategoryType, CompanyCategoryType, SubcategoryType, UrlType, UserType } from "../../interfaces/interfaces"
+import {CategoryType, CompanyCategoryType, SubcategoryType, UrlType, UserType} from "../../interfaces/interfaces"
 
 type MapStatePropsType = {
-  // NavbarReducer
-  companyCategories: CompanyCategoryType[] | null
-  productCategories: CategoryType[] | null
-  productSubcategories: SubcategoryType[] | null
-  user: UserType | null
-  productSubcategoriesByCategory: SubcategoryType[][] | null
+    // NavbarReducer
+    companyCategories: CompanyCategoryType[] | null
+    productCategories: CategoryType[] | null
+    productSubcategories: SubcategoryType[] | null
+    user: UserType | null
+    productSubcategoriesByCategory: SubcategoryType[][] | null
 
-  // UrlReducer
-  url: UrlType  
+    // UrlReducer
+    url: UrlType
 }
 
-type MapDispatchPropsType = {
+type MapDispatchPropsType = {}
 
-}
-
-type OwnPropsType = {
-
-}
+type OwnPropsType = {}
 
 let mapStateToProps = (state: RootState) => {
-  return {
-    companyCategories: state.navbar.companyCategories,
-    productCategories: state.navbar.productCategories,
-    productSubcategories: state.navbar.productSubcategories,
-    productSubcategoriesByCategory: state.navbar.productSubcategoriesByCategory,
-    user: state.navbar.user,
+    return {
+        companyCategories: state.navbar.companyCategories,
+        productCategories: state.navbar.productCategories,
+        productSubcategories: state.navbar.productSubcategories,
+        productSubcategoriesByCategory: state.navbar.productSubcategoriesByCategory,
+        user: state.navbar.user,
 
-    url: state.url,
-  }
+        url: state.url,
+    }
 }
 
 const RouterContainer = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, RootState>(
-  mapStateToProps
+    mapStateToProps
 )(Router)
 
 export default RouterContainer

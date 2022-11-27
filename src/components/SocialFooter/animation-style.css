@@ -1,9 +1,9 @@
 .social__vk {
-  transition: 0.3s all;
-  fill: red;
+    transition: 0.3s all;
+    fill: red;
 }
 
 
 .social__vk:hover {
-  fill: white;
+    fill: white;
 }

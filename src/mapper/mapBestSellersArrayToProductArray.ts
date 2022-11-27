@@ -1,12 +1,12 @@
-import { BestSellersType, ProductType } from "../interfaces/interfaces";
+import {BestSellersType, ProductType} from "../interfaces/interfaces";
 
 export const mapBestSellersArrayToProductArray = (bestSellersArray: Array<BestSellersType> | null): Array<ProductType> => {
-  let productList: Array<ProductType> = []
-  
-  if (bestSellersArray !== null)
-    bestSellersArray.map((bestSeller, index) => {
-      productList.push(bestSeller.product)
-    })
+    let productList: Array<ProductType> = []
 
-  return productList
+    if (bestSellersArray !== null)
+        bestSellersArray.map((bestSeller, index) => {
+            productList.push(bestSeller.product)
+        })
+
+    return productList
 }

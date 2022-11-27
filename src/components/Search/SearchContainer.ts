@@ -1,31 +1,29 @@
-import { connect } from "react-redux";
-import { ProductType } from "../../interfaces/interfaces";
-import { getSearchProducts } from "../../store/Actions/SearchAction";
-import { RootState } from "../../store/redux-store";
+import {connect} from "react-redux";
+import {ProductType} from "../../interfaces/interfaces";
+import {getSearchProducts} from "../../store/Actions/SearchAction";
+import {RootState} from "../../store/redux-store";
 import Search from "./Search";
 
 type MapStatePropsType = {
-  productList: Array<ProductType>
-  responseStatus: number
+    productList: Array<ProductType>
+    responseStatus: number
 }
 
 type MapDispatchPropsType = {
-  getSearchProducts: (headerOrDescriptionSearch: string) => void
+    getSearchProducts: (headerOrDescriptionSearch: string) => void
 }
 
-type OwnPropsType = {
-
-}
+type OwnPropsType = {}
 
 let mapStateToProps = (state: RootState) => {
-  return {
-    productList: state.search.searchProducts,
-    responseStatus: state.search.responseStatus
-  }
+    return {
+        productList: state.search.searchProducts,
+        responseStatus: state.search.responseStatus
+    }
 }
 
 const SearchContainer = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, RootState>(
-  mapStateToProps, {getSearchProducts}
+    mapStateToProps, {getSearchProducts}
 )(Search)
 
 export default SearchContainer

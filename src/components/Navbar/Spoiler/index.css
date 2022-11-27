@@ -4,15 +4,18 @@
     height: 0;
     opacity: 0;
 }
+
 .spoiler-enter-active {
     height: 1000px;
     opacity: 1;
     transition: all 1500ms;
 }
+
 .spoiler-exit {
     height: 100%;
     opacity: 1;
 }
+
 .spoiler-exit-active {
     height: 0;
     opacity: 0;

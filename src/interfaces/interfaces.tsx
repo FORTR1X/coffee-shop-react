@@ -86,5 +86,5 @@ export type ProductRequestBodyType = {
     header: string
     price: string
     description: string
-    subcategory: {id: string}
+    subcategory: { id: string }
 }

@@ -1,32 +1,32 @@
 .about_us_wrapper {
-  width: 80%;
+    width: 80%;
 
-  margin: 0 auto;
-  margin-top: 40px;
+    margin: 0 auto;
+    margin-top: 40px;
 
-  padding-bottom: 50px;
+    padding-bottom: 50px;
 }
 
 .about_us__header {
-  text-align: center;
+    text-align: center;
 
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .about_us_wrapper > p {
-  text-align: left;
+    text-align: left;
 
-  font-size: 18px;
-  line-height: 1.3em;
+    font-size: 18px;
+    line-height: 1.3em;
 }
 
 .about_us_wrapper > p:not(:last-child) {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .about_us__img {
-  height: 250px;
-  width: 100%;
+    height: 250px;
+    width: 100%;
 
-  object-fit: cover;
+    object-fit: cover;
 }

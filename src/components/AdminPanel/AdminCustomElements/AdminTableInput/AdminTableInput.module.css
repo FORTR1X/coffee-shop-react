@@ -1,21 +1,21 @@
 .form {
-  margin: 0 auto;
+    margin: 0 auto;
 
-  padding: 5px 15px 5px 15px;
+    padding: 5px 15px 5px 15px;
 }
 
 .form__title_container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .form__input {
-  font-family: 'Lato Regular';
-  padding: 3px;
-  width: 100%;
+    font-family: 'Lato Regular';
+    padding: 3px;
+    width: 100%;
 }
 
 .form__input:focus {
-  outline: none;
+    outline: none;
 }

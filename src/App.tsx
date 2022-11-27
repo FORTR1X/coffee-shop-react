@@ -2,9 +2,9 @@ import './App.css';
 import RouterContainer from './components/Router/RouterContainer';
 
 const App = () => {
-  return (
-    <RouterContainer/>
-  );
+    return (
+        <RouterContainer/>
+    );
 }
 
 export default App;

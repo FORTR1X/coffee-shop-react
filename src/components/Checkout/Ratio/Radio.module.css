@@ -1,62 +1,63 @@
 .input__wrapper {
-  margin: 10px 0 5px 0;
+    margin: 10px 0 5px 0;
 
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .input__label {
-  cursor: pointer;
+    cursor: pointer;
 
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
+
 .input__label > span {
-  width: 100%;
+    width: 100%;
 }
 
 .input__radio {
-  display: none;
+    display: none;
 }
 
 .custom_radio {
-  border-radius: 50%;
-  box-shadow: 0 0 2px grey;
+    border-radius: 50%;
+    box-shadow: 0 0 2px grey;
 
-  cursor: pointer;
+    cursor: pointer;
 
-  min-width: 20px;
-  min-height: 20px;
+    min-width: 20px;
+    min-height: 20px;
 
-  position: relative;
+    position: relative;
 
-  background-color:#f7f7f7;
+    background-color: #f7f7f7;
 
-  margin: 0 7px 0 7px;
+    margin: 0 7px 0 7px;
 
-  transition: 0.2s all;
+    transition: 0.2s all;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .input__radio:checked ~ .input__label > .custom_radio:before {
-  border-radius: 50%;
+    border-radius: 50%;
 
-  content: '';
-  background-color: #2C9462;
-  box-shadow: 0 0 2px #2C9462;
+    content: '';
+    background-color: #2C9462;
+    box-shadow: 0 0 2px #2C9462;
 
-  width: 10px;
-  height: 10px;
+    width: 10px;
+    height: 10px;
 
-  transition: 0.4s all;
+    transition: 0.4s all;
 }

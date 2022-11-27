@@ -1,51 +1,52 @@
 .swiper {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .swiper-button-next,
 .swiper-button-prev {
-  transition: 0.4s all;
-  border-radius: 13px;
-  color: white;
+    transition: 0.4s all;
+    border-radius: 13px;
+    color: white;
 }
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-  background-color: rgba(0, 0, 0, 0.25);
+    background-color: rgba(0, 0, 0, 0.25);
 }
 
 @media (max-width: 992px) {
-  .swiper-button-next,
-  .swiper-button-prev {
-    display: none;
-  }
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none;
+    }
 }
 
 .swiper-pagination-bullet {
-  width: 14px;
-  height: 14px;
+    width: 14px;
+    height: 14px;
 
-  opacity: 0.8;
+    opacity: 0.8;
 
-  background-color: rgba(0, 0, 0, 0);
-  border: 2px solid white;
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid white;
 
-  transition: all 0.5s;
+    transition: all 0.5s;
 }
+
 .swiper-pagination-bullet:not(.swiper-pagination-bullet:last-child) {
-  margin-right: 15px;
+    margin-right: 15px;
 }
 
 .swiper-pagination-bullet:hover {
-  opacity: 1;
-  background-color: white;
+    opacity: 1;
+    background-color: white;
 }
 
 .swiper-pagination-bullet-active {
-  opacity: 1;
-  background-color: white;
+    opacity: 1;
+    background-color: white;
 }
 
 .swiper-slide.swiper-slide-active a {
-  display:block
+    display: block
 }

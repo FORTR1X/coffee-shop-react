@@ -1,61 +1,63 @@
 .category__container {
-  margin: 0 auto;
+    margin: 0 auto;
 
-  display: inline-block;
-  white-space: normal;
+    display: inline-block;
+    white-space: normal;
 
-  width: 170px;
+    width: 170px;
 }
 
 .category__link {
 
-  width: 140px;
-  height: 140px;
+    width: 140px;
+    height: 140px;
 
-  margin: 0 auto;
+    margin: 0 auto;
 }
 
 .category__img {
-  position: relative;
+    position: relative;
 
-  width: 140px;
-  height: 140px;
+    width: 140px;
+    height: 140px;
 
-  object-fit: cover;
+    object-fit: cover;
 
-  border-radius: 50%;
+    border-radius: 50%;
 }
+
 .subcategory {
-  color: black;
-  text-align: center;
+    color: black;
+    text-align: center;
 
-  text-decoration: none;
+    text-decoration: none;
 
-  margin-top: 3px;
+    margin-top: 3px;
 
-  font-size: 22px;
+    font-size: 22px;
 
-  width: 100%;
+    width: 100%;
 
-  transition: 0.4s all;
+    transition: 0.4s all;
 }
+
 .subcategory:hover {
-  color: rgba(79, 79, 79, 0.65);
+    color: rgba(79, 79, 79, 0.65);
 }
 
 .category {
-  font-family: 'Lato Light';
-  font-size: 18px;
+    font-family: 'Lato Light';
+    font-size: 18px;
 
-  color: black;
+    color: black;
 
-  text-align: center;
-  text-decoration: none;
+    text-align: center;
+    text-decoration: none;
 
-  width: 100%;
+    width: 100%;
 }
 
 .subcategory__container,
 .category__container {
-  text-align: center;
+    text-align: center;
 }

@@ -1,42 +1,42 @@
 .contacts__wrapper {
-  margin-bottom: 50px;
+    margin-bottom: 50px;
 }
 
 .contacts__img {
-  height: 250px;
-  width: 100%;
+    height: 250px;
+    width: 100%;
 
-  object-fit: cover;
+    object-fit: cover;
 }
 
 .contacts__content {
-  margin: 0 auto;
+    margin: 0 auto;
 
-  font-size: 18px;
+    font-size: 18px;
 
-  width: 76%;
+    width: 76%;
 }
 
 .contacts__header {
-  text-align: center;
-  
-  margin: 30px 0 30px 0;
+    text-align: center;
+
+    margin: 30px 0 30px 0;
 }
 
 .tea__header,
 .coffee__header {
-  font-family: 'Lato Bold';
-  margin-bottom: 7px;
+    font-family: 'Lato Bold';
+    margin-bottom: 7px;
 }
 
 .contacts__tea,
 .contacts__coffee {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .contacts__worktime {
-  font-family: 'Lato Bold';
+    font-family: 'Lato Bold';
 }

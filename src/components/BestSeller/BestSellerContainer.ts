@@ -1,30 +1,28 @@
-import { connect } from "react-redux"
-import { BestSellersType } from "../../interfaces/interfaces"
-import { getBestSellersList } from "../../store/Actions/BestSellersAction"
-import { RootState } from "../../store/redux-store"
+import {connect} from "react-redux"
+import {BestSellersType} from "../../interfaces/interfaces"
+import {getBestSellersList} from "../../store/Actions/BestSellersAction"
+import {RootState} from "../../store/redux-store"
 
 import BestSeller from './BestSeller'
 
 type MapStatePropsType = {
-  bestSellersProduct: Array<BestSellersType> | null
+    bestSellersProduct: Array<BestSellersType> | null
 }
 
 type MapDispatchPropsType = {
-  getBestSellersList: () => void
+    getBestSellersList: () => void
 }
 
-type OwnPropsType = {
-
-}
+type OwnPropsType = {}
 
 let mapStateToProps = (state: RootState) => {
-  return {
-    bestSellersProduct: state.bestSellers.bestSellersProduct,
-  }
+    return {
+        bestSellersProduct: state.bestSellers.bestSellersProduct,
+    }
 }
 
 const BestSellerContainer = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, RootState>(
-  mapStateToProps, {getBestSellersList}
+    mapStateToProps, {getBestSellersList}
 )(BestSeller)
 
 export default BestSellerContainer
